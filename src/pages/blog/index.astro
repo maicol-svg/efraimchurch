@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+
+function formatDate(date: Date): string {
+  return new Intl.DateTimeFormat('it-IT', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  }).format(date);
+}
+---
+
+<BaseLayout
+  title="Blog"
+  description="Articoli, riflessioni e aggiornamenti dalla Chiesa Cristiana Evangelica Efraim di Messina."
+>
+  <!-- Hero Banner -->
+  <section class="relative bg-gradient-to-br from-primary-dark via-primary to-primary-light pt-36 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10"></div>
+    <div
+      class="absolute inset-0 opacity-10"
+      style="background: repeating-linear-gradient(-45deg, transparent, transparent 80px, rgba(255,255,255,0.05) 80px, rgba(255,255,255,0.05) 82px);"
+    ></div>
+    <div
+      class="absolute -bottom-2 left-0 right-0 h-24 bg-warm"
+      style="clip-path: polygon(0 60%, 100% 0, 100% 100%, 0% 100%);"
+    ></div>
+    <div class="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 text-center">
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight">
+        Blog
+      </h1>
+      <div class="flex items-center justify-center gap-4 mt-6 mb-4">
+        <span class="block w-12 h-px bg-accent"></span>
+        <span class="block w-2 h-2 rounded-full bg-accent"></span>
+        <span class="block w-12 h-px bg-accent"></span>
+      </div>
+      <p class="text-lg sm:text-xl text-white/90 font-light max-w-2xl mx-auto">
+        Riflessioni, aggiornamenti e storie dalla nostra comunita
+      </p>
+    </div>
+  </section>
+
+  <!-- Blog Posts Grid -->
+  <section class="py-16 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {posts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {posts.map((post) => (
+            <article class="group flex flex-col rounded-2xl bg-white border border-divider overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+              {post.data.image && (
+                <a href={`/blog/${post.id}/`} class="block relative h-52 overflow-hidden">
+                  <img
+                    src={post.data.image}
+                    alt={post.data.title}
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                </a>
+              )}
+              <div class="flex flex-col flex-1 p-6">
+                <time
+                  datetime={post.data.date.toISOString()}
+                  class="text-sm font-medium text-primary uppercase tracking-wider"
+                >
+                  {formatDate(post.data.date)}
+                </time>
+                <h2 class="mt-3 font-serif text-xl font-bold text-text leading-snug group-hover:text-primary-dark transition-colors">
+                  <a href={`/blog/${post.id}/`} class="hover:underline">
+                    {post.data.title}
+                  </a>
+                </h2>
+                <p class="mt-3 text-text-secondary text-sm leading-relaxed line-clamp-3 flex-1">
+                  {post.data.description}
+                </p>
+                <div class="mt-5 pt-5 border-t border-divider">
+                  <a
+                    href={`/blog/${post.id}/`}
+                    class="inline-flex items-center gap-2 text-sm font-semibold text-primary-dark hover:text-primary transition-colors group/link"
+                  >
+                    Leggi
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/link:translate-x-1" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <p class="text-xl text-text-secondary font-light">
+            Nessun articolo pubblicato
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,304 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import MissionCard from '../components/MissionCard.astro';
+import EventCard from '../components/EventCard.astro';
+import BlogCard from '../components/BlogCard.astro';
+import DonationBanner from '../components/DonationBanner.astro';
+import { getCollection } from 'astro:content';
+
+const allEvents = await getCollection('eventi');
+const now = new Date();
+const futureEvents = allEvents
+  .filter(e => new Date(e.data.date) >= now)
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime())
+  .slice(0, 3);
+
+// Prepare upcoming events for the Hero sidebar
+const dayAbbrevs = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+const heroEvents = futureEvents.slice(0, 3).map(e => {
+  const d = new Date(e.data.date);
+  return {
+    title: e.data.title,
+    dayAbbrev: dayAbbrevs[d.getDay()],
+    time: e.data.time || '',
+  };
+});
+
+const allPosts = await getCollection('blog');
+const latestPosts = allPosts
+  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime())
+  .slice(0, 3);
+---
+
+<BaseLayout title="Home">
+
+  <!-- ═══ HERO ═══ -->
+  <Hero upcomingEvents={heroEvents} />
+
+  <!-- ═══ CHI SIAMO preview ═══ -->
+  <section class="relative py-24 sm:py-32 bg-warm grain-subtle overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+
+        <!-- Left: editorial text block (offset grid) -->
+        <div class="lg:col-span-6 lg:col-start-1 reveal-left">
+          <p class="text-accent font-sans text-xs font-semibold tracking-[0.25em] uppercase mb-5">
+            Chi siamo
+          </p>
+          <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-text leading-[1.1] mb-8">
+            Una comunita'<br>
+            <span class="italic text-primary-dark">che cammina insieme</span>
+          </h2>
+          <div class="space-y-5 text-text-secondary leading-[1.85] text-[1.05rem]">
+            <p>
+              La <strong class="text-text font-medium">Chiesa Cristiana Evangelica Efraim</strong> di Messina
+              e' una comunita' di credenti uniti dalla passione per il Vangelo e dall'amore per il prossimo.
+            </p>
+            <p>
+              Sotto la guida del pastore <strong class="text-text font-medium">Tindaro Smeraldi</strong>,
+              camminiamo nella fede, nell'accoglienza e nel servizio. Le nostre porte sono aperte:
+              c'e' un posto anche per te.
+            </p>
+          </div>
+          <div class="mt-10">
+            <a
+              href="/chi-siamo/"
+              class="group inline-flex items-center gap-3 font-sans text-sm font-semibold text-primary-dark tracking-wide transition-colors hover:text-accent"
+            >
+              <span class="w-10 h-px bg-primary-dark group-hover:bg-accent group-hover:w-14 transition-all duration-300"></span>
+              Scopri la nostra storia
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: visual card with overlapping elements -->
+        <div class="lg:col-span-5 lg:col-start-8 mt-16 lg:mt-0 reveal-right">
+          <div class="relative">
+            <!-- Background accent rectangle (offset) -->
+            <div class="absolute -top-4 -right-4 w-full h-full bg-accent/10 -z-10"></div>
+
+            <!-- Main card -->
+            <div class="relative bg-cream border border-divider p-10 shadow-[0_4px_40px_-12px_rgba(0,0,0,0.08)]">
+              <!-- Corner accent -->
+              <div class="absolute top-0 left-0 w-16 h-[2px] bg-accent"></div>
+              <div class="absolute top-0 left-0 w-[2px] h-16 bg-accent"></div>
+
+              <div class="flex items-center gap-4 mb-8">
+                <div class="w-14 h-14 rounded-full bg-primary-dark/10 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary-dark"><path d="M18 20V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v14"/><path d="M2 20h20"/><path d="M14 12v.01"/></svg>
+                </div>
+                <div>
+                  <p class="font-serif text-2xl font-semibold text-text">Chiesa Efraim</p>
+                  <p class="text-sm text-text-secondary">Messina, Italia</p>
+                </div>
+              </div>
+
+              <div class="space-y-5">
+                <div class="flex items-center gap-5 p-4 bg-warm">
+                  <div class="flex flex-col items-center w-16 shrink-0">
+                    <span class="text-2xl font-serif font-bold text-primary-dark">Dom</span>
+                    <span class="text-[10px] text-text-secondary tracking-wider uppercase">10:00</span>
+                  </div>
+                  <div class="h-10 w-px bg-divider"></div>
+                  <p class="text-sm text-text font-medium">Culto della Domenica</p>
+                </div>
+                <div class="flex items-center gap-5 p-4 bg-warm">
+                  <div class="flex flex-col items-center w-16 shrink-0">
+                    <span class="text-2xl font-serif font-bold text-primary-dark">Mer</span>
+                    <span class="text-[10px] text-text-secondary tracking-wider uppercase">18:00</span>
+                  </div>
+                  <div class="h-10 w-px bg-divider"></div>
+                  <p class="text-sm text-text font-medium">Culto</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-2 mt-8 text-text-secondary text-xs">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                Via B. Colleoni 43 (zona Minissale), 98125 Messina
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ MISSIONI ═══ -->
+  <section class="relative py-24 sm:py-32 bg-slate-dark grain overflow-hidden">
+    <!-- Organic wave top -->
+    <div class="wave-top">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" class="w-full h-12 sm:h-16" aria-hidden="true">
+        <path d="M0,40 C360,0 720,80 1080,30 C1260,10 1380,50 1440,40 L1440,0 L0,0 Z" fill="var(--color-warm)"/>
+      </svg>
+    </div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <!-- Section header: left-aligned, editorial -->
+      <div class="max-w-2xl mb-16 reveal">
+        <p class="text-accent font-sans text-xs font-semibold tracking-[0.25em] uppercase mb-5">
+          Nel mondo
+        </p>
+        <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-white leading-[1.1] mb-6">
+          Le nostre<br>
+          <span class="italic text-accent">missioni</span>
+        </h2>
+        <p class="text-white/50 text-lg leading-relaxed">
+          Dal 2012 siamo presenti in Kenya e in India, portando speranza e costruendo futuro.
+        </p>
+      </div>
+
+      <!-- Mission cards -->
+      <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
+        <div class="reveal reveal-delay-1">
+          <MissionCard
+            title="Missione Kenya"
+            country="Kasue, Kitui"
+            image="/images/kenya-children.jpg"
+            description="Dal 2012 sosteniamo oltre 140 bambini a Kasue, nella contea di Kitui. Istruzione, alimentazione, cure mediche e un pozzo per l'acqua pulita."
+            stats={[
+              { label: 'Bambini sostenuti', value: '140+' },
+              { label: 'Anni di presenza', value: '13' },
+            ]}
+            href="/missioni/kenya/"
+          />
+        </div>
+        <div class="reveal reveal-delay-2">
+          <MissionCard
+            title="Missione India"
+            country="India"
+            image="/images/india-school.jpg"
+            description="In India lavoriamo per offrire istruzione e speranza alle comunita' in crescita. Nuovi progetti stanno prendendo forma."
+            stats={[
+              { label: 'Stato', value: 'Attivo' },
+              { label: 'Focus', value: 'Istruzione' },
+            ]}
+            href="/missioni/india/"
+          />
+        </div>
+      </div>
+
+      <div class="mt-14 reveal reveal-delay-3">
+        <a
+          href="/missioni/"
+          class="group inline-flex items-center gap-3 font-sans text-sm font-semibold text-accent tracking-wide transition-colors hover:text-white"
+        >
+          <span class="w-10 h-px bg-accent group-hover:w-14 group-hover:bg-white transition-all duration-300"></span>
+          Scopri tutte le missioni
+        </a>
+      </div>
+    </div>
+
+    <!-- Organic wave bottom -->
+    <div class="wave-bottom">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" class="w-full h-12 sm:h-16" aria-hidden="true">
+        <path d="M0,40 C360,0 720,80 1080,30 C1260,10 1380,50 1440,40 L1440,0 L0,0 Z" fill="var(--color-cream)"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ═══ PROSSIMI EVENTI ═══ -->
+  <section class="relative py-24 sm:py-32 bg-cream grain-subtle overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+
+      <div class="lg:grid lg:grid-cols-12 lg:gap-16">
+        <!-- Left: header -->
+        <div class="lg:col-span-4 mb-12 lg:mb-0 reveal">
+          <p class="text-accent font-sans text-xs font-semibold tracking-[0.25em] uppercase mb-5">
+            Calendario
+          </p>
+          <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-text leading-[1.1] mb-6">
+            Prossimi<br>
+            <span class="italic text-primary-dark">eventi</span>
+          </h2>
+          <p class="text-text-secondary leading-relaxed mb-8">
+            Gli appuntamenti della nostra comunita'. Vieni a trovarci.
+          </p>
+          <a
+            href="/eventi/"
+            class="group inline-flex items-center gap-3 font-sans text-sm font-semibold text-primary-dark tracking-wide transition-colors hover:text-accent"
+          >
+            <span class="w-10 h-px bg-primary-dark group-hover:bg-accent group-hover:w-14 transition-all duration-300"></span>
+            Tutti gli eventi
+          </a>
+        </div>
+
+        <!-- Right: event cards -->
+        <div class="lg:col-span-8">
+          {futureEvents.length > 0 ? (
+            <div class="space-y-4">
+              {futureEvents.map((event, i) => (
+                <div class={`reveal reveal-delay-${i + 1}`}>
+                  <EventCard
+                    title={event.data.title}
+                    date={event.data.date}
+                    time={event.data.time}
+                    description={event.data.description}
+                    image={event.data.image}
+                    href={`/eventi/${event.id}/`}
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="flex flex-col items-center justify-center py-16 text-center reveal">
+              <div class="w-16 h-16 bg-primary-dark/5 flex items-center justify-center mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+              </div>
+              <p class="text-text-secondary">Nessun evento in programma</p>
+              <p class="text-text-secondary/60 text-sm mt-1">Torna a trovarci presto.</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BLOG ═══ -->
+  <section class="relative py-24 sm:py-32 bg-warm grain-subtle overflow-hidden">
+    <div class="relative z-10 mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-16 reveal">
+        <div>
+          <p class="text-accent font-sans text-xs font-semibold tracking-[0.25em] uppercase mb-5">
+            Articoli
+          </p>
+          <h2 class="font-serif text-4xl sm:text-5xl font-semibold text-text leading-[1.1]">
+            Dal nostro <span class="italic text-primary-dark">blog</span>
+          </h2>
+        </div>
+        <a
+          href="/blog/"
+          class="group inline-flex items-center gap-3 font-sans text-sm font-semibold text-primary-dark tracking-wide transition-colors hover:text-accent shrink-0"
+        >
+          <span class="w-10 h-px bg-primary-dark group-hover:bg-accent group-hover:w-14 transition-all duration-300"></span>
+          Tutti gli articoli
+        </a>
+      </div>
+
+      {latestPosts.length > 0 ? (
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {latestPosts.map((post, i) => (
+            <div class={`reveal reveal-delay-${i + 1}`}>
+              <BlogCard
+                title={post.data.title}
+                date={post.data.date}
+                description={post.data.description}
+                image={post.data.image}
+                href={`/blog/${post.id}/`}
+              />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12 reveal">
+          <p class="text-text-secondary text-lg">Nessun articolo pubblicato.</p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- ═══ DONA ═══ -->
+  <DonationBanner />
+
+</BaseLayout>

@@ -1,0 +1,198 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import TeamMember from '../components/TeamMember.astro';
+import { getCollection } from 'astro:content';
+
+const teamMembers = (await getCollection('team')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title="Chi siamo"
+  description="Scopri la storia, i valori e il team della Chiesa Cristiana Evangelica Efraim di Messina. Una comunita' di fede al servizio della citta' e del mondo."
+>
+  <!-- Hero -->
+  <section class="relative bg-slate-dark overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/90 to-slate-dark"></div>
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-light rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+    </div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 md:py-36">
+      <div class="max-w-3xl">
+        <span class="inline-block text-accent font-medium text-sm tracking-widest uppercase mb-4">La nostra chiesa</span>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+          Chi siamo
+        </h1>
+        <p class="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl">
+          Una comunita' di fede che cammina insieme, radicata nella Parola di Dio e impegnata a portare speranza a Messina e nel mondo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- La nostra storia -->
+  <section class="py-20 md:py-28 bg-warm">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Image placeholder -->
+        <div class="relative">
+          <div class="aspect-[4/3] rounded-2xl bg-cream border border-divider overflow-hidden flex items-center justify-center">
+            <div class="text-center p-8">
+              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-primary/30 mb-4" aria-hidden="true">
+                <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+                <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+                <circle cx="10" cy="12" r="2" />
+                <path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" />
+              </svg>
+              <p class="text-text-secondary text-sm">Foto della chiesa</p>
+            </div>
+          </div>
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-accent/10 rounded-2xl -z-10"></div>
+        </div>
+
+        <!-- Text -->
+        <div>
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Le nostre radici</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text mb-6">La nostra storia</h2>
+          <div class="space-y-4 text-text-secondary leading-relaxed">
+            <p>
+              La Chiesa Cristiana Evangelica Efraim nasce a Messina dalla visione del pastore Tindaro Smeraldi e di sua moglie Angela, con il desiderio di fondare una comunita' cristiana viva, radicata nella Parola di Dio e aperta al servizio della citta' e delle nazioni.
+            </p>
+            <p>
+              Fin dai primi incontri, il cuore della chiesa e' stato quello di equipaggiare i credenti per la vita e per il ministero, creando un ambiente di fede dove ogni persona potesse crescere spiritualmente, trovare il proprio scopo e contribuire alla missione di Dio nel mondo.
+            </p>
+            <p>
+              Con sede in Via Bartolomeo Colleoni 43, la chiesa e' diventata un punto di riferimento per molte famiglie messinesi. Nel 2012, la vocazione missionaria si e' concretizzata con l'avvio del progetto in Kenya, nella localita' di Kasue, Kitui, dove oggi vengono sostenuti oltre 140 bambini attraverso programmi di istruzione, nutrizione e cura spirituale.
+            </p>
+            <p>
+              In partnership con la Equippers Church Roma, guidata dai pastori Francesco e Tanya Basile, continuiamo a crescere nella visione di equipaggiare vite e trasformare comunita', sia localmente che a livello internazionale, con una presenza missionaria anche in India.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- I nostri valori -->
+  <section class="py-20 md:py-28 bg-cream">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Cosa ci guida</span>
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">I nostri valori</h2>
+        <p class="mt-4 text-text-secondary leading-relaxed">
+          Quattro pilastri che guidano ogni aspetto della nostra vita comunitaria e del nostro servizio nel mondo.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Fede -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-divider/50 text-center hover:shadow-md transition-shadow">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true">
+              <path d="M12 22V8" />
+              <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
+              <path d="M8 5h8" />
+              <path d="M12 2v3" />
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-text mb-3">Fede</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Crediamo nella potenza della Parola di Dio come fondamento della nostra vita. La Bibbia e' la nostra guida quotidiana per ogni decisione e relazione.
+          </p>
+        </div>
+
+        <!-- Comunita' -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-divider/50 text-center hover:shadow-md transition-shadow">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true">
+              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-text mb-3">Comunita'</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Siamo una famiglia spirituale dove ognuno e' accolto e valorizzato. Camminiamo insieme nella gioia e nelle sfide, sostenendoci a vicenda.
+          </p>
+        </div>
+
+        <!-- Missione -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-divider/50 text-center hover:shadow-md transition-shadow">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+              <path d="M2 12h20" />
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-text mb-3">Missione</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Portiamo il messaggio di speranza oltre i confini della nostra citta'. Dal Kenya all'India, siamo chiamati a fare la differenza nelle nazioni.
+          </p>
+        </div>
+
+        <!-- Servizio -->
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-divider/50 text-center hover:shadow-md transition-shadow">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true">
+              <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-semibold text-text mb-3">Servizio</h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            Seguiamo l'esempio di Gesu' servendo gli altri con umilta' e amore. Ogni membro e' chiamato a mettere i propri doni al servizio del prossimo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Il nostro team -->
+  <section class="py-20 md:py-28 bg-warm">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16">
+        <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Chi ci guida</span>
+        <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Il nostro team</h2>
+        <p class="mt-4 text-text-secondary leading-relaxed">
+          Persone appassionate che servono la comunita' con dedizione e amore, guidate dalla chiamata di Dio.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+        {teamMembers.map((member) => (
+          <TeamMember
+            name={member.data.name}
+            role={member.data.role}
+            image={member.data.image}
+            bio={member.data.bio}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-primary-dark">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Vieni a trovarci</h2>
+      <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
+        Ti aspettiamo ogni domenica alle 10:00 e ogni mercoledi' alle 18:00. Porta la tua famiglia e i tuoi amici!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a
+          href="/contatti/"
+          class="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-semibold text-slate-dark shadow-md hover:bg-accent-dark hover:text-white transition-all"
+        >
+          Contattaci
+        </a>
+        <a
+          href="/missioni/"
+          class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-8 py-3 text-base font-semibold text-white hover:bg-white/10 transition-all"
+        >
+          Le nostre missioni
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,144 @@
+---
+// Donation banner with IBAN copy, 5x1000, and donation CTAs
+---
+
+<section class="relative overflow-hidden bg-slate-dark grain py-24 sm:py-32">
+  <!-- Organic wave top -->
+  <div class="wave-top">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" class="w-full h-12 sm:h-16" aria-hidden="true">
+      <path d="M0,40 C360,0 720,80 1080,30 C1260,10 1380,50 1440,40 L1440,0 L0,0 Z" fill="var(--color-cream)"/>
+    </svg>
+  </div>
+
+  <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <!-- Editorial header - left-aligned with accent overline -->
+    <div class="mb-14">
+      <div class="w-12 h-[2px] bg-accent mb-5"></div>
+      <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-white mb-4">
+        Sostieni Efraim Church
+      </h2>
+      <p class="text-white/60 text-lg max-w-2xl leading-relaxed">
+        Ogni contributo fa la differenza nella vita di chi ha bisogno. Scegli come sostenere le nostre missioni e attivit&agrave;.
+      </p>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="grid md:grid-cols-3 gap-6 lg:gap-8">
+      <!-- IBAN Card -->
+      <div class="relative bg-white/[0.04] border border-white/10 p-7">
+        <!-- Gold corner accents -->
+        <div class="absolute top-0 left-0 w-10 h-[2px] bg-accent"></div>
+        <div class="absolute top-0 left-0 w-[2px] h-10 bg-accent"></div>
+        <div class="absolute bottom-0 right-0 w-10 h-[2px] bg-accent"></div>
+        <div class="absolute bottom-0 right-0 w-[2px] h-10 bg-accent"></div>
+
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+        </div>
+        <h3 class="font-serif text-lg font-semibold text-white mb-2">Bonifico bancario</h3>
+        <p class="text-white/50 text-sm mb-5">Intestato a Chiesa Cristiana Evangelica Efraim</p>
+        <div class="bg-white/[0.06] border border-white/10 px-4 py-3 mb-5">
+          <span id="iban-text" class="text-white font-mono text-sm sm:text-base tracking-wide break-all select-all">
+            IT40R0306909606100000172244
+          </span>
+        </div>
+        <button
+          id="copy-iban-btn"
+          type="button"
+          class="inline-flex items-center gap-2 bg-white/[0.08] px-5 py-2.5 text-sm font-sans font-semibold text-white border border-white/20 transition-all hover:bg-white/15 hover:border-white/40 active:scale-95"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+          <span id="copy-iban-label">Copia IBAN</span>
+        </button>
+      </div>
+
+      <!-- 5x1000 Card -->
+      <div class="relative bg-white/[0.04] border border-white/10 p-7">
+        <!-- Gold corner accents -->
+        <div class="absolute top-0 left-0 w-10 h-[2px] bg-accent"></div>
+        <div class="absolute top-0 left-0 w-[2px] h-10 bg-accent"></div>
+        <div class="absolute bottom-0 right-0 w-10 h-[2px] bg-accent"></div>
+        <div class="absolute bottom-0 right-0 w-[2px] h-10 bg-accent"></div>
+
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
+        </div>
+        <h3 class="font-serif text-lg font-semibold text-white mb-2">5&times;1000</h3>
+        <p class="text-white/50 text-sm mb-5">Destina il tuo 5 per mille alla Chiesa Efraim. Non ti costa nulla!</p>
+        <div class="bg-white/[0.06] border border-white/10 px-4 py-4 mb-5 text-center">
+          <span class="block text-[11px] font-sans text-white/40 uppercase tracking-[0.15em] mb-2">Codice Fiscale</span>
+          <span class="text-white font-mono text-2xl font-semibold tracking-wider select-all">97089710830</span>
+        </div>
+        <p class="text-white/40 text-xs">
+          Indica il CF nella tua dichiarazione dei redditi
+        </p>
+      </div>
+
+      <!-- Online / Sostegno a distanza Card -->
+      <div class="relative bg-white/[0.04] border border-white/10 p-7">
+        <!-- Gold corner accents -->
+        <div class="absolute top-0 left-0 w-10 h-[2px] bg-accent"></div>
+        <div class="absolute top-0 left-0 w-[2px] h-10 bg-accent"></div>
+        <div class="absolute bottom-0 right-0 w-10 h-[2px] bg-accent"></div>
+        <div class="absolute bottom-0 right-0 w-[2px] h-10 bg-accent"></div>
+
+        <div class="mb-5">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+        </div>
+        <h3 class="font-serif text-lg font-semibold text-white mb-2">Sostieni a distanza</h3>
+        <p class="text-white/50 text-sm mb-7">Adotta un bambino a distanza o fai una donazione online per le nostre missioni.</p>
+        <div class="flex flex-col gap-3">
+          <a
+            href="/dona/"
+            class="inline-flex items-center justify-center gap-2 bg-accent px-6 py-3 text-sm font-sans font-semibold text-white transition-all hover:bg-accent-dark active:scale-[0.98]"
+          >
+            Sostieni a distanza
+          </a>
+          <a
+            href="/dona/"
+            class="inline-flex items-center justify-center gap-2 bg-white/[0.08] px-6 py-3 text-sm font-sans font-semibold text-white border border-white/20 transition-all hover:bg-white/15 hover:border-white/40"
+          >
+            Dona online
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const copyBtn = document.getElementById('copy-iban-btn');
+  const copyLabel = document.getElementById('copy-iban-label');
+  const ibanText = document.getElementById('iban-text');
+
+  copyBtn?.addEventListener('click', async () => {
+    const iban = ibanText?.textContent?.trim();
+    if (!iban) return;
+
+    try {
+      await navigator.clipboard.writeText(iban);
+      if (copyLabel) {
+        copyLabel.textContent = 'Copiato!';
+        setTimeout(() => {
+          copyLabel.textContent = 'Copia IBAN';
+        }, 2000);
+      }
+    } catch {
+      // Fallback for older browsers
+      const textarea = document.createElement('textarea');
+      textarea.value = iban;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      if (copyLabel) {
+        copyLabel.textContent = 'Copiato!';
+        setTimeout(() => {
+          copyLabel.textContent = 'Copia IBAN';
+        }, 2000);
+      }
+    }
+  });
+</script>

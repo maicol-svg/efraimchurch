@@ -1,0 +1,96 @@
+backend:
+  name: test-repo
+  branch: main
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+locale: "it"
+
+collections:
+  - name: "blog"
+    label: "Blog"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Autore", name: "author", widget: "string", default: "Efraim Church" }
+      - { label: "Descrizione", name: "description", widget: "text" }
+      - { label: "Immagine", name: "image", widget: "image", required: false }
+      - { label: "Tag", name: "tags", widget: "list", required: false }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "eventi"
+    label: "Eventi"
+    folder: "src/content/eventi"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data inizio", name: "date", widget: "datetime" }
+      - { label: "Data fine", name: "endDate", widget: "datetime", required: false }
+      - { label: "Orario", name: "time", widget: "string", required: false }
+      - { label: "Luogo", name: "location", widget: "string", required: false }
+      - { label: "Descrizione", name: "description", widget: "text" }
+      - { label: "Immagine", name: "image", widget: "image", required: false }
+      - { label: "Link", name: "link", widget: "string", required: false }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "team"
+    label: "Team"
+    folder: "src/content/team"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Nome", name: "name", widget: "string" }
+      - { label: "Ruolo", name: "role", widget: "string" }
+      - { label: "Foto", name: "image", widget: "image", required: false }
+      - { label: "Biografia", name: "bio", widget: "text", required: false }
+      - { label: "Ordine", name: "order", widget: "number", default: 0 }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "missioni"
+    label: "Missioni"
+    folder: "src/content/missioni"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Missione", name: "mission", widget: "select", options: ["kenya", "india"] }
+      - { label: "Descrizione", name: "description", widget: "text" }
+      - { label: "Immagini", name: "images", widget: "list", field: { label: "Immagine", name: "image", widget: "image" }, required: false }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
+  - name: "galleria"
+    label: "Galleria"
+    folder: "src/content/galleria"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Immagine", name: "image", widget: "image" }
+      - { label: "Didascalia", name: "caption", widget: "string", required: false }
+      - { label: "Categoria", name: "category", widget: "select", options: ["kenya", "india", "chiesa", "eventi"] }
+      - { label: "Data", name: "date", widget: "datetime", required: false }
+
+  - name: "partner"
+    label: "Partner"
+    folder: "src/content/partner"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Nome", name: "name", widget: "string" }
+      - { label: "Logo", name: "logo", widget: "image", required: false }
+      - { label: "Descrizione", name: "description", widget: "text", required: false }
+      - { label: "Sito web", name: "website", widget: "string", required: false }
+      - { label: "Ordine", name: "order", widget: "number", default: 0 }
+      - { label: "Contenuto", name: "body", widget: "markdown" }

@@ -1,0 +1,391 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Dona"
+  description="Sostieni la missione della Chiesa Efraim. Dona tramite bonifico, 5x1000 o adozione a distanza per cambiare la vita di un bambino in Kenya."
+>
+  <!-- Hero -->
+  <section class="relative bg-slate-dark overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/90 to-slate-dark"></div>
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-light rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+    </div>
+    <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 md:py-36">
+      <div class="max-w-3xl">
+        <span class="inline-block text-accent font-medium text-sm tracking-widest uppercase mb-4">Fai la differenza</span>
+        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+          Sostieni la nostra missione
+        </h1>
+        <p class="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl">
+          Ogni donazione, grande o piccola, contribuisce a cambiare la vita di bambini e famiglie in Kenya e in India. Il tuo gesto generoso ha un impatto eterno.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- IBAN Section -->
+  <section class="py-20 md:py-28 bg-warm">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Bonifico bancario</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Dona tramite bonifico</h2>
+          <p class="mt-4 text-text-secondary leading-relaxed">
+            Il modo piu' diretto per sostenere le nostre attivita'. Puoi effettuare un bonifico bancario utilizzando i seguenti dati.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 md:p-10">
+          <!-- IBAN -->
+          <div class="mb-8">
+            <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">IBAN</label>
+            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
+              <code id="iban-code" class="flex-1 text-lg md:text-xl font-mono font-semibold text-primary-dark tracking-wider break-all">
+                IT40R0306909606100000172244
+              </code>
+              <button
+                id="copy-iban"
+                type="button"
+                class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
+                aria-label="Copia IBAN negli appunti"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <span id="copy-label">Copia</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Bank Details -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Intestato a</label>
+              <p class="text-text font-medium">Chiesa Cristiana Evangelica Efraim</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Banca</label>
+              <p class="text-text font-medium">Intesa San Paolo</p>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/10">
+            <p class="text-sm text-text-secondary">
+              <strong class="text-text">Causale suggerita:</strong> Donazione liberale / Missione Kenya / Missione India / Adozione a distanza
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5x1000 Section -->
+  <section class="py-20 md:py-28 bg-cream">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 items-center">
+          <div class="lg:col-span-3">
+            <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">5 per mille</span>
+            <h2 class="font-serif text-3xl md:text-4xl font-bold text-text mb-6">Dona il tuo 5x1000</h2>
+            <div class="space-y-4 text-text-secondary leading-relaxed">
+              <p>
+                Destinare il 5 per mille alla Chiesa Efraim non ti costa nulla ma per noi vale moltissimo. E' un gesto semplice che si trasforma in aiuto concreto per le nostre missioni e le attivita' sociali.
+              </p>
+              <p>
+                Al momento della dichiarazione dei redditi, firma nel riquadro dedicato al "Sostegno del volontariato e delle altre organizzazioni non lucrative di utilita' sociale" e inserisci il nostro codice fiscale.
+              </p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-2">
+            <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 text-center">
+              <p class="text-sm font-medium text-text-secondary uppercase tracking-wider mb-3">Codice Fiscale</p>
+              <div class="flex items-center justify-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
+                <code id="cf-code" class="text-2xl font-mono font-bold text-primary-dark tracking-widest">
+                  97089710830
+                </code>
+                <button
+                  id="copy-cf"
+                  type="button"
+                  class="shrink-0 p-2 rounded-lg bg-primary/10 text-primary-dark hover:bg-primary/20 transition-colors"
+                  aria-label="Copia codice fiscale negli appunti"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                </button>
+              </div>
+              <p class="mt-4 text-xs text-text-secondary">
+                Chiesa Cristiana Evangelica Efraim
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Adozioni a distanza -->
+  <section class="py-20 md:py-28 bg-warm">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Adozione a distanza</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Adotta un bambino a distanza</h2>
+          <p class="mt-4 text-text-secondary leading-relaxed">
+            Con il programma di adozione a distanza puoi accompagnare un bambino nel suo percorso di crescita, garantendogli istruzione, nutrizione e cure mediche.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 overflow-hidden">
+          <div class="bg-gradient-to-r from-primary to-primary-dark p-8 md:p-10 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-1.5 text-sm text-white mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              Missione Kenya
+            </div>
+            <p class="text-white/80 text-sm mb-2">A partire da</p>
+            <div class="text-5xl md:text-6xl font-serif font-bold text-white mb-1">25 &euro;</div>
+            <p class="text-white/80 text-lg">al mese</p>
+          </div>
+          <div class="p-8 md:p-10">
+            <h3 class="font-serif text-xl font-semibold text-text mb-4">Cosa include l'adozione a distanza</h3>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span class="text-text-secondary">Iscrizione e frequenza scolastica con materiale didattico</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span class="text-text-secondary">Un pasto caldo al giorno, ogni giorno</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span class="text-text-secondary">Assistenza sanitaria di base e visite mediche</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span class="text-text-secondary">Attivita' ricreative e formazione spirituale</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <span class="text-text-secondary">Aggiornamenti periodici sul bambino adottato</span>
+              </li>
+            </ul>
+            <div class="mt-8 text-center">
+              <a
+                href="/contatti/"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-primary-dark hover:shadow-lg transition-all"
+              >
+                Contattaci per adottare
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dona online -->
+  <section class="py-20 md:py-28 bg-cream">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Dona online</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text mb-6">Donazione online</h2>
+          <p class="text-text-secondary leading-relaxed">
+            Puoi sostenere la nostra missione anche online tramite PayPal. Semplice, veloce e sicuro.
+          </p>
+        </div>
+
+        <!-- PayPal -->
+        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 md:p-10 mb-8">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-full bg-[#0070ba]/10 flex items-center justify-center shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0070ba" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
+                <path d="M10 14l1-6h3c2 0 3.5 1 3 3.5s-2.5 3.5-4.5 3.5H10z" opacity="0.5"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-serif text-xl font-semibold text-text">PayPal</h3>
+              <p class="text-sm text-text-secondary">Invia la tua donazione tramite PayPal</p>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">Invia a</label>
+            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
+              <code id="paypal-email" class="flex-1 text-lg font-mono font-semibold text-primary-dark break-all">
+                info@missionekenya.com
+              </code>
+              <button
+                id="copy-paypal"
+                type="button"
+                class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
+                aria-label="Copia email PayPal negli appunti"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <span id="copy-paypal-label">Copia</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a
+              href="https://paypal.me/missionekenya"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-[#0070ba] px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-[#005ea6] transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
+              </svg>
+              Dona con PayPal
+            </a>
+            <p class="text-sm text-text-secondary mt-3">
+              Oppure invia direttamente a <strong>info@missionekenya.com</strong> dall'app PayPal
+            </p>
+          </div>
+        </div>
+
+        <!-- Stripe coming soon -->
+        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 text-center">
+          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true">
+              <rect width="20" height="14" x="2" y="5" rx="2" />
+              <line x1="2" x2="22" y1="10" y2="10" />
+            </svg>
+          </div>
+          <p class="text-text font-medium mb-1">Carte di credito in arrivo</p>
+          <p class="text-sm text-text-secondary/70">Presto sara' disponibile anche la possibilita' di donare con carta di credito tramite Stripe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 md:py-28 bg-warm">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Domande frequenti</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Hai delle domande?</h2>
+        </div>
+
+        <div class="space-y-4">
+          <!-- FAQ 1 -->
+          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              <h3 class="font-serif text-lg font-semibold text-text">Come vengono utilizzate le donazioni?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
+              <p>Le donazioni vengono utilizzate per sostenere le nostre missioni in Kenya e India, coprendo i costi di istruzione, nutrizione, assistenza sanitaria e cura spirituale dei bambini. Una parte viene destinata alle attivita' della chiesa locale, tra cui l'affitto dei locali, le utenze e i programmi comunitari. Garantiamo la massima trasparenza nella gestione dei fondi.</p>
+            </div>
+          </details>
+
+          <!-- FAQ 2 -->
+          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              <h3 class="font-serif text-lg font-semibold text-text">Le donazioni sono deducibili fiscalmente?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
+              <p>Le donazioni effettuate tramite bonifico bancario a favore della Chiesa Cristiana Evangelica Efraim possono essere deducibili o detraibili ai fini fiscali, nei limiti e secondo le modalita' previste dalla normativa vigente. Ti consigliamo di conservare la ricevuta del bonifico e di consultare il tuo commercialista per i dettagli specifici.</p>
+            </div>
+          </details>
+
+          <!-- FAQ 3 -->
+          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              <h3 class="font-serif text-lg font-semibold text-text">Come funziona l'adozione a distanza?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
+              <p>L'adozione a distanza prevede un contributo mensile a partire da 25 euro. Ti verra' assegnato un bambino specifico del programma in Kenya, e riceverai aggiornamenti periodici sulla sua crescita e il suo percorso scolastico. Il tuo sostegno coprira' le spese di istruzione, alimentazione e assistenza sanitaria. Contattaci per maggiori informazioni e per iniziare.</p>
+            </div>
+          </details>
+
+          <!-- FAQ 4 -->
+          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              <h3 class="font-serif text-lg font-semibold text-text">Posso visitare le missioni di persona?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
+              <p>Si', organizziamo periodicamente viaggi missionari in Kenya dove e' possibile visitare il progetto, conoscere i bambini e partecipare attivamente alle attivita'. Se sei interessato, contattaci e ti forniremo tutte le informazioni sui prossimi viaggi programmati.</p>
+            </div>
+          </details>
+
+          <!-- FAQ 5 -->
+          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
+            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              <h3 class="font-serif text-lg font-semibold text-text">Come posso essere sicuro che le donazioni arrivino a destinazione?</h3>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+            </summary>
+            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
+              <p>La trasparenza e' un valore fondamentale per noi. Pubblichiamo regolarmente aggiornamenti sulle nostre attivita' missionarie attraverso il blog, i social media e le comunicazioni dirette ai donatori. Inoltre, il pastore e i responsabili della missione visitano regolarmente i progetti sul campo per verificare l'andamento dei programmi e l'utilizzo dei fondi.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-primary-dark">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Hai bisogno di aiuto?</h2>
+      <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
+        Se hai domande su come donare o vuoi saperne di piu' sui nostri progetti, non esitare a contattarci.
+      </p>
+      <a
+        href="/contatti/"
+        class="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-semibold text-slate-dark shadow-md hover:bg-accent-dark hover:text-white transition-all"
+      >
+        Contattaci
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  function setupCopyButton(buttonId: string, codeId: string) {
+    const button = document.getElementById(buttonId);
+    const code = document.getElementById(codeId);
+    if (!button || !code) return;
+
+    button.addEventListener('click', async () => {
+      const text = code.textContent?.trim() || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        const label = button.querySelector('span');
+        const originalText = label?.textContent;
+        if (label) {
+          label.textContent = 'Copiato!';
+          setTimeout(() => {
+            label.textContent = originalText || 'Copia';
+          }, 2000);
+        } else {
+          button.setAttribute('aria-label', 'Copiato!');
+          setTimeout(() => {
+            button.setAttribute('aria-label', `Copia ${buttonId === 'copy-iban' ? 'IBAN' : 'codice fiscale'} negli appunti`);
+          }, 2000);
+        }
+      } catch {
+        // Fallback for older browsers
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+    });
+  }
+
+  setupCopyButton('copy-iban', 'iban-code');
+  setupCopyButton('copy-cf', 'cf-code');
+  setupCopyButton('copy-paypal', 'paypal-email');
+</script>

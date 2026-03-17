@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Gestione Contenuti - Efraim Church</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+      /* ─── Reset & Base ─── */
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      :root {
+        --primary-dark: #1B5E20;
+        --primary: #2E7D32;
+        --primary-light: #4CAF50;
+        --accent: #D4A843;
+        --accent-dark: #B8912E;
+        --slate-dark: #1A2332;
+        --warm: #FEFBF6;
+        --cream: #FDF8F0;
+        --text: #1C2127;
+        --text-secondary: #5A6370;
+        --divider: #E8DFD0;
+      }
+
+      /* ─── Login Gate ─── */
+      #login-gate {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: var(--slate-dark);
+        font-family: 'Nunito', sans-serif;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Subtle grain texture */
+      #login-gate::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        opacity: 0.25;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.5'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        mix-blend-mode: overlay;
+      }
+
+      /* Decorative gradient orbs */
+      #login-gate::after {
+        content: '';
+        position: absolute;
+        width: 500px;
+        height: 500px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(46, 125, 50, 0.12) 0%, transparent 70%);
+        top: -150px;
+        right: -100px;
+        pointer-events: none;
+      }
+
+      .login-card {
+        position: relative;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 20px;
+        padding: 3rem 2.5rem;
+        width: 100%;
+        max-width: 420px;
+        margin: 1rem;
+        text-align: center;
+        animation: card-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+      }
+
+      @keyframes card-in {
+        0% { opacity: 0; transform: translateY(24px) scale(0.97); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      /* Decorative top accent line */
+      .login-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--accent), var(--accent-dark));
+        border-radius: 0 0 3px 3px;
+      }
+
+      /* Cross icon */
+      .login-icon {
+        width: 48px;
+        height: 48px;
+        margin: 0 auto 1.25rem;
+        opacity: 0.9;
+      }
+      .login-icon svg {
+        width: 100%;
+        height: 100%;
+      }
+
+      .login-brand {
+        font-family: 'Lora', serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: var(--warm);
+        letter-spacing: 0.04em;
+        margin-bottom: 0.25rem;
+      }
+      .login-brand span {
+        font-weight: 400;
+        font-size: 0.85em;
+        color: var(--accent);
+        display: block;
+        letter-spacing: 0.15em;
+        text-transform: lowercase;
+        margin-top: 0.1rem;
+      }
+
+      .login-divider {
+        width: 40px;
+        height: 1px;
+        background: var(--accent);
+        margin: 1.25rem auto;
+        opacity: 0.5;
+      }
+
+      .login-subtitle {
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.85rem;
+        margin-bottom: 2rem;
+        letter-spacing: 0.03em;
+      }
+
+      .form-group {
+        position: relative;
+        margin-bottom: 1.25rem;
+      }
+
+      .form-group input {
+        width: 100%;
+        padding: 0.875rem 1.125rem;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: var(--warm);
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.95rem;
+        transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+        outline: none;
+      }
+      .form-group input::placeholder {
+        color: rgba(255, 255, 255, 0.3);
+      }
+      .form-group input:focus {
+        border-color: var(--accent);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.15);
+      }
+
+      .login-btn {
+        width: 100%;
+        padding: 0.875rem;
+        background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        cursor: pointer;
+        transition: transform 0.2s, box-shadow 0.3s, opacity 0.2s;
+        position: relative;
+        overflow: hidden;
+      }
+      .login-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 24px rgba(27, 94, 32, 0.35);
+      }
+      .login-btn:active {
+        transform: translateY(0);
+        opacity: 0.9;
+      }
+
+      /* Gold bottom accent on button */
+      .login-btn::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40%;
+        height: 2px;
+        background: var(--accent);
+        border-radius: 2px 2px 0 0;
+        opacity: 0.6;
+      }
+
+      .login-error {
+        color: #EF5350;
+        font-size: 0.8rem;
+        margin-top: 0.75rem;
+        min-height: 1.2em;
+        transition: opacity 0.2s;
+      }
+
+      .login-footer {
+        margin-top: 2rem;
+        color: rgba(255, 255, 255, 0.25);
+        font-size: 0.7rem;
+        letter-spacing: 0.05em;
+      }
+
+      /* ─── Preview Banner (shown inside CMS) ─── */
+      #preview-banner {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 99999;
+        background: linear-gradient(135deg, #1B5E20, #2E7D32);
+        color: white;
+        text-align: center;
+        padding: 8px 16px;
+        font-family: 'Nunito', sans-serif;
+        font-size: 13px;
+        letter-spacing: 0.02em;
+        box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      }
+      #preview-banner strong {
+        color: var(--accent);
+      }
+      #preview-banner .close-banner {
+        position: absolute;
+        right: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: rgba(255,255,255,0.6);
+        cursor: pointer;
+        font-size: 18px;
+        line-height: 1;
+        padding: 4px;
+      }
+      #preview-banner .close-banner:hover {
+        color: white;
+      }
+
+      /* Push CMS content down when banner is visible */
+      body.has-banner #nc-root,
+      body.has-banner [id^="nc-"] {
+        margin-top: 36px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ─── Password Gate ─── -->
+    <div id="login-gate">
+      <div class="login-card">
+        <div class="login-icon">
+          <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M24 4 L24 44" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M10 18 L38 18" stroke="#D4A843" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="24" cy="18" r="6" stroke="#D4A843" stroke-width="1.5" fill="none" opacity="0.4"/>
+            <path d="M17 10 L24 18 L31 10" stroke="#D4A843" stroke-width="1" stroke-linecap="round" fill="none" opacity="0.3"/>
+          </svg>
+        </div>
+        <div class="login-brand">
+          EFRAIM
+          <span>church</span>
+        </div>
+        <div class="login-divider"></div>
+        <p class="login-subtitle">Area gestione contenuti</p>
+        <form id="login-form" onsubmit="return handleLogin(event)">
+          <div class="form-group">
+            <input
+              type="password"
+              id="password-input"
+              placeholder="Password"
+              autocomplete="current-password"
+              autofocus
+            />
+          </div>
+          <button type="submit" class="login-btn">Accedi</button>
+          <p class="login-error" id="login-error">&nbsp;</p>
+        </form>
+        <p class="login-footer">Gestione contenuti del sito</p>
+      </div>
+    </div>
+
+    <!-- ─── Preview Mode Banner ─── -->
+    <div id="preview-banner">
+      <strong>Modalita' anteprima</strong> &mdash; le modifiche non vengono salvate. Collega GitHub per salvare.
+      <button class="close-banner" onclick="closeBanner()" aria-label="Chiudi">&times;</button>
+    </div>
+
+    <!-- ─── Auth + CMS Loading Script ─── -->
+    <script>
+      var CORRECT_PASSWORD = 'efraim2026';
+
+      function handleLogin(e) {
+        e.preventDefault();
+        var pw = document.getElementById('password-input').value;
+        if (pw === CORRECT_PASSWORD) {
+          sessionStorage.setItem('efraim_cms_auth', 'true');
+          loadCMS();
+        } else {
+          var errEl = document.getElementById('login-error');
+          errEl.textContent = 'Password non corretta';
+          document.getElementById('password-input').value = '';
+          document.getElementById('password-input').focus();
+          // Shake animation
+          var card = document.querySelector('.login-card');
+          card.style.animation = 'none';
+          card.offsetHeight; // trigger reflow
+          card.style.animation = 'shake 0.5s ease';
+        }
+        return false;
+      }
+
+      function loadCMS() {
+        // Hide login gate
+        document.getElementById('login-gate').style.display = 'none';
+
+        // Show preview banner
+        document.getElementById('preview-banner').style.display = 'block';
+        document.body.classList.add('has-banner');
+
+        // Load Decap CMS
+        var script = document.createElement('script');
+        script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+        document.body.appendChild(script);
+      }
+
+      function closeBanner() {
+        document.getElementById('preview-banner').style.display = 'none';
+        document.body.classList.remove('has-banner');
+      }
+
+      // Check if already authenticated in this session
+      if (sessionStorage.getItem('efraim_cms_auth') === 'true') {
+        loadCMS();
+      }
+
+      // Add shake keyframes dynamically
+      var shakeStyle = document.createElement('style');
+      shakeStyle.textContent = '@keyframes shake { 0%, 100% { transform: translateX(0); } 20% { transform: translateX(-8px); } 40% { transform: translateX(8px); } 60% { transform: translateX(-4px); } 80% { transform: translateX(4px); } }';
+      document.head.appendChild(shakeStyle);
+    </script>
+
+  </body>
+</html>
