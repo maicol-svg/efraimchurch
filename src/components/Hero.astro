@@ -114,66 +114,39 @@ const { upcomingEvents = [] } = Astro.props;
           </a>
         </div>
 
-        <!-- Compact mobile/tablet upcoming events (visible below lg, hidden on lg+) -->
-        <div class="hero-cta lg:hidden mt-10">
-          {upcomingEvents.length > 0 ? (
-            <!-- Mobile: horizontal pills row (below md) -->
-            <div class="md:hidden">
-              <p class="text-white/40 font-sans text-[10px] tracking-[0.2em] uppercase mb-3">Prossimi incontri</p>
-              <div class="flex flex-wrap gap-2">
-                {upcomingEvents.map((event) => (
-                  <div class="inline-flex items-center gap-2 px-3 py-2 bg-white/[0.06] backdrop-blur-sm border border-white/10 rounded-sm">
-                    <span class="text-accent font-serif font-bold text-sm leading-none">{event.dayAbbrev}</span>
-                    {event.time && <span class="text-white/50 text-xs">{event.time}</span>}
-                    <span class="text-white/30 text-xs">|</span>
-                    <span class="text-white/80 text-xs font-medium">{event.title}</span>
-                  </div>
+        <!-- Compact upcoming events for mobile/tablet (visible below lg) -->
+        {upcomingEvents.length > 0 && (
+          <div class="hero-cta lg:hidden mt-10 max-w-xs">
+            <div class="relative bg-white/[0.04] backdrop-blur-sm border border-white/10 p-5">
+              <div class="absolute top-0 left-0 w-8 h-[2px] bg-accent"></div>
+              <div class="absolute top-0 left-0 w-[2px] h-8 bg-accent"></div>
+
+              <p class="text-white/40 font-sans text-[10px] tracking-[0.2em] uppercase mb-4">Prossimi incontri</p>
+
+              <div class="space-y-3">
+                {upcomingEvents.map((event, i) => (
+                  <>
+                    {i > 0 && <div class="w-full h-px bg-white/10"></div>}
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 flex flex-col items-center justify-center bg-accent/10 text-accent flex-shrink-0">
+                        <span class="text-sm font-serif font-bold leading-none">{event.dayAbbrev}</span>
+                      </div>
+                      <div>
+                        <p class="text-white font-medium text-sm">{event.title}</p>
+                        {event.time && <p class="text-white/50 text-xs mt-0.5">Ore {event.time}</p>}
+                      </div>
+                    </div>
+                  </>
                 ))}
               </div>
-              <div class="flex items-center gap-1.5 mt-3 text-white/30 text-[10px]">
+
+              <div class="flex items-center gap-2 mt-4 pt-3 border-t border-white/10 text-white/30 text-[10px]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>Via B. Colleoni 43, Messina</span>
+                <span>Via B. Colleoni 43 (zona Minissale), Messina</span>
               </div>
             </div>
-
-            <!-- Tablet: centered card (md to lg) -->
-            <div class="hidden md:flex md:justify-center">
-              <div class="relative max-w-sm w-full">
-                <div class="relative bg-white/[0.04] backdrop-blur-sm border border-white/10 p-6">
-                  <!-- Accent corner -->
-                  <div class="absolute top-0 left-0 w-10 h-[2px] bg-accent"></div>
-                  <div class="absolute top-0 left-0 w-[2px] h-10 bg-accent"></div>
-
-                  <p class="text-white/40 font-sans text-xs tracking-[0.2em] uppercase mb-4">Prossimi incontri</p>
-
-                  <div class="flex items-center gap-4">
-                    {upcomingEvents.map((event, i) => (
-                      <>
-                        {i > 0 && <div class="w-px h-10 bg-white/10 shrink-0"></div>}
-                        <div class="flex items-center gap-3 flex-1 min-w-0">
-                          <div class="w-10 h-10 flex flex-col items-center justify-center bg-accent/10 text-accent flex-shrink-0">
-                            <span class="text-sm font-serif font-bold leading-none">{event.dayAbbrev}</span>
-                          </div>
-                          <div class="min-w-0">
-                            <p class="text-white font-medium text-xs truncate">{event.title}</p>
-                            {event.time && <p class="text-white/50 text-[10px] mt-0.5">Ore {event.time}</p>}
-                          </div>
-                        </div>
-                      </>
-                    ))}
-                  </div>
-
-                  <div class="flex items-center gap-2 mt-4 pt-4 border-t border-white/10 text-white/40 text-xs">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-                    <span>Via B. Colleoni 43 (zona Minissale), Messina</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <p class="text-white/50 text-sm italic">Nessun incontro in programma</p>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       <!-- Right: full info card (5 cols) - desktop sidebar (hidden below lg, visible on lg+) -->
