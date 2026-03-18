@@ -341,13 +341,13 @@
         window.CMS_MANUAL_INIT = true;
 
         var script = document.createElement('script');
-        script.src = 'https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js';
+        script.src = 'https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js';
         script.onload = function() {
           var CMS = window.CMS;
           CMS.init({
             config: {
               load_config_file: false,
-              backend: { name: 'github', repo: 'maicol-svg/efraimchurch', branch: 'main' },
+              backend: { name: 'github', repo: 'maicol-svg/efraimchurch', branch: 'main', auth_type: 'pkce' },
               media_folder: 'public/images/uploads',
               public_folder: '/images/uploads',
               locale: 'it',
