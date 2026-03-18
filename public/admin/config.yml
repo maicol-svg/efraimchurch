@@ -39,6 +39,7 @@ collections:
       - { label: "Descrizione", name: "description", widget: "text" }
       - { label: "Immagine", name: "image", widget: "image", required: false }
       - { label: "Link", name: "link", widget: "string", required: false }
+      - { label: "Ricorrenza", name: "recurring", widget: "select", options: ["none", "settimanale"], default: "none" }
       - { label: "Contenuto", name: "body", widget: "markdown" }
 
   - name: "team"
