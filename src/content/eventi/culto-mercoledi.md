@@ -1,10 +1,12 @@
 ---
-title: "Culto"
-date: 2026-03-19
-time: "18:00"
-location: "Chiesa Efraim - Via Bartolomeo Colleoni 43, 98125 Messina"
-description: "Ogni mercoledi' alle 18:00 ci ritroviamo per un momento di culto, adorazione e ascolto della Parola. Un appuntamento settimanale aperto a tutti."
-image: "/images/bible-study.jpg"
+title: Culto
+date: 2026-03-18T01:00:00
+endDate: ''
+time: 18:00
+location: Chiesa Efraim - Via Bartolomeo Colleoni 43, 98125 Messina
+description: Ogni mercoledi' alle 18:00 ci ritroviamo per un momento di culto, adorazione e ascolto della Parola. Un appuntamento settimanale aperto a tutti.
+image: /images/bible-study.jpg
+link: ''
 ---
 
 ## Un momento di culto a meta' settimana
