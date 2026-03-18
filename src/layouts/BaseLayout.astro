@@ -14,13 +14,13 @@ interface Props {
 
 const {
   title,
-  description = 'Chiesa Cristiana Evangelica Efraim di Messina. Equipaggiare vite, trasformare comunità. Missioni in Kenya e India.',
+  description = 'Chiesa Cristiana Efraim di Messina. Equipaggiare vite, trasformare comunità. Missioni in Kenya e India.',
   image = '/images/og-default.jpg',
   type = 'website',
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const fullTitle = title === 'Home' ? 'Efraim Church | Chiesa Evangelica Messina' : `${title} | Efraim Church`;
+const fullTitle = title === 'Home' ? 'Efraim Church | Chiesa Cristiana Messina' : `${title} | Efraim Church`;
 ---
 
 <!doctype html>

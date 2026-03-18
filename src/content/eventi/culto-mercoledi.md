@@ -1,5 +1,5 @@
 ---
-title: Culto
+title: Service
 date: 2026-03-18T18:00:00
 endDate: ''
 time: 18:00
@@ -14,6 +14,6 @@ link: ''
 
 Il culto del mercoledì è un appuntamento prezioso per chi desidera vivere un momento di **adorazione e ascolto della Parola di Dio** durante la settimana, in un ambiente accogliente e familiare. Ogni settimana ci ritroviamo per lodare il Signore, pregare insieme e lasciarci edificare dalla Sua Parola.
 
-Guidati dal pastore **Tindaro Smeraldi** e dai responsabili della chiesa, questi incontri sono aperti a tutti: sia a chi muove i primi passi nella fede sia a chi cammina con il Signore da tempo. L'atmosfera è informale ma il cuore del culto è lo stesso della domenica: incontrare Dio insieme.
+Guidati dai pastori **Tindaro Smeraldi** e **Angela Attanà** e dai responsabili della chiesa, questi incontri sono aperti a tutti: sia a chi muove i primi passi nella fede sia a chi cammina con il Signore da tempo. L'atmosfera è informale ma il cuore del culto è lo stesso della domenica: incontrare Dio insieme.
 
 **Ci vediamo ogni mercoledì alle 18:00** in Via Bartolomeo Colleoni 43, Messina. È un'occasione perfetta per chi non riesce a partecipare la domenica o per chi semplicemente desidera un momento in più di comunione durante la settimana.

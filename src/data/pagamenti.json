@@ -1,12 +1,12 @@
 {
   "iban": "IT40R0306909606100000172244",
-  "intestatario": "Chiesa Cristiana Evangelica Efraim",
+  "intestatario": "Chiesa Cristiana Efraim",
   "banca": "Intesa San Paolo",
   "causale_suggerita": "Donazione liberale / Missione Kenya / Missione India / Adozione a distanza",
   "codice_fiscale": "97089710830",
   "paypal_email": "info@missionekenya.com",
   "paypal_link": "https://paypal.me/missionekenya",
-  "adozione_importo": "25",
+  "adozione_importo": "35",
   "adozione_incluso": [
     "Iscrizione e frequenza scolastica con materiale didattico",
     "Un pasto caldo al giorno, ogni giorno",
