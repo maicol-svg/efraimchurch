@@ -1,10 +1,10 @@
 ---
-title: "Inaugurazione della nuova scuola in India"
+title: Inaugurazione della nuova scuola in India
 date: 2026-01-15
-mission: "india"
-description: "Una nuova scuola e stata inaugurata in India grazie al sostegno della Chiesa Efraim. Un passo importante per il futuro di tanti bambini."
+mission: india
+description: Una nuova scuola e stata inaugurata in India grazie al sostegno della Chiesa Efraim. Un passo importante per il futuro di tanti bambini.
 images:
-  - "/images/india-school.jpg"
+  - /images/india-school.jpg
 ---
 
 ## Un futuro che inizia tra i banchi
