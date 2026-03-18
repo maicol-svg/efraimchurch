@@ -6,68 +6,9 @@ import EventCard from '../components/EventCard.astro';
 import BlogCard from '../components/BlogCard.astro';
 import DonationBanner from '../components/DonationBanner.astro';
 import { getCollection } from 'astro:content';
+import { getExpandedEvents, dayAbbrevs } from '../lib/events';
 
-const allEvents = await getCollection('eventi');
-const now = new Date();
-const dayAbbrevs = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
-
-// Expand recurring events into future occurrences (next 4 weeks)
-function expandRecurringEvents(events: any[]) {
-  const expanded: any[] = [];
-
-  for (const event of events) {
-    if (event.data.recurring === 'settimanale') {
-      // Get the day of week from the original event date
-      const originalDate = new Date(event.data.date);
-      const dayOfWeek = originalDate.getDay();
-
-      // Find the next 4 occurrences of this weekday from today
-      for (let week = 0; week < 4; week++) {
-        const nextDate = new Date(now);
-        // Find next occurrence of this day of week
-        const daysUntil = (dayOfWeek - now.getDay() + 7) % 7;
-        nextDate.setDate(now.getDate() + daysUntil + (week * 7));
-        // If daysUntil is 0 and we're on the same day, keep today's occurrence
-        nextDate.setHours(0, 0, 0, 0);
-
-        expanded.push({
-          id: `${event.id}-week-${week}`,
-          slug: event.id,
-          data: {
-            ...event.data,
-            date: nextDate,
-          },
-          isRecurring: true,
-        });
-      }
-    } else {
-      // One-time event: include if future or today
-      const eventDate = new Date(event.data.date);
-      if (eventDate >= now || isSameDay(eventDate, now)) {
-        expanded.push({
-          id: event.id,
-          slug: event.id,
-          data: event.data,
-          isRecurring: false,
-        });
-      }
-    }
-  }
-
-  return expanded;
-}
-
-function isSameDay(d1: Date, d2: Date) {
-  return d1.getFullYear() === d2.getFullYear() &&
-         d1.getMonth() === d2.getMonth() &&
-         d1.getDate() === d2.getDate();
-}
-
-const expandedEvents = expandRecurringEvents(allEvents);
-
-// Sort by date
-const sortedEvents = expandedEvents
-  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+const sortedEvents = await getExpandedEvents(4);
 
 // Hero: next 3 upcoming events (including recurring occurrences)
 const heroEvents = sortedEvents.slice(0, 3).map(e => {
@@ -111,18 +52,18 @@ const latestPosts = allPosts
             Chi siamo
           </p>
           <h2 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-semibold text-text leading-[1.1] mb-8">
-            Una comunita'<br>
+            Una comunità<br>
             <span class="italic text-primary-dark">che cammina insieme</span>
           </h2>
           <div class="space-y-5 text-text-secondary leading-[1.85] text-[1.05rem]">
             <p>
               La <strong class="text-text font-medium">Chiesa Cristiana Evangelica Efraim</strong> di Messina
-              e' una comunita' di credenti uniti dalla passione per il Vangelo e dall'amore per il prossimo.
+              è una comunità di credenti uniti dalla passione per il Vangelo e dall'amore per il prossimo.
             </p>
             <p>
               Sotto la guida del pastore <strong class="text-text font-medium">Tindaro Smeraldi</strong>,
               camminiamo nella fede, nell'accoglienza e nel servizio. Le nostre porte sono aperte:
-              c'e' un posto anche per te.
+              c'è un posto anche per te.
             </p>
           </div>
           <div class="mt-10">
@@ -226,7 +167,7 @@ const latestPosts = allPosts
             title="Missione India"
             country="India"
             image="/images/india-school.jpg"
-            description="In India lavoriamo per offrire istruzione e speranza alle comunita' in crescita. Nuovi progetti stanno prendendo forma."
+            description="In India lavoriamo per offrire istruzione e speranza alle comunità in crescita. Nuovi progetti stanno prendendo forma."
             stats={[
               { label: 'Stato', value: 'Attivo' },
               { label: 'Focus', value: 'Istruzione' },
@@ -270,7 +211,7 @@ const latestPosts = allPosts
             <span class="italic text-primary-dark">eventi</span>
           </h2>
           <p class="text-text-secondary leading-relaxed mb-8">
-            Gli appuntamenti della nostra comunita'. Vieni a trovarci.
+            Gli appuntamenti della nostra comunità. Vieni a trovarci.
           </p>
           <a
             href="/eventi/"

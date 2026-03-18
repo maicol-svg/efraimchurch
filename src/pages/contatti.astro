@@ -1,10 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { getRecurringSchedule, getScheduleText } from '../lib/events';
+
+const schedule = await getRecurringSchedule();
+const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${s.time}`).join(', ');
 ---
 
 <BaseLayout
   title="Contatti"
-  description="Contatta la Chiesa Cristiana Evangelica Efraim di Messina. Via Bartolomeo Colleoni 43. Culto domenicale ore 10:00, culto mercoledi' ore 18:00."
+  description={`Contatta la Chiesa Cristiana Evangelica Efraim di Messina. Via Bartolomeo Colleoni 43. ${scheduleDesc}.`}
 >
   <!-- Hero -->
   <section class="relative bg-slate-dark overflow-hidden">
@@ -20,7 +24,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           Contattaci
         </h1>
         <p class="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl">
-          Hai domande, bisogno di preghiera o vuoi saperne di piu' sulla nostra chiesa? Siamo felici di ascoltarti.
+          Hai domande, bisogno di preghiera o vuoi saperne di più sulla nostra chiesa? Siamo felici di ascoltarti.
         </p>
       </div>
     </div>
@@ -166,18 +170,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div>
                 <h3 class="font-serif text-lg font-semibold text-text">Orari culti</h3>
                 <div class="mt-2 space-y-2">
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-primary-light shrink-0"></span>
-                    <span class="text-text-secondary"><strong class="text-text">Domenica</strong> - Culto ore 10:00</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-primary-light shrink-0"></span>
-                    <span class="text-text-secondary"><strong class="text-text">Mercoledi'</strong> - Culto ore 18:00</span>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <span class="w-2 h-2 rounded-full bg-primary-light shrink-0"></span>
-                    <span class="text-text-secondary"><strong class="text-text">Venerdi'</strong> - HolyDay ore 19:00</span>
-                  </div>
+                  {schedule.map((s) => (
+                    <div class="flex items-center gap-2">
+                      <span class="w-2 h-2 rounded-full bg-primary-light shrink-0"></span>
+                      <span class="text-text-secondary"><strong class="text-text">{s.day}</strong> - {s.title} ore {s.time}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -193,7 +191,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <h3 class="font-serif text-lg font-semibold text-text">Come raggiungerci</h3>
                 <div class="mt-2 text-sm text-text-secondary space-y-2 leading-relaxed">
                   <p><strong class="text-text">In auto:</strong> La chiesa si trova in Via Bartolomeo Colleoni 43, facilmente raggiungibile dal centro di Messina. Parcheggio disponibile nelle vicinanze.</p>
-                  <p><strong class="text-text">Con i mezzi:</strong> Diverse linee di autobus ATM collegano la zona. Fermata piu' vicina a pochi minuti a piedi.</p>
+                  <p><strong class="text-text">Con i mezzi:</strong> Diverse linee di autobus ATM collegano la zona. Fermata più vicina a pochi minuti a piedi.</p>
                 </div>
               </div>
             </div>

@@ -1,18 +1,67 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getExpandedEvents, buildCalendarMonth, getEventDotColor } from '../../lib/events';
 
-const allEvents = await getCollection('eventi');
+const allExpanded = await getExpandedEvents(8);
 const now = new Date();
-now.setHours(0, 0, 0, 0);
 
-const futureEvents = allEvents
-  .filter((e) => new Date(e.data.date).getTime() >= now.getTime())
-  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+// Build calendar data for current month + next month
+const cal1 = buildCalendarMonth(now.getFullYear(), now.getMonth(), allExpanded);
+const nextMonth = now.getMonth() === 11
+  ? { year: now.getFullYear() + 1, month: 0 }
+  : { year: now.getFullYear(), month: now.getMonth() + 1 };
+const cal2 = buildCalendarMonth(nextMonth.year, nextMonth.month, allExpanded);
 
-const pastEvents = allEvents
-  .filter((e) => new Date(e.data.date).getTime() < now.getTime())
-  .sort((a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime());
+const weekDays = ['Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab', 'Dom'];
+
+// Upcoming events (deduplicated for list view - show 1 occurrence per recurring)
+const seenSlugs = new Set<string>();
+const upcomingUnique = allExpanded.filter(e => {
+  if (e.isRecurring) {
+    if (seenSlugs.has(e.slug)) return false;
+    seenSlugs.add(e.slug);
+  }
+  return true;
+});
+
+// All future expanded events grouped by week for the timeline
+const weekGroups: { label: string; events: typeof allExpanded }[] = [];
+let currentWeekStart: Date | null = null;
+let currentGroup: typeof allExpanded = [];
+
+for (const event of allExpanded) {
+  const d = new Date(event.data.date);
+  // Get Monday of this event's week
+  const monday = new Date(d);
+  const dow = d.getDay() === 0 ? 6 : d.getDay() - 1;
+  monday.setDate(d.getDate() - dow);
+  monday.setHours(0, 0, 0, 0);
+
+  if (!currentWeekStart || monday.getTime() !== currentWeekStart.getTime()) {
+    if (currentGroup.length > 0) {
+      const sunday = new Date(currentWeekStart!);
+      sunday.setDate(currentWeekStart!.getDate() + 6);
+      const fmt = (dt: Date) => `${dt.getDate()} ${new Intl.DateTimeFormat('it-IT', { month: 'short' }).format(dt)}`;
+      weekGroups.push({
+        label: `${fmt(currentWeekStart!)} - ${fmt(sunday)}`,
+        events: currentGroup,
+      });
+    }
+    currentWeekStart = monday;
+    currentGroup = [event];
+  } else {
+    currentGroup.push(event);
+  }
+}
+if (currentGroup.length > 0 && currentWeekStart) {
+  const sunday = new Date(currentWeekStart);
+  sunday.setDate(currentWeekStart.getDate() + 6);
+  const fmt = (dt: Date) => `${dt.getDate()} ${new Intl.DateTimeFormat('it-IT', { month: 'short' }).format(dt)}`;
+  weekGroups.push({
+    label: `${fmt(currentWeekStart)} - ${fmt(sunday)}`,
+    events: currentGroup,
+  });
+}
 
 function formatDate(date: Date): string {
   return new Intl.DateTimeFormat('it-IT', {
@@ -20,6 +69,10 @@ function formatDate(date: Date): string {
     month: 'long',
     year: 'numeric',
   }).format(date);
+}
+
+function getDayName(date: Date): string {
+  return new Intl.DateTimeFormat('it-IT', { weekday: 'long' }).format(date);
 }
 
 function getDay(date: Date): string {
@@ -33,7 +86,7 @@ function getMonth(date: Date): string {
 
 <BaseLayout
   title="Eventi"
-  description="Scopri gli eventi e le attivita della Chiesa Cristiana Evangelica Efraim di Messina."
+  description="Scopri gli eventi e le attività della Chiesa Cristiana Evangelica Efraim di Messina."
 >
   <!-- Hero Banner -->
   <section class="relative bg-gradient-to-br from-primary-dark via-primary to-primary-light pt-36 pb-20 overflow-hidden">
@@ -61,82 +114,190 @@ function getMonth(date: Date): string {
     </div>
   </section>
 
-  <!-- Prossimi Eventi -->
+  <!-- Calendar View -->
+  <section class="py-12 sm:py-16 bg-warm">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-3 mb-8">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+        <h2 class="font-serif text-2xl sm:text-3xl font-bold text-text">Calendario</h2>
+      </div>
+
+      <!-- Legend -->
+      <div class="flex flex-wrap gap-4 mb-6 text-sm text-text-secondary">
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+          <span>Culto</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-violet-500"></span>
+          <span>HolyDay</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-3 h-3 rounded-full bg-accent"></span>
+          <span>Evento speciale</span>
+        </div>
+      </div>
+
+      <!-- Two-month calendar grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {[cal1, cal2].map((cal) => (
+          <div class="bg-white rounded-2xl shadow-sm border border-divider/50 overflow-hidden">
+            <!-- Month header -->
+            <div class="bg-primary-dark px-6 py-4">
+              <h3 class="font-serif text-lg font-semibold text-white capitalize">
+                {cal.monthName} {cal.year}
+              </h3>
+            </div>
+
+            <div class="p-4 sm:p-6">
+              <!-- Weekday headers -->
+              <div class="grid grid-cols-7 gap-1 mb-2">
+                {weekDays.map((wd) => (
+                  <div class="text-center text-xs font-semibold text-text-secondary uppercase tracking-wider py-2">
+                    {wd}
+                  </div>
+                ))}
+              </div>
+
+              <!-- Calendar cells -->
+              {cal.weeks.map((week) => (
+                <div class="grid grid-cols-7 gap-1">
+                  {week.map((cell) => {
+                    const isToday = cell.day !== null &&
+                      cal.year === now.getFullYear() &&
+                      cal.month === now.getMonth() &&
+                      cell.day === now.getDate();
+
+                    return (
+                      <div class={`
+                        relative flex flex-col items-center py-2 min-h-[52px] rounded-lg transition-colors
+                        ${cell.day === null ? '' : 'hover:bg-cream'}
+                        ${isToday ? 'bg-primary/10 ring-1 ring-primary/30' : ''}
+                      `}>
+                        {cell.day !== null && (
+                          <>
+                            <span class={`text-sm font-medium ${isToday ? 'text-primary-dark font-bold' : 'text-text'}`}>
+                              {cell.day}
+                            </span>
+                            {cell.events.length > 0 && (
+                              <div class="flex gap-0.5 mt-1 flex-wrap justify-center">
+                                {cell.events.map((ev) => (
+                                  <span
+                                    class={`w-2 h-2 rounded-full ${getEventDotColor(ev.data.title)}`}
+                                    title={`${ev.data.title}${ev.data.time ? ` ore ${ev.data.time}` : ''}`}
+                                  ></span>
+                                ))}
+                              </div>
+                            )}
+                          </>
+                        )}
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Weekly Timeline / Planner -->
   <section class="py-16 sm:py-20">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <h2 class="font-serif text-3xl sm:text-4xl font-bold text-text mb-12">
-        Prossimi eventi
+        Prossimi appuntamenti
       </h2>
 
-      {futureEvents.length > 0 ? (
-        <div class="space-y-8">
-          {futureEvents.map((event) => (
-            <article class="group relative flex flex-col md:flex-row rounded-2xl bg-white border border-divider overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-              {/* Date badge */}
-              <div class="flex md:flex-col items-center justify-center bg-primary-dark text-white px-6 py-4 md:px-8 md:py-6 md:min-w-[120px] shrink-0">
-                <span class="text-3xl md:text-4xl font-bold leading-none">
-                  {getDay(event.data.date)}
-                </span>
-                <span class="ml-2 md:ml-0 md:mt-1 text-sm font-semibold uppercase tracking-wider text-white/80">
-                  {getMonth(event.data.date)}
-                </span>
-              </div>
-
-              {/* Content area */}
-              <div class="flex flex-col lg:flex-row flex-1">
-                <div class="flex-1 p-6 lg:p-8">
-                  <h3 class="font-serif text-xl lg:text-2xl font-bold text-text group-hover:text-primary-dark transition-colors">
-                    <a href={`/eventi/${event.id}/`} class="hover:underline">
-                      {event.data.title}
-                    </a>
-                  </h3>
-
-                  <div class="flex flex-wrap gap-x-5 gap-y-2 mt-3 text-sm text-text-secondary">
-                    {event.data.time && (
-                      <span class="inline-flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        {event.data.time}
-                      </span>
-                    )}
-                    {event.data.location && (
-                      <span class="inline-flex items-center gap-1.5">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                        {event.data.location}
-                      </span>
-                    )}
-                    <span class="inline-flex items-center gap-1.5">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                      {formatDate(event.data.date)}
-                    </span>
-                  </div>
-
-                  <p class="mt-4 text-text-secondary text-sm leading-relaxed line-clamp-2">
-                    {event.data.description}
-                  </p>
-
-                  <a
-                    href={`/eventi/${event.id}/`}
-                    class="inline-flex items-center gap-2 mt-5 text-sm font-semibold text-primary-dark hover:text-primary transition-colors group/link"
-                  >
-                    Scopri di piu
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform group-hover/link:translate-x-1" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                  </a>
+      {weekGroups.length > 0 ? (
+        <div class="space-y-12">
+          {weekGroups.map((group) => (
+            <div>
+              <!-- Week label -->
+              <div class="flex items-center gap-4 mb-6">
+                <div class="w-10 h-10 rounded-lg bg-primary-dark/10 flex items-center justify-center shrink-0">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary-dark" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                 </div>
-
-                {/* Image (optional) */}
-                {event.data.image && (
-                  <a href={`/eventi/${event.id}/`} class="hidden lg:block relative w-64 shrink-0 overflow-hidden">
-                    <img
-                      src={event.data.image}
-                      alt={event.data.title}
-                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"></div>
-                  </a>
-                )}
+                <h3 class="font-sans text-sm font-semibold text-text-secondary uppercase tracking-wider">
+                  {group.label}
+                </h3>
+                <div class="flex-1 h-px bg-divider"></div>
               </div>
-            </article>
+
+              <!-- Events in this week -->
+              <div class="space-y-3 pl-2 sm:pl-6 border-l-2 border-primary/20">
+                {group.events.map((event) => {
+                  const dotColor = getEventDotColor(event.data.title);
+                  return (
+                    <article class="group relative flex flex-col sm:flex-row rounded-xl bg-white border border-divider overflow-hidden transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg">
+                      {/* Color accent */}
+                      <div class={`w-full sm:w-1.5 h-1.5 sm:h-auto shrink-0 ${dotColor}`}></div>
+
+                      {/* Date badge */}
+                      <div class="flex sm:flex-col items-center justify-center bg-cream px-4 py-3 sm:px-6 sm:py-4 sm:min-w-[100px] shrink-0">
+                        <span class="text-2xl sm:text-3xl font-bold text-primary-dark leading-none font-serif">
+                          {getDay(event.data.date)}
+                        </span>
+                        <span class="ml-2 sm:ml-0 sm:mt-1 text-xs font-semibold uppercase tracking-wider text-text-secondary">
+                          {getMonth(event.data.date)}
+                        </span>
+                      </div>
+
+                      {/* Content */}
+                      <div class="flex-1 p-4 sm:p-5">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                          <h4 class="font-serif text-lg font-bold text-text group-hover:text-primary-dark transition-colors">
+                            <a href={`/eventi/${event.slug}/`} class="hover:underline">
+                              {event.data.title}
+                            </a>
+                          </h4>
+                          {event.isRecurring && (
+                            <span class="inline-flex items-center gap-1 text-[11px] font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
+                              settimanale
+                            </span>
+                          )}
+                        </div>
+
+                        <div class="flex flex-wrap gap-x-4 gap-y-1 text-sm text-text-secondary">
+                          <span class="capitalize">{getDayName(event.data.date)}</span>
+                          {event.data.time && (
+                            <span class="inline-flex items-center gap-1">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/60" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                              ore {event.data.time}
+                            </span>
+                          )}
+                          {event.data.location && (
+                            <span class="inline-flex items-center gap-1">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary/60" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                              {event.data.location}
+                            </span>
+                          )}
+                        </div>
+
+                        <p class="mt-2 text-text-secondary text-sm leading-relaxed line-clamp-2">
+                          {event.data.description}
+                        </p>
+                      </div>
+
+                      {/* Image (desktop only) */}
+                      {event.data.image && (
+                        <a href={`/eventi/${event.slug}/`} class="hidden lg:block relative w-48 shrink-0 overflow-hidden">
+                          <img
+                            src={event.data.image}
+                            alt={event.data.title}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            loading="lazy"
+                          />
+                          <div class="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent"></div>
+                        </a>
+                      )}
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
           ))}
         </div>
       ) : (
@@ -153,26 +314,29 @@ function getMonth(date: Date): string {
     </div>
   </section>
 
-  <!-- Eventi Passati -->
-  {pastEvents.length > 0 && (
-    <section class="pb-16 sm:pb-20">
+  <!-- Unique Events Detail (non-recurring + recurring shown once) -->
+  {upcomingUnique.filter(e => !e.isRecurring).length > 0 && (
+    <section class="pb-16 sm:pb-20 bg-cream">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="border-t border-divider pt-16">
-          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-text-secondary mb-10">
-            Eventi passati
+        <div class="pt-16">
+          <h2 class="font-serif text-2xl sm:text-3xl font-bold text-text mb-10">
+            Eventi speciali
           </h2>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {pastEvents.map((event) => (
-              <article class="group flex flex-col rounded-xl bg-cream/60 border border-divider overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+            {upcomingUnique.filter(e => !e.isRecurring).map((event) => (
+              <article class="group flex flex-col rounded-xl bg-white border border-divider overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                 {event.data.image && (
-                  <a href={`/eventi/${event.id}/`} class="block relative h-40 overflow-hidden">
+                  <a href={`/eventi/${event.slug}/`} class="block relative h-40 overflow-hidden">
                     <img
                       src={event.data.image}
                       alt={event.data.title}
-                      class="w-full h-full object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
                     <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
+                    <div class="absolute top-3 right-3 bg-accent text-slate-dark text-xs font-bold px-3 py-1 rounded-full">
+                      Speciale
+                    </div>
                   </a>
                 )}
                 <div class="p-5">
@@ -183,13 +347,19 @@ function getMonth(date: Date): string {
                     {formatDate(event.data.date)}
                   </time>
                   <h3 class="mt-2 font-serif text-lg font-bold text-text group-hover:text-primary-dark transition-colors">
-                    <a href={`/eventi/${event.id}/`} class="hover:underline">
+                    <a href={`/eventi/${event.slug}/`} class="hover:underline">
                       {event.data.title}
                     </a>
                   </h3>
                   <p class="mt-2 text-text-secondary text-sm leading-relaxed line-clamp-2">
                     {event.data.description}
                   </p>
+                  {event.data.time && (
+                    <div class="flex items-center gap-1.5 mt-3 text-sm text-primary-dark">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                      ore {event.data.time}
+                    </div>
+                  )}
                 </div>
               </article>
             ))}

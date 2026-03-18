@@ -10,12 +10,12 @@ link: "https://pasqua.missionekenya.com"
 recurring: none
 ---
 
-La Pasqua Solidale e' l'iniziativa della Chiesa Efraim per portare gioia sia in Kenya che nella nostra citta'.
+La Pasqua Solidale è l'iniziativa della Chiesa Efraim per portare gioia sia in Kenya che nella nostra città.
 
 **Come funziona:**
 - Dona 10 euro per ricevere un uovo di Pasqua solidale
 - Puoi decidere di tenerlo per te
-- Oppure lasciare che la nostra comunita' lo doni ai piu' bisognosi e alle famiglie con bambini che si troveranno a Piazza Cairoli durante i giorni dell'evento
+- Oppure lasciare che la nostra comunità lo doni ai più bisognosi e alle famiglie con bambini che si troveranno a Piazza Cairoli durante i giorni dell'evento
 
 **Quando:** 2-4 Aprile 2026
 **Dove:** Piazza Cairoli, Messina

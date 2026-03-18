@@ -1,5 +1,8 @@
 ---
+import { getRecurringSchedule } from '../lib/events';
+
 const currentYear = new Date().getFullYear();
+const schedule = await getRecurringSchedule();
 
 const quickLinks = [
   { href: '/chi-siamo/', label: 'Chi siamo' },
@@ -28,7 +31,7 @@ const quickLinks = [
       <div class="lg:col-span-1">
         <a href="/" class="inline-block mb-6" aria-label="Efraim Church">
           <span class="font-serif text-4xl font-bold tracking-[0.04em] text-white block">EFRAIM</span>
-          <span class="font-serif text-[15px] italic font-light text-white/40 mt-1 block">Equipaggiare vite, trasformare comunita'</span>
+          <span class="font-serif text-[15px] italic font-light text-white/40 mt-1 block">Equipaggiare vite, trasformare comunità</span>
         </a>
         <p class="text-sm text-white/50 leading-relaxed">
           Chiesa Cristiana Evangelica Efraim.
@@ -92,29 +95,18 @@ const quickLinks = [
             <div class="absolute -bottom-5 -right-5 w-3 h-3 border-b border-r border-accent/50" aria-hidden="true"></div>
 
             <div class="space-y-4 text-sm">
-              <div class="flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-accent" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <div>
-                  <p class="text-white font-medium text-[13px] tracking-wide">Domenica</p>
-                  <p class="text-white/50 text-[13px]">Culto ore 10:00</p>
-                </div>
-              </div>
-              <div class="w-full h-px bg-white/8" aria-hidden="true"></div>
-              <div class="flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-accent" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <div>
-                  <p class="text-white font-medium text-[13px] tracking-wide">Mercoledi'</p>
-                  <p class="text-white/50 text-[13px]">Culto ore 18:00</p>
-                </div>
-              </div>
-              <div class="w-full h-px bg-white/8" aria-hidden="true"></div>
-              <div class="flex items-start gap-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-accent" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                <div>
-                  <p class="text-white font-medium text-[13px] tracking-wide">Venerdi'</p>
-                  <p class="text-white/50 text-[13px]">HolyDay ore 19:00</p>
-                </div>
-              </div>
+              {schedule.map((s, i) => (
+                <>
+                  {i > 0 && <div class="w-full h-px bg-white/8" aria-hidden="true"></div>}
+                  <div class="flex items-start gap-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-accent" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    <div>
+                      <p class="text-white font-medium text-[13px] tracking-wide">{s.day}</p>
+                      <p class="text-white/50 text-[13px]">{s.title} ore {s.time}</p>
+                    </div>
+                  </div>
+                </>
+              ))}
             </div>
           </div>
         </div>

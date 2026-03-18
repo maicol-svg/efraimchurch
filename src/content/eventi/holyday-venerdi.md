@@ -10,8 +10,8 @@ link:
 recurring: settimanale
 ---
 
-HolyDay e' l'incontro settimanale dei giovani di Efraim Church, ogni venerdi' alle 19:00.
+HolyDay è l'incontro settimanale dei giovani di Efraim Church, ogni venerdì alle 19:00.
 
-Un momento per stare insieme, crescere nella fede e condividere la vita. Se hai tra i 14 e i 30 anni (ma non solo!), questo e' il posto giusto per te.
+Un momento per stare insieme, crescere nella fede e condividere la vita. Se hai tra i 14 e i 30 anni (ma non solo!), questo è il posto giusto per te.
 
 Seguici su Instagram [@efraim_young_](https://www.instagram.com/efraim_young_/) per restare aggiornato.
