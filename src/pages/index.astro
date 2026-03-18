@@ -159,22 +159,16 @@ const latestPosts = allPosts
               </div>
 
               <div class="space-y-5">
-                <div class="flex items-center gap-5 p-4 bg-warm">
-                  <div class="flex flex-col items-center w-16 shrink-0">
-                    <span class="text-2xl font-serif font-bold text-primary-dark">Dom</span>
-                    <span class="text-[10px] text-text-secondary tracking-wider uppercase">10:00</span>
+                {heroEvents.slice(0, 3).map((event) => (
+                  <div class="flex items-center gap-5 p-4 bg-warm">
+                    <div class="flex flex-col items-center w-16 shrink-0">
+                      <span class="text-2xl font-serif font-bold text-primary-dark">{event.dayAbbrev}</span>
+                      {event.time && <span class="text-[10px] text-text-secondary tracking-wider uppercase">{event.time}</span>}
+                    </div>
+                    <div class="h-10 w-px bg-divider"></div>
+                    <p class="text-sm text-text font-medium">{event.title}</p>
                   </div>
-                  <div class="h-10 w-px bg-divider"></div>
-                  <p class="text-sm text-text font-medium">Culto della Domenica</p>
-                </div>
-                <div class="flex items-center gap-5 p-4 bg-warm">
-                  <div class="flex flex-col items-center w-16 shrink-0">
-                    <span class="text-2xl font-serif font-bold text-primary-dark">Mer</span>
-                    <span class="text-[10px] text-text-secondary tracking-wider uppercase">18:00</span>
-                  </div>
-                  <div class="h-10 w-px bg-divider"></div>
-                  <p class="text-sm text-text font-medium">Culto</p>
-                </div>
+                ))}
               </div>
 
               <div class="flex items-center gap-2 mt-8 text-text-secondary text-xs">
