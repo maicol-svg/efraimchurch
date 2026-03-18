@@ -35,6 +35,8 @@ Il profilo Google "Centro Cristiano Efraim" e' il primo punto di contatto per ch
 - "missioni umanitarie kenya"
 - "adozione a distanza kenya"
 - "missione india"
+- "adozione a distanza india"
+- "missioni umanitarie india"
 - "chiesa evangelica missioni"
 
 ### Parole chiave eventi

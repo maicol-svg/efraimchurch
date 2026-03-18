@@ -1,12 +1,13 @@
 ---
 title: HolyDay
 date: 2026-03-20
-endDate: ''
+endDate:
 time: 19:00
 location: Via Bartolomeo Colleoni 43, Messina
 description: L'appuntamento settimanale del venerdì sera per i giovani della Chiesa Efraim. Un momento di incontro, worship e crescita insieme.
 image: /images/community.jpg
-link: ''
+link:
+recurring: settimanale
 ---
 
 HolyDay e' l'incontro settimanale dei giovani di Efraim Church, ogni venerdi' alle 19:00.

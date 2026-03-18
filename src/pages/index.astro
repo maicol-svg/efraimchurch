@@ -9,14 +9,68 @@ import { getCollection } from 'astro:content';
 
 const allEvents = await getCollection('eventi');
 const now = new Date();
-const futureEvents = allEvents
-  .filter(e => new Date(e.data.date) >= now)
-  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime())
-  .slice(0, 3);
-
-// Prepare upcoming events for the Hero sidebar
 const dayAbbrevs = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
-const heroEvents = futureEvents.slice(0, 3).map(e => {
+
+// Expand recurring events into future occurrences (next 4 weeks)
+function expandRecurringEvents(events: any[]) {
+  const expanded: any[] = [];
+
+  for (const event of events) {
+    if (event.data.recurring === 'settimanale') {
+      // Get the day of week from the original event date
+      const originalDate = new Date(event.data.date);
+      const dayOfWeek = originalDate.getDay();
+
+      // Find the next 4 occurrences of this weekday from today
+      for (let week = 0; week < 4; week++) {
+        const nextDate = new Date(now);
+        // Find next occurrence of this day of week
+        const daysUntil = (dayOfWeek - now.getDay() + 7) % 7;
+        nextDate.setDate(now.getDate() + daysUntil + (week * 7));
+        // If daysUntil is 0 and we're on the same day, keep today's occurrence
+        nextDate.setHours(0, 0, 0, 0);
+
+        expanded.push({
+          id: `${event.id}-week-${week}`,
+          slug: event.id,
+          data: {
+            ...event.data,
+            date: nextDate,
+          },
+          isRecurring: true,
+        });
+      }
+    } else {
+      // One-time event: include if future or today
+      const eventDate = new Date(event.data.date);
+      if (eventDate >= now || isSameDay(eventDate, now)) {
+        expanded.push({
+          id: event.id,
+          slug: event.id,
+          data: event.data,
+          isRecurring: false,
+        });
+      }
+    }
+  }
+
+  return expanded;
+}
+
+function isSameDay(d1: Date, d2: Date) {
+  return d1.getFullYear() === d2.getFullYear() &&
+         d1.getMonth() === d2.getMonth() &&
+         d1.getDate() === d2.getDate();
+}
+
+const expandedEvents = expandRecurringEvents(allEvents);
+
+// Sort by date
+const sortedEvents = expandedEvents
+  .sort((a, b) => new Date(a.data.date).getTime() - new Date(b.data.date).getTime());
+
+// Hero: next 3 upcoming events (including recurring occurrences)
+const heroEvents = sortedEvents.slice(0, 3).map(e => {
   const d = new Date(e.data.date);
   return {
     title: e.data.title,
@@ -24,6 +78,16 @@ const heroEvents = futureEvents.slice(0, 3).map(e => {
     time: e.data.time || '',
   };
 });
+
+// Events section: next unique events (show 1 occurrence max per recurring event)
+const seenTitles = new Set();
+const eventsForSection = sortedEvents.filter(e => {
+  if (e.isRecurring) {
+    if (seenTitles.has(e.data.title)) return false;
+    seenTitles.add(e.data.title);
+  }
+  return true;
+}).slice(0, 3);
 
 const allPosts = await getCollection('blog');
 const latestPosts = allPosts
@@ -225,9 +289,9 @@ const latestPosts = allPosts
 
         <!-- Right: event cards -->
         <div class="lg:col-span-8">
-          {futureEvents.length > 0 ? (
+          {eventsForSection.length > 0 ? (
             <div class="space-y-4">
-              {futureEvents.map((event, i) => (
+              {eventsForSection.map((event, i) => (
                 <div class={`reveal reveal-delay-${i + 1}`}>
                   <EventCard
                     title={event.data.title}
@@ -235,7 +299,7 @@ const latestPosts = allPosts
                     time={event.data.time}
                     description={event.data.description}
                     image={event.data.image}
-                    href={`/eventi/${event.id}/`}
+                    href={event.isRecurring ? `/eventi/${event.slug}/` : `/eventi/${event.id}/`}
                   />
                 </div>
               ))}

@@ -18,12 +18,13 @@ const eventi = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    endDate: z.coerce.date().optional(),
+    endDate: z.union([z.coerce.date(), z.literal(''), z.null()]).optional().transform(v => (!v || v === '') ? undefined : v),
     time: z.string().optional(),
     location: z.string().optional(),
     description: z.string(),
     image: z.string().optional(),
-    link: z.string().url().optional(),
+    link: z.string().nullish().transform(v => (!v || v === '') ? undefined : v),
+    recurring: z.enum(['none', 'settimanale']).default('none'),
   }),
 });
 
@@ -66,7 +67,7 @@ const partner = defineCollection({
     name: z.string(),
     logo: z.string().optional(),
     description: z.string().optional(),
-    website: z.string().url().optional(),
+    website: z.string().nullish().transform(v => (!v || v === '') ? undefined : v),
     order: z.number().default(0),
   }),
 });

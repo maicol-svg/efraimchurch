@@ -5,6 +5,7 @@ time: "10:00"
 location: "Chiesa Efraim - Via Bartolomeo Colleoni 43, 98125 Messina"
 description: "Ogni domenica alle 10:00 ci ritroviamo per adorare Dio insieme, ascoltare la Sua Parola e crescere come comunita nella fede."
 image: "/images/hero-worship.jpg"
+recurring: settimanale
 ---
 
 ## Ogni domenica, una famiglia che si ritrova

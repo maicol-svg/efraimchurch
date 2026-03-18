@@ -7,6 +7,7 @@ location: "Piazza Cairoli, Messina"
 description: "Regala un sorriso ai bambini in Kenya! Dona 10 euro per un uovo solidale: puoi tenerlo per te o lasciare che lo doniamo alle famiglie e ai bambini di Piazza Cairoli."
 image: "/images/kenya-children.jpg"
 link: "https://pasqua.missionekenya.com"
+recurring: none
 ---
 
 La Pasqua Solidale e' l'iniziativa della Chiesa Efraim per portare gioia sia in Kenya che nella nostra citta'.

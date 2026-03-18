@@ -5,6 +5,7 @@ time: "18:00"
 location: "Via Bartolomeo Colleoni 43, Messina"
 description: "Una serata speciale dedicata alle missioni. Testimonianze, aggiornamenti dal campo e un momento di condivisione per celebrare cio' che Dio sta facendo nel mondo."
 image: "/images/kenya-children.jpg"
+recurring: none
 ---
 
 Il Mission Party e' la serata che la Chiesa Efraim dedica alle missioni internazionali.
