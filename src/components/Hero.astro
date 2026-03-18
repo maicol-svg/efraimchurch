@@ -1,6 +1,7 @@
 ---
 // Hero: Mediterranean Editorial - asymmetric, botanical, dramatic
 // Background image with dark overlay for depth
+import contatti from '../data/contatti.json';
 
 interface Props {
   upcomingEvents?: Array<{
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const { upcomingEvents = [] } = Astro.props;
+const shortAddress = `${contatti.indirizzo} (${contatti.zona}), ${contatti.citta}`;
 ---
 
 <section class="relative min-h-screen flex items-center overflow-hidden bg-slate-dark">
@@ -142,7 +144,7 @@ const { upcomingEvents = [] } = Astro.props;
 
               <div class="flex items-center gap-2 mt-4 pt-3 border-t border-white/10 text-white/30 text-[10px]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>Via B. Colleoni 43 (zona Minissale), Messina</span>
+                <span>{shortAddress}</span>
               </div>
             </div>
           </div>
@@ -184,7 +186,7 @@ const { upcomingEvents = [] } = Astro.props;
 
               <div class="flex items-center gap-2 text-white/40 text-xs">
                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-                <span>Via B. Colleoni 43 (zona Minissale), Messina</span>
+                <span>{shortAddress}</span>
               </div>
             </div>
           </div>

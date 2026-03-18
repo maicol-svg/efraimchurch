@@ -420,6 +420,44 @@
                     { label: 'Ordine', name: 'order', widget: 'number', default: 0 },
                     { label: 'Contenuto', name: 'body', widget: 'markdown' }
                   ]
+                },
+                {
+                  name: 'impostazioni', label: 'Impostazioni',
+                  files: [
+                    {
+                      name: 'contatti', label: 'Contatti', file: 'src/data/contatti.json',
+                      fields: [
+                        { label: 'Indirizzo', name: 'indirizzo', widget: 'string' },
+                        { label: 'Zona', name: 'zona', widget: 'string' },
+                        { label: 'CAP', name: 'cap', widget: 'string' },
+                        { label: 'Città', name: 'citta', widget: 'string' },
+                        { label: 'Provincia', name: 'provincia', widget: 'string' },
+                        { label: 'Email', name: 'email', widget: 'string' },
+                        { label: 'Telefono', name: 'telefono', widget: 'string', required: false },
+                        { label: 'Facebook', name: 'social_facebook', widget: 'string', required: false },
+                        { label: 'Instagram', name: 'social_instagram', widget: 'string', required: false },
+                        { label: 'YouTube', name: 'social_youtube', widget: 'string', required: false },
+                        { label: 'TikTok', name: 'social_tiktok', widget: 'string', required: false },
+                        { label: 'Come raggiungerci (auto)', name: 'raggiungerci_auto', widget: 'text', required: false },
+                        { label: 'Come raggiungerci (mezzi)', name: 'raggiungerci_mezzi', widget: 'text', required: false },
+                        { label: 'Google Maps embed URL', name: 'maps_embed', widget: 'string', required: false }
+                      ]
+                    },
+                    {
+                      name: 'pagamenti', label: 'Pagamenti', file: 'src/data/pagamenti.json',
+                      fields: [
+                        { label: 'IBAN', name: 'iban', widget: 'string' },
+                        { label: 'Intestatario', name: 'intestatario', widget: 'string' },
+                        { label: 'Banca', name: 'banca', widget: 'string' },
+                        { label: 'Causale suggerita', name: 'causale_suggerita', widget: 'string' },
+                        { label: 'Codice Fiscale', name: 'codice_fiscale', widget: 'string' },
+                        { label: 'Email PayPal', name: 'paypal_email', widget: 'string' },
+                        { label: 'Link PayPal', name: 'paypal_link', widget: 'string' },
+                        { label: 'Importo adozione (€/mese)', name: 'adozione_importo', widget: 'string' },
+                        { label: "Cosa include l'adozione", name: 'adozione_incluso', widget: 'list', field: { label: 'Voce', name: 'voce', widget: 'string' } }
+                      ]
+                    }
+                  ]
                 }
               ]
             }

@@ -1,5 +1,6 @@
 ---
 // Donation banner with IBAN copy, 5x1000, and donation CTAs
+import pagamenti from '../data/pagamenti.json';
 ---
 
 <section class="relative overflow-hidden bg-slate-dark grain py-24 sm:py-32">
@@ -36,10 +37,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
         </div>
         <h3 class="font-serif text-lg font-semibold text-white mb-2">Bonifico bancario</h3>
-        <p class="text-white/50 text-sm mb-5">Intestato a Chiesa Cristiana Evangelica Efraim</p>
+        <p class="text-white/50 text-sm mb-5">Intestato a {pagamenti.intestatario}</p>
         <div class="bg-white/[0.06] border border-white/10 px-4 py-3 mb-5">
           <span id="iban-text" class="text-white font-mono text-sm sm:text-base tracking-wide break-all select-all">
-            IT40R0306909606100000172244
+            {pagamenti.iban}
           </span>
         </div>
         <button
@@ -67,7 +68,7 @@
         <p class="text-white/50 text-sm mb-5">Destina il tuo 5 per mille alla Chiesa Efraim. Non ti costa nulla!</p>
         <div class="bg-white/[0.06] border border-white/10 px-4 py-4 mb-5 text-center">
           <span class="block text-[11px] font-sans text-white/40 uppercase tracking-[0.15em] mb-2">Codice Fiscale</span>
-          <span class="text-white font-mono text-2xl font-semibold tracking-wider select-all">97089710830</span>
+          <span class="text-white font-mono text-2xl font-semibold tracking-wider select-all">{pagamenti.codice_fiscale}</span>
         </div>
         <p class="text-white/40 text-xs">
           Indica il CF nella tua dichiarazione dei redditi

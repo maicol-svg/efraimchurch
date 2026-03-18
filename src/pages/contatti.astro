@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { getRecurringSchedule, getScheduleText } from '../lib/events';
+import contatti from '../data/contatti.json';
 
 const schedule = await getRecurringSchedule();
 const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${s.time}`).join(', ');
@@ -8,7 +9,7 @@ const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${
 
 <BaseLayout
   title="Contatti"
-  description={`Contatta la Chiesa Cristiana Evangelica Efraim di Messina. Via Bartolomeo Colleoni 43. ${scheduleDesc}.`}
+  description={`Contatta la Chiesa Cristiana Evangelica Efraim di ${contatti.citta}. ${contatti.indirizzo}. ${scheduleDesc}.`}
 >
   <!-- Hero -->
   <section class="relative bg-slate-dark overflow-hidden">
@@ -137,10 +138,7 @@ const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${
               </div>
               <div>
                 <h3 class="font-serif text-lg font-semibold text-text">Indirizzo</h3>
-                <address class="not-italic mt-1 text-text-secondary leading-relaxed">
-                  Via Bartolomeo Colleoni 43<br>
-                  (zona Minissale)<br>
-                  98125 Messina (ME)
+                <address class="not-italic mt-1 text-text-secondary leading-relaxed" set:html={`${contatti.indirizzo}<br>(${contatti.zona})<br>${contatti.cap} ${contatti.citta} (${contatti.provincia})`}>
                 </address>
               </div>
             </div>
@@ -154,8 +152,8 @@ const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${
               </div>
               <div>
                 <h3 class="font-serif text-lg font-semibold text-text">Email</h3>
-                <a href="mailto:info@efraimchurch.com" class="mt-1 text-primary-dark hover:text-primary transition-colors">
-                  info@efraimchurch.com
+                <a href={`mailto:${contatti.email}`} class="mt-1 text-primary-dark hover:text-primary transition-colors">
+                  {contatti.email}
                 </a>
               </div>
             </div>
@@ -190,8 +188,8 @@ const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${
               <div>
                 <h3 class="font-serif text-lg font-semibold text-text">Come raggiungerci</h3>
                 <div class="mt-2 text-sm text-text-secondary space-y-2 leading-relaxed">
-                  <p><strong class="text-text">In auto:</strong> La chiesa si trova in Via Bartolomeo Colleoni 43, facilmente raggiungibile dal centro di Messina. Parcheggio disponibile nelle vicinanze.</p>
-                  <p><strong class="text-text">Con i mezzi:</strong> Diverse linee di autobus ATM collegano la zona. Fermata più vicina a pochi minuti a piedi.</p>
+                  <p><strong class="text-text">In auto:</strong> {contatti.raggiungerci_auto}</p>
+                  <p><strong class="text-text">Con i mezzi:</strong> {contatti.raggiungerci_mezzi}</p>
                 </div>
               </div>
             </div>
@@ -209,14 +207,14 @@ const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${
       </div>
       <div class="rounded-2xl overflow-hidden shadow-sm border border-divider/50 aspect-[16/7]">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3120.8!2d15.55!3d38.18!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sVia+Bartolomeo+Colleoni+43%2C+98125+Messina+ME!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit"
+          src={contatti.maps_embed}
           width="100%"
           height="100%"
           style="border:0;"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Mappa della Chiesa Cristiana Evangelica Efraim - Via Bartolomeo Colleoni 43, 98125 Messina"
+          title={`Mappa della Chiesa Cristiana Evangelica Efraim - ${contatti.indirizzo}, ${contatti.cap} ${contatti.citta}`}
         ></iframe>
       </div>
     </div>
