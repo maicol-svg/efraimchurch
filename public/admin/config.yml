@@ -54,7 +54,6 @@ collections:
       - { label: "Foto", name: "image", widget: "image", required: false }
       - { label: "Biografia", name: "bio", widget: "text", required: false }
       - { label: "Ordine", name: "order", widget: "number", default: 0 }
-      - { label: "Contenuto", name: "body", widget: "markdown" }
 
   - name: "missioni"
     label: "Missioni"
