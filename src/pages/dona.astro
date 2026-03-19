@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import pagamenti from '../data/pagamenti.json';
+import faqDona from '../data/faq-dona.json';
 ---
 
 <BaseLayout
@@ -259,60 +260,17 @@ import pagamenti from '../data/pagamenti.json';
         </div>
 
         <div class="space-y-4">
-          <!-- FAQ 1 -->
-          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
-            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-              <h3 class="font-serif text-lg font-semibold text-text">Come vengono utilizzate le donazioni?</h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </summary>
-            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
-              <p>Le donazioni vengono utilizzate per sostenere le nostre missioni in Kenya e India, coprendo i costi di istruzione, nutrizione, assistenza sanitaria e cura spirituale dei bambini. Una parte viene destinata alle attività della chiesa locale, tra cui l'affitto dei locali, le utenze e i programmi comunitari. Garantiamo la massima trasparenza nella gestione dei fondi.</p>
-            </div>
-          </details>
-
-          <!-- FAQ 2 -->
-          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
-            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-              <h3 class="font-serif text-lg font-semibold text-text">Le donazioni sono deducibili fiscalmente?</h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </summary>
-            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
-              <p>Le donazioni effettuate tramite bonifico bancario a favore della Chiesa Cristiana Efraim possono essere deducibili o detraibili ai fini fiscali, nei limiti e secondo le modalità previste dalla normativa vigente. Ti consigliamo di conservare la ricevuta del bonifico e di consultare il tuo commercialista per i dettagli specifici.</p>
-            </div>
-          </details>
-
-          <!-- FAQ 3 -->
-          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
-            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-              <h3 class="font-serif text-lg font-semibold text-text">Come funziona l'adozione a distanza?</h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </summary>
-            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
-              <p>L'adozione a distanza prevede un contributo mensile a partire da 35 euro. Ti verrà assegnato un bambino specifico del programma in Kenya o in India, e riceverai aggiornamenti periodici sulla sua crescita e il suo percorso scolastico. Il tuo sostegno coprirà le spese di istruzione, alimentazione e assistenza sanitaria. Contattaci per maggiori informazioni e per iniziare.</p>
-            </div>
-          </details>
-
-          <!-- FAQ 4 -->
-          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
-            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-              <h3 class="font-serif text-lg font-semibold text-text">Posso visitare le missioni di persona?</h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </summary>
-            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
-              <p>Sì, organizziamo periodicamente viaggi missionari in Kenya e in India dove è possibile visitare i progetti, conoscere i bambini e partecipare attivamente alle attività. Se sei interessato, contattaci e ti forniremo tutte le informazioni sui prossimi viaggi programmati.</p>
-            </div>
-          </details>
-
-          <!-- FAQ 5 -->
-          <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
-            <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
-              <h3 class="font-serif text-lg font-semibold text-text">Come posso essere sicuro che le donazioni arrivino a destinazione?</h3>
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </summary>
-            <div class="px-6 pb-6 text-text-secondary leading-relaxed">
-              <p>La trasparenza è un valore fondamentale per noi. Pubblichiamo regolarmente aggiornamenti sulle nostre attività missionarie attraverso il blog, i social media e le comunicazioni dirette ai donatori. Inoltre, il pastore e i responsabili della missione visitano regolarmente i progetti sul campo per verificare l'andamento dei programmi e l'utilizzo dei fondi.</p>
-            </div>
-          </details>
+          {faqDona.faq.map((faq) => (
+            <details class="group bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden">
+              <summary class="flex items-center justify-between gap-4 p-6 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+                <h3 class="font-serif text-lg font-semibold text-text">{faq.domanda}</h3>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 text-text-secondary group-open:rotate-180 transition-transform" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+              </summary>
+              <div class="px-6 pb-6 text-text-secondary leading-relaxed">
+                <p>{faq.risposta}</p>
+              </div>
+            </details>
+          ))}
         </div>
       </div>
     </div>
