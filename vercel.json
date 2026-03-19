@@ -19,17 +19,4 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "efraimchurch.com"
-        }
-      ],
-      "destination": "/coming-soon.html"
-    }
-  ]
-}
+  ]}
