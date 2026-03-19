@@ -3,7 +3,7 @@ title: "Pasqua Solidale 2026: regala un sorriso"
 date: 2026-03-10
 author: "Efraim Church"
 description: "Quest'anno la Pasqua diventa solidale: con 10 euro puoi donare un uovo di Pasqua e sostenere i bambini in Kenya. Scopri come partecipare dal 2 al 4 aprile a Piazza Cairoli, Messina."
-image: "/images/kenya-children.jpg"
+image: "/images/missioni/kenya/gruppo-bambini-volontari.jpg"
 tags:
   - pasqua
   - missioni

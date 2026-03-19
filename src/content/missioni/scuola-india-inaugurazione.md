@@ -4,7 +4,7 @@ date: 2026-01-15
 mission: india
 description: Una nuova scuola è stata inaugurata in India grazie al sostegno della Chiesa Efraim. Un passo importante per il futuro di tanti bambini.
 images:
-  - /images/india-school.jpg
+  - /images/missioni/india/bambini-orfanotrofio.jpg
 ---
 
 ## Un futuro che inizia tra i banchi
