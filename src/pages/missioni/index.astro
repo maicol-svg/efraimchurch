@@ -13,11 +13,39 @@ const { statistiche } = missioniInfo;
 >
   <!-- Hero -->
   <section class="relative bg-slate-dark overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/90 to-slate-dark"></div>
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-      <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-light rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+    <!-- Flags background: Kenya left, India right, diagonal split -->
+    <div class="absolute inset-0" aria-hidden="true">
+      <svg class="w-full h-full" viewBox="0 0 1440 500" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <clipPath id="clip-left">
+            <polygon points="0,0 780,0 680,500 0,500" />
+          </clipPath>
+          <clipPath id="clip-right">
+            <polygon points="780,0 1440,0 1440,500 680,500" />
+          </clipPath>
+        </defs>
+        <!-- Kenya flag (left side) -->
+        <g clip-path="url(#clip-left)">
+          <rect x="0" y="0" width="1440" height="125" fill="#000000"/>
+          <rect x="0" y="115" width="1440" height="20" fill="#FFFFFF"/>
+          <rect x="0" y="125" width="1440" height="125" fill="#BB0000"/>
+          <rect x="0" y="240" width="1440" height="20" fill="#FFFFFF"/>
+          <rect x="0" y="250" width="1440" height="125" fill="#006600"/>
+          <rect x="0" y="375" width="1440" height="125" fill="#006600"/>
+        </g>
+        <!-- India flag (right side) -->
+        <g clip-path="url(#clip-right)">
+          <rect x="0" y="0" width="1440" height="167" fill="#FF9933"/>
+          <rect x="0" y="167" width="1440" height="166" fill="#FFFFFF"/>
+          <rect x="0" y="333" width="1440" height="167" fill="#138808"/>
+          <circle cx="1060" cy="250" r="40" fill="none" stroke="#000080" stroke-width="3"/>
+        </g>
+        <!-- Diagonal divider line -->
+        <line x1="780" y1="0" x2="680" y2="500" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+      </svg>
     </div>
+    <!-- Dark overlay for readability -->
+    <div class="absolute inset-0 bg-slate-dark/80"></div>
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 md:py-36">
       <div class="max-w-3xl">
         <span class="inline-block text-accent font-medium text-sm tracking-widest uppercase mb-4">Raggiungere le nazioni</span>
@@ -46,17 +74,13 @@ const { statistiche } = missioniInfo;
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {[kenya, india].map((mission) => (
           <a href={`/missioni/${mission.id}/`} class="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-divider/50 hover:shadow-lg transition-all duration-300">
-            <div class="aspect-[16/10] overflow-hidden relative">
+            <div class="aspect-[16/10] overflow-hidden">
               <img
                 src={mission.immagine}
                 alt={mission.titolo}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
-              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-              <span class="absolute top-4 right-4 text-3xl drop-shadow-lg" aria-hidden="true">
-                {mission.id === 'kenya' ? '🇰🇪' : '🇮🇳'}
-              </span>
             </div>
             <div class="p-8">
               <div class="flex items-center gap-3 mb-3">
