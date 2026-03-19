@@ -8,6 +8,10 @@ import DonationBanner from '../components/DonationBanner.astro';
 import { getCollection } from 'astro:content';
 import { getExpandedEvents, dayAbbrevs } from '../lib/events';
 import contatti from '../data/contatti.json';
+import missioniInfo from '../data/missioni-info.json';
+
+const kenya = missioniInfo.missioni.find(m => m.id === 'kenya');
+const india = missioniInfo.missioni.find(m => m.id === 'india');
 
 const sortedEvents = await getExpandedEvents(4);
 
@@ -152,27 +156,21 @@ const latestPosts = allPosts
       <div class="grid md:grid-cols-2 gap-8 lg:gap-10">
         <div class="reveal reveal-delay-1">
           <MissionCard
-            title="Missione Kenya"
-            country="Kasue, Kitui"
-            image="/images/kenya-children.jpg"
-            description="Dal 2012 sosteniamo oltre 140 bambini a Kasue, nella contea di Kitui. Istruzione, alimentazione, cure mediche e un pozzo per l'acqua pulita."
-            stats={[
-              { label: 'Bambini sostenuti', value: '140+' },
-              { label: 'Anni di presenza', value: '13' },
-            ]}
+            title={kenya.titolo}
+            country={kenya.localita}
+            image={kenya.immagine}
+            description={kenya.card_descrizione}
+            stats={kenya.card_stats.map(s => ({ label: s.etichetta, value: s.valore }))}
             href="/missioni/kenya/"
           />
         </div>
         <div class="reveal reveal-delay-2">
           <MissionCard
-            title="Missione India"
-            country="India"
-            image="/images/india-school.jpg"
-            description="In India lavoriamo per offrire istruzione e speranza alle comunità in crescita. Nuovi progetti stanno prendendo forma."
-            stats={[
-              { label: 'Stato', value: 'Attivo' },
-              { label: 'Focus', value: 'Istruzione' },
-            ]}
+            title={india.titolo}
+            country={india.localita}
+            image={india.immagine}
+            description={india.card_descrizione}
+            stats={india.card_stats.map(s => ({ label: s.etichetta, value: s.valore }))}
             href="/missioni/india/"
           />
         </div>

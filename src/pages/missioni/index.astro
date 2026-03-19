@@ -1,5 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import missioniInfo from '../../data/missioni-info.json';
+
+const kenya = missioniInfo.missioni.find(m => m.id === 'kenya');
+const india = missioniInfo.missioni.find(m => m.id === 'india');
+const { statistiche } = missioniInfo;
 ---
 
 <BaseLayout
@@ -39,61 +44,32 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
       <!-- Mission Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-        <!-- Kenya Card -->
-        <a href="/missioni/kenya/" class="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-divider/50 hover:shadow-lg transition-all duration-300">
-          <div class="aspect-[16/10] bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center">
-            <div class="text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-primary/40 mb-3 group-hover:text-primary/60 transition-colors" aria-hidden="true">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                <path d="M2 12h20" />
-              </svg>
-              <p class="text-text-secondary text-sm">Foto della missione in Kenya</p>
+        {[kenya, india].map((mission) => (
+          <a href={`/missioni/${mission.id}/`} class="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-divider/50 hover:shadow-lg transition-all duration-300">
+            <div class="aspect-[16/10] overflow-hidden">
+              <img
+                src={mission.immagine}
+                alt={mission.titolo}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
+              />
             </div>
-          </div>
-          <div class="p-8">
-            <div class="flex items-center gap-3 mb-3">
-              <span class="inline-block w-2 h-2 rounded-full bg-primary-light"></span>
-              <span class="text-sm font-medium text-primary-dark">Attiva dal 2012</span>
+            <div class="p-8">
+              <div class="flex items-center gap-3 mb-3">
+                <span class={`inline-block w-2 h-2 rounded-full ${mission.id === 'kenya' ? 'bg-primary-light' : 'bg-accent'}`}></span>
+                <span class={`text-sm font-medium ${mission.id === 'kenya' ? 'text-primary-dark' : 'text-accent-dark'}`}>{mission.stato}</span>
+              </div>
+              <h3 class="font-serif text-2xl font-bold text-text group-hover:text-primary-dark transition-colors">{mission.titolo}</h3>
+              <p class="mt-2 text-text-secondary leading-relaxed">
+                {mission.card_descrizione}
+              </p>
+              <span class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-primary-dark group-hover:gap-3 transition-all">
+                Scopri di più
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </span>
             </div>
-            <h3 class="font-serif text-2xl font-bold text-text group-hover:text-primary-dark transition-colors">Missione Kenya</h3>
-            <p class="mt-2 text-text-secondary leading-relaxed">
-              Kasue, Kitui - Sosteniamo oltre 140 bambini con istruzione, nutrizione e cura spirituale. Un progetto che trasforma vite e dona futuro.
-            </p>
-            <span class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-primary-dark group-hover:gap-3 transition-all">
-              Scopri di più
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
-
-        <!-- India Card -->
-        <a href="/missioni/india/" class="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-divider/50 hover:shadow-lg transition-all duration-300">
-          <div class="aspect-[16/10] bg-gradient-to-br from-accent/10 to-primary/10 flex items-center justify-center">
-            <div class="text-center">
-              <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-accent/40 mb-3 group-hover:text-accent/60 transition-colors" aria-hidden="true">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
-                <path d="M2 12h20" />
-              </svg>
-              <p class="text-text-secondary text-sm">Foto della missione in India</p>
-            </div>
-          </div>
-          <div class="p-8">
-            <div class="flex items-center gap-3 mb-3">
-              <span class="inline-block w-2 h-2 rounded-full bg-accent"></span>
-              <span class="text-sm font-medium text-accent-dark">In sviluppo</span>
-            </div>
-            <h3 class="font-serif text-2xl font-bold text-text group-hover:text-primary-dark transition-colors">Missione India</h3>
-            <p class="mt-2 text-text-secondary leading-relaxed">
-              Un progetto in crescita per portare istruzione, sostegno e il messaggio del Vangelo alle comunità rurali dell'India.
-            </p>
-            <span class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-primary-dark group-hover:gap-3 transition-all">
-              Scopri di più
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </span>
-          </div>
-        </a>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -107,26 +83,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
-        <!-- Years -->
-        <div class="text-center p-8 rounded-2xl bg-white/5 border border-white/10">
-          <div class="font-serif text-5xl md:text-6xl font-bold text-accent mb-2">13+</div>
-          <p class="text-white/70 text-sm font-medium uppercase tracking-wider">Anni di servizio</p>
-          <p class="text-white/50 text-sm mt-2">Presenti in Kenya dal 2012</p>
-        </div>
-
-        <!-- Children -->
-        <div class="text-center p-8 rounded-2xl bg-white/5 border border-white/10">
-          <div class="font-serif text-5xl md:text-6xl font-bold text-accent mb-2">140+</div>
-          <p class="text-white/70 text-sm font-medium uppercase tracking-wider">Bambini sostenuti</p>
-          <p class="text-white/50 text-sm mt-2">Istruzione, nutrizione e cura</p>
-        </div>
-
-        <!-- Communities -->
-        <div class="text-center p-8 rounded-2xl bg-white/5 border border-white/10">
-          <div class="font-serif text-5xl md:text-6xl font-bold text-accent mb-2">2</div>
-          <p class="text-white/70 text-sm font-medium uppercase tracking-wider">Nazioni raggiunte</p>
-          <p class="text-white/50 text-sm mt-2">Kenya e India</p>
-        </div>
+        {statistiche.map((stat) => (
+          <div class="text-center p-8 rounded-2xl bg-white/5 border border-white/10">
+            <div class="font-serif text-5xl md:text-6xl font-bold text-accent mb-2">{stat.valore}</div>
+            <p class="text-white/70 text-sm font-medium uppercase tracking-wider">{stat.etichetta}</p>
+            <p class="text-white/50 text-sm mt-2">{stat.sottotitolo}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>

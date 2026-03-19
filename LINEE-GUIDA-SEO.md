@@ -62,7 +62,6 @@ Il blog e' lo strumento piu' potente per la SEO. Ogni articolo porta nuove visit
 - "Mission Party 2026: una serata per le missioni"
 - "La storia della Chiesa Efraim di Messina"
 - "Come funziona l'adozione a distanza in Kenya"
-- "Equippers Church Roma: la nostra partnership"
 
 **Settimana 9-12 (Maggio-Giugno):**
 - "Perche' la chiesa fa missioni umanitarie"
@@ -107,7 +106,6 @@ I link da altri siti verso il nostro migliorano l'autorita' del dominio.
 
 **Azioni:**
 - Registrare il sito su directory di chiese evangeliche italiane
-- Chiedere a Equippers Church Roma un link reciproco
 - Collegare missionekenya.com al nuovo sito con link prominenti
 - Collegare pasqua.missionekenya.com al sito principale
 - Registrarsi su Google Maps e Bing Places

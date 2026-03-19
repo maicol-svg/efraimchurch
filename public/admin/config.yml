@@ -130,3 +130,46 @@ collections:
           - { label: "Link PayPal", name: "paypal_link", widget: "string" }
           - { label: "Importo adozione (€/mese)", name: "adozione_importo", widget: "string" }
           - { label: "Cosa include l'adozione", name: "adozione_incluso", widget: "list", field: { label: "Voce", name: "voce", widget: "string" } }
+      - name: "faq-dona"
+        label: "FAQ Donazioni"
+        file: "src/data/faq-dona.json"
+        fields:
+          - label: "FAQ"
+            name: "faq"
+            widget: "list"
+            fields:
+              - { label: "Domanda", name: "domanda", widget: "string" }
+              - { label: "Risposta", name: "risposta", widget: "text" }
+      - name: "missioni-info"
+        label: "Info Missioni"
+        file: "src/data/missioni-info.json"
+        fields:
+          - label: "Missioni"
+            name: "missioni"
+            widget: "list"
+            fields:
+              - { label: "ID", name: "id", widget: "select", options: ["kenya", "india"] }
+              - { label: "Titolo", name: "titolo", widget: "string" }
+              - { label: "Località", name: "localita", widget: "string" }
+              - { label: "Anno inizio", name: "anno_inizio", widget: "string", required: false }
+              - { label: "Stato", name: "stato", widget: "string" }
+              - { label: "Descrizione hero", name: "hero_descrizione", widget: "text" }
+              - label: "Descrizione pagina"
+                name: "descrizione"
+                widget: "list"
+                field: { label: "Paragrafo", name: "paragrafo", widget: "text" }
+              - { label: "Descrizione card (homepage)", name: "card_descrizione", widget: "text" }
+              - label: "Statistiche card (homepage)"
+                name: "card_stats"
+                widget: "list"
+                fields:
+                  - { label: "Etichetta", name: "etichetta", widget: "string" }
+                  - { label: "Valore", name: "valore", widget: "string" }
+              - { label: "Immagine", name: "immagine", widget: "image", required: false }
+          - label: "Statistiche impatto"
+            name: "statistiche"
+            widget: "list"
+            fields:
+              - { label: "Valore", name: "valore", widget: "string" }
+              - { label: "Etichetta", name: "etichetta", widget: "string" }
+              - { label: "Sottotitolo", name: "sottotitolo", widget: "string" }

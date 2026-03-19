@@ -1,7 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
+import missioniInfo from '../../data/missioni-info.json';
+import pagamenti from '../../data/pagamenti.json';
 
+const india = missioniInfo.missioni.find(m => m.id === 'india');
+const galleria = (await getCollection('galleria'))
+  .filter(entry => entry.data.category === 'india')
+  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 const updates = (await getCollection('missioni'))
   .filter((entry) => entry.data.mission === 'india')
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
@@ -9,11 +15,18 @@ const updates = (await getCollection('missioni'))
 
 <BaseLayout
   title="Missione India"
-  description="La nostra missione in India. Portiamo istruzione, sostegno e il messaggio del Vangelo alle comunità rurali indiane."
+  description="La nostra missione a Chennai, India. Dal 2024 un orfanotrofio con 24 bambini, 7 aule scolastiche e un programma di cura integrale."
 >
-  <!-- Hero -->
+  <!-- Section 1: Hero -->
   <section class="relative bg-slate-dark overflow-hidden">
-    <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/90 to-slate-dark"></div>
+    <div class="absolute inset-0">
+      <img
+        src={india.immagine}
+        alt="Bambini dell'orfanotrofio in India"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-slate-dark/90 via-slate-dark/75 to-slate-dark/60"></div>
+    </div>
     <div class="absolute inset-0 opacity-10">
       <div class="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
       <div class="absolute bottom-0 left-0 w-64 h-64 bg-primary-light rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
@@ -24,28 +37,47 @@ const updates = (await getCollection('missioni'))
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
           Tutte le missioni
         </a>
-        <span class="inline-block text-accent font-medium text-sm tracking-widest uppercase mb-4">India</span>
+        <span class="inline-block text-accent font-medium text-sm tracking-widest uppercase mb-4">India - Chennai</span>
         <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-          Missione India
+          {india.titolo}
         </h1>
         <p class="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl">
-          Portare speranza e istruzione alle comunità rurali dell'India, dove il bisogno è grande e le opportunità sono poche.
+          {india.hero_descrizione}
         </p>
         <div class="flex flex-wrap gap-4 mt-8">
           <div class="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 text-sm text-white/80">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-            India
+            Chennai, India
           </div>
           <div class="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 text-sm text-white/80">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-            Progetto in crescita
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+            Dal 2024
           </div>
+          <div class="flex items-center gap-2 bg-white/10 rounded-full px-4 py-2 text-sm text-white/80">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            24 bambini
+          </div>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+          <a
+            href="#adozione"
+            class="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-semibold text-slate-dark shadow-md hover:bg-accent-dark hover:text-white transition-all"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            Adotta un bambino
+          </a>
+          <a
+            href="#donazione"
+            class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-8 py-3 text-base font-semibold text-white hover:bg-white/10 transition-all"
+          >
+            Dona ora
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Mission Description -->
+  <!-- Section 2: Il progetto -->
   <section class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
@@ -53,15 +85,9 @@ const updates = (await getCollection('missioni'))
           <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Il progetto</span>
           <h2 class="font-serif text-3xl md:text-4xl font-bold text-text mb-6">Una nuova frontiera di speranza</h2>
           <div class="space-y-4 text-text-secondary leading-relaxed">
-            <p>
-              L'India rappresenta una delle nuove frontiere missionarie della Chiesa Efraim. In un Paese dove milioni di persone vivono in condizioni di estrema povertà, sentiamo la chiamata a portare il messaggio di speranza del Vangelo insieme ad un aiuto concreto e tangibile.
-            </p>
-            <p>
-              Il nostro progetto si concentra sulle comunità rurali, dove l'accesso all'istruzione e ai servizi sanitari di base è spesso limitato o inesistente. Lavoriamo a stretto contatto con partner locali per garantire che il nostro intervento sia culturalmente sensibile e sostenibile nel lungo periodo.
-            </p>
-            <p>
-              Attraverso programmi educativi, supporto alimentare e formazione professionale, miriamo a creare opportunità concrete per le famiglie e i bambini delle comunità che serviamo. Crediamo che ogni persona meriti la possibilità di una vita dignitosa e piena di speranza.
-            </p>
+            {india.descrizione.map((paragrafo) => (
+              <p>{paragrafo}</p>
+            ))}
           </div>
         </div>
 
@@ -69,48 +95,48 @@ const updates = (await getCollection('missioni'))
         <div class="space-y-6">
           <div class="bg-white rounded-xl p-6 shadow-sm border border-divider/50">
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-dark" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
               </div>
               <div>
                 <h3 class="font-serif text-lg font-semibold text-text">Istruzione</h3>
-                <p class="mt-1 text-sm text-text-secondary">Programmi educativi per bambini e giovani, con particolare attenzione all'alfabetizzazione e alla formazione professionale.</p>
+                <p class="mt-1 text-sm text-text-secondary">7 aule scolastiche con 3 insegnanti assunti, aperte anche a bambini esterni provenienti da famiglie in difficoltà.</p>
               </div>
             </div>
           </div>
 
           <div class="bg-white rounded-xl p-6 shadow-sm border border-divider/50">
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-dark" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"/><path d="M8.5 8.5v.01"/><path d="M16 15.5v.01"/><path d="M12 12v.01"/><path d="M11 17v.01"/><path d="M7 14v.01"/></svg>
               </div>
               <div>
-                <h3 class="font-serif text-lg font-semibold text-text">Sostegno alle famiglie</h3>
-                <p class="mt-1 text-sm text-text-secondary">Supporto diretto alle famiglie in difficoltà attraverso programmi di microcredito, formazione lavorativa e assistenza sociale.</p>
+                <h3 class="font-serif text-lg font-semibold text-text">Nutrizione</h3>
+                <p class="mt-1 text-sm text-text-secondary">4 pasti al giorno per ogni bambino, preparati da un cuoco dedicato assunto per l'orfanotrofio.</p>
               </div>
             </div>
           </div>
 
           <div class="bg-white rounded-xl p-6 shadow-sm border border-divider/50">
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-dark" aria-hidden="true"><path d="M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2"/></svg>
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="m3 9 9-7 9 7"/><path d="M9 22V12h6v10"/></svg>
               </div>
               <div>
-                <h3 class="font-serif text-lg font-semibold text-text">Salute</h3>
-                <p class="mt-1 text-sm text-text-secondary">Accesso ai servizi sanitari di base, campagne di prevenzione e sensibilizzazione sulla salute nelle comunità rurali.</p>
+                <h3 class="font-serif text-lg font-semibold text-text">Accoglienza</h3>
+                <p class="mt-1 text-sm text-text-secondary">Orfanotrofio con 24 bambini accolti (da 3 iniziali), stanze ridipinte, nuovi letti acquistati.</p>
               </div>
             </div>
           </div>
 
           <div class="bg-white rounded-xl p-6 shadow-sm border border-divider/50">
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center shrink-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent-dark" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
               </div>
               <div>
                 <h3 class="font-serif text-lg font-semibold text-text">Cura spirituale</h3>
-                <p class="mt-1 text-sm text-text-secondary">Condivisione del Vangelo, formazione di leader locali e creazione di comunità di fede autosufficienti e radicate nella Parola.</p>
+                <p class="mt-1 text-sm text-text-secondary">Condivisione del Vangelo, formazione di leader locali e creazione di comunità di fede radicate nella Parola.</p>
               </div>
             </div>
           </div>
@@ -119,32 +145,184 @@ const updates = (await getCollection('missioni'))
     </div>
   </section>
 
-  <!-- Photo Gallery Placeholder -->
-  <section class="py-20 md:py-28 bg-cream">
+  <!-- Section 4: Adotta a distanza -->
+  <section id="adozione" class="py-20 md:py-28 bg-cream">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-12">
-        <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Galleria</span>
-        <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Immagini dalla missione</h2>
-      </div>
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Adozione a distanza</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Adotta un bambino a distanza</h2>
+          <p class="mt-4 text-text-secondary leading-relaxed">
+            Con il programma di adozione a distanza puoi accompagnare un bambino nel suo percorso di crescita, garantendogli istruzione, nutrizione e cure mediche.
+          </p>
+        </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <div class="aspect-square rounded-xl bg-white border border-divider/50 flex items-center justify-center overflow-hidden">
-            <div class="text-center p-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-accent/20 mb-2" aria-hidden="true">
-                <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                <circle cx="9" cy="9" r="2" />
-                <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
-              </svg>
-              <p class="text-xs text-text-secondary/50">Foto {i + 1}</p>
+        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 overflow-hidden">
+          <div class="bg-gradient-to-r from-primary to-primary-dark p-8 md:p-10 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-1.5 text-sm text-white mb-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+              Missione India
+            </div>
+            <p class="text-white/80 text-sm mb-2">A partire da</p>
+            <div class="text-5xl md:text-6xl font-serif font-bold text-white mb-1">{pagamenti.adozione_importo} &euro;</div>
+            <p class="text-white/80 text-lg">al mese</p>
+          </div>
+          <div class="p-8 md:p-10">
+            <h3 class="font-serif text-xl font-semibold text-text mb-4">Cosa include l'adozione a distanza</h3>
+            <ul class="space-y-3">
+              {pagamenti.adozione_incluso.map((item) => (
+                <li class="flex items-start gap-3">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                  <span class="text-text-secondary">{item}</span>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/10">
+              <p class="text-sm text-text-secondary">
+                <strong class="text-text">Causale:</strong> Adozione a distanza - India
+              </p>
+            </div>
+            <div class="mt-8 text-center">
+              <a
+                href="/contatti/"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-primary-dark hover:shadow-lg transition-all"
+              >
+                Contattaci per adottare
+              </a>
             </div>
           </div>
-        ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Updates -->
+  <!-- Section 5: Galleria -->
+  {galleria.length > 0 && (
+    <section class="py-20 md:py-28 bg-warm">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Galleria</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Immagini dalla missione</h2>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {galleria.map((foto) => (
+            <div class="aspect-square rounded-xl overflow-hidden">
+              <img
+                src={foto.data.image}
+                alt={foto.data.alt || 'Foto dalla missione in India'}
+                class="w-full h-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Section 6: Dona per questa missione -->
+  <section id="donazione" class="py-20 md:py-28 bg-cream">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Sostieni</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Dona per la missione in India</h2>
+        </div>
+
+        <!-- IBAN Card -->
+        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 md:p-10 mb-8">
+          <div class="mb-8">
+            <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">IBAN</label>
+            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
+              <code id="iban-code-india" class="flex-1 text-lg md:text-xl font-mono font-semibold text-primary-dark tracking-wider break-all">
+                {pagamenti.iban}
+              </code>
+              <button
+                id="copy-iban-india"
+                type="button"
+                class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
+                aria-label="Copia IBAN negli appunti"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <span>Copia</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Intestato a</label>
+              <p class="text-text font-medium">{pagamenti.intestatario}</p>
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Banca</label>
+              <p class="text-text font-medium">{pagamenti.banca}</p>
+            </div>
+          </div>
+
+          <div class="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/10">
+            <p class="text-sm text-text-secondary">
+              <strong class="text-text">Causale:</strong> Donazione - Missione India
+            </p>
+          </div>
+        </div>
+
+        <!-- PayPal -->
+        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 md:p-10">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-full bg-[#0070ba]/10 flex items-center justify-center shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0070ba" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
+                <path d="M10 14l1-6h3c2 0 3.5 1 3 3.5s-2.5 3.5-4.5 3.5H10z" opacity="0.5"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-serif text-xl font-semibold text-text">PayPal</h3>
+              <p class="text-sm text-text-secondary">Invia la tua donazione tramite PayPal</p>
+            </div>
+          </div>
+
+          <div class="mb-6">
+            <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">Invia a</label>
+            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
+              <code id="paypal-email-india" class="flex-1 text-lg font-mono font-semibold text-primary-dark break-all">
+                {pagamenti.paypal_email}
+              </code>
+              <button
+                id="copy-paypal-india"
+                type="button"
+                class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
+                aria-label="Copia email PayPal negli appunti"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+                <span>Copia</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <a
+              href={pagamenti.paypal_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-[#0070ba] px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-[#005ea6] transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
+              </svg>
+              Dona con PayPal
+            </a>
+            <p class="text-sm text-text-secondary mt-3">
+              Oppure invia direttamente a <strong>{pagamenti.paypal_email}</strong> dall'app PayPal
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 7: Aggiornamenti -->
   <section class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
@@ -182,28 +360,62 @@ const updates = (await getCollection('missioni'))
     </div>
   </section>
 
-  <!-- CTA Donate -->
+  <!-- Section 8: CTA finale -->
   <section class="py-20 bg-primary-dark">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Sostieni la missione in India</h2>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Hai domande sulla missione in India?</h2>
       <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto">
-        Il tuo contributo può fare una differenza enorme nella vita delle comunità rurali indiane. Unisciti a noi.
+        Il tuo contributo può fare una differenza enorme nella vita dei bambini dell'orfanotrofio a Chennai. Unisciti a noi.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a
-          href="/dona/"
+          href="/contatti/"
           class="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-semibold text-slate-dark shadow-md hover:bg-accent-dark hover:text-white transition-all"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-          Dona ora
+          Contattaci
         </a>
         <a
-          href="/contatti/"
+          href="/missioni/"
           class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-8 py-3 text-base font-semibold text-white hover:bg-white/10 transition-all"
         >
-          Contattaci per info
+          Tutte le missioni
         </a>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  function setupCopyButton(buttonId: string, codeId: string) {
+    const button = document.getElementById(buttonId);
+    const code = document.getElementById(codeId);
+    if (!button || !code) return;
+
+    button.addEventListener('click', async () => {
+      const text = code.textContent?.trim() || '';
+      try {
+        await navigator.clipboard.writeText(text);
+        const label = button.querySelector('span');
+        const originalText = label?.textContent;
+        if (label) {
+          label.textContent = 'Copiato!';
+          setTimeout(() => {
+            label.textContent = originalText || 'Copia';
+          }, 2000);
+        }
+      } catch {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+    });
+  }
+
+  setupCopyButton('copy-iban-india', 'iban-code-india');
+  setupCopyButton('copy-paypal-india', 'paypal-email-india');
+</script>

@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Efraim Church | Sito in arrivo</title>
+  <meta name="description" content="Il nuovo sito della Chiesa Cristiana Efraim di Messina sta per arrivare. Una comunità di fede al servizio della città e del mondo." />
+  <link rel="canonical" href="https://efraimchurch.com/" />
+  <meta property="og:title" content="Efraim Church | Sito in arrivo" />
+  <meta property="og:description" content="Il nuovo sito della Chiesa Cristiana Efraim di Messina sta per arrivare." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://efraimchurch.com/" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-deep: #0F2E14;
+      --green-dark: #1B5E20;
+      --green: #2E7D32;
+      --gold: #D4A843;
+      --gold-dark: #B8912E;
+      --gold-pale: #E8D5A0;
+      --cream: #FDF8F0;
+      --text-light: rgba(253, 248, 240, 0.85);
+      --text-muted: rgba(253, 248, 240, 0.45);
+    }
+
+    html { height: 100%; }
+
+    body {
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--green-deep);
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-light);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 180px 180px;
+      mix-blend-mode: overlay;
+    }
+
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(100px);
+    }
+    .bg-orb--1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(46, 125, 50, 0.15) 0%, transparent 70%);
+      top: -200px; right: -150px;
+    }
+    .bg-orb--2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(212, 168, 67, 0.08) 0%, transparent 70%);
+      bottom: -100px; left: -100px;
+    }
+    .bg-orb--3 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(46, 125, 50, 0.1) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .line-v {
+      position: fixed;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(212, 168, 67, 0.12), transparent);
+      top: 0; bottom: 0;
+      pointer-events: none;
+    }
+    .line-v--1 { left: 15%; }
+    .line-v--2 { right: 15%; }
+
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 640px;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+
+    .cross {
+      width: 44px;
+      height: 44px;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    }
+    .cross svg { width: 100%; height: 100%; }
+
+    .brand {
+      opacity: 0;
+      animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s forwards;
+    }
+    .brand-name {
+      font-family: 'Lora', serif;
+      font-size: clamp(2.5rem, 7vw, 4rem);
+      font-weight: 700;
+      color: var(--cream);
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+    .brand-sub {
+      font-family: 'Lora', serif;
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin-top: 0.3rem;
+    }
+
+    .divider {
+      width: 50px;
+      height: 1px;
+      background: var(--gold);
+      margin: 2rem auto;
+      opacity: 0;
+      animation: widen 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+    }
+
+    .message {
+      opacity: 0;
+      animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+    }
+    .message h1 {
+      font-family: 'Lora', serif;
+      font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+    .message p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text-muted);
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .info {
+      margin-top: 2.5rem;
+      padding: 1.75rem 2rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(212, 168, 67, 0.12);
+      border-radius: 16px;
+      opacity: 0;
+      animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.75s forwards;
+    }
+    .info-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: 0.75rem;
+    }
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+    }
+    .info-row:last-child { margin-bottom: 0; }
+    .info-row svg { width: 15px; height: 15px; color: var(--gold); flex-shrink: 0; }
+    .info-row a { color: var(--text-light); text-decoration: none; transition: color 0.3s; }
+    .info-row a:hover { color: var(--gold); }
+
+    .social {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.9s forwards;
+    }
+    .social a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(212, 168, 67, 0.2);
+      color: var(--gold-pale);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .social a:hover {
+      background: rgba(212, 168, 67, 0.1);
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .social a svg { width: 18px; height: 18px; }
+
+    .footer {
+      margin-top: 3rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      opacity: 0;
+      animation: rise 1s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+    }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes widen {
+      from { opacity: 0; width: 0; }
+      to   { opacity: 0.5; width: 50px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-orb bg-orb--1"></div>
+  <div class="bg-orb bg-orb--2"></div>
+  <div class="bg-orb bg-orb--3"></div>
+  <div class="line-v line-v--1"></div>
+  <div class="line-v line-v--2"></div>
+
+  <div class="container">
+    <div class="cross">
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M24 4L24 44" stroke="#D4A843" stroke-width="2" stroke-linecap="round"/>
+        <path d="M10 18L38 18" stroke="#D4A843" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="24" cy="18" r="7" stroke="#D4A843" stroke-width="1" fill="none" opacity="0.3"/>
+      </svg>
+    </div>
+
+    <div class="brand">
+      <div class="brand-name">EFRAIM</div>
+      <div class="brand-sub">church</div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="message">
+      <h1>Il nostro nuovo sito<br>sta per arrivare</h1>
+      <p>Stiamo preparando qualcosa di speciale per la nostra comunità. Nel frattempo, vieni a trovarci di persona o seguici sui social.</p>
+    </div>
+
+    <div class="info">
+      <div class="info-label">Dove trovarci</div>
+      <div class="info-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+        <span>Via Bartolomeo Colleoni 43, Messina</span>
+      </div>
+      <div class="info-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <a href="mailto:info@missionekenya.com">info@missionekenya.com</a>
+      </div>
+      <div class="info-row">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <a href="mailto:c.efraim.media@gmail.com">c.efraim.media@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="social">
+      <a href="https://www.facebook.com/profile.php?id=100089926218971" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/efraim.church/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+      </a>
+      <a href="https://www.youtube.com/@EfraimChurch" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg>
+      </a>
+    </div>
+
+    <div class="footer">Chiesa Cristiana Efraim &middot; Messina</div>
+  </div>
+</body>
+</html>
