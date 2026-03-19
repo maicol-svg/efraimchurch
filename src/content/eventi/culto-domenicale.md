@@ -4,7 +4,7 @@ date: 2026-03-22
 time: "10:00"
 location: "Chiesa Efraim - Via Bartolomeo Colleoni 43, 98125 Messina"
 description: "Ogni domenica alle 10:00 ci ritroviamo per adorare Dio insieme, ascoltare la Sua Parola e crescere come comunità nella fede."
-image: "/images/missioni/kenya/vista-aerea-2.jpg"
+image: "/images/chiesa/worship-service.jpg"
 recurring: settimanale
 ---
 

@@ -6,7 +6,7 @@ time: 18:00
 recurring: settimanale
 location: Chiesa Efraim - Via Bartolomeo Colleoni 43, 98125 Messina
 description: Ogni mercoledì alle 18:00 ci ritroviamo per un momento di culto, adorazione e ascolto della Parola. Un appuntamento settimanale aperto a tutti.
-image: /images/missioni/kenya/vista-aerea-1.jpg
+image: /images/chiesa/worship-service.jpg
 link: ''
 ---
 

@@ -3,7 +3,7 @@ title: "Benvenuti sul nuovo sito della Chiesa Efraim"
 date: 2026-03-15
 author: "Efraim Church"
 description: "Siamo felici di presentarvi il nuovo sito della Chiesa Cristiana Efraim di Messina. Scoprite chi siamo, cosa crediamo e come unirvi a noi."
-image: "/images/missioni/kenya/bambini-nutrizione-1.jpg"
+image: "/images/chiesa/church-welcome.jpg"
 tags:
   - comunità
   - novità
