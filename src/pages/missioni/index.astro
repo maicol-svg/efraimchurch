@@ -46,13 +46,17 @@ const { statistiche } = missioniInfo;
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {[kenya, india].map((mission) => (
           <a href={`/missioni/${mission.id}/`} class="group relative overflow-hidden rounded-2xl bg-white shadow-sm border border-divider/50 hover:shadow-lg transition-all duration-300">
-            <div class="aspect-[16/10] overflow-hidden">
+            <div class="aspect-[16/10] overflow-hidden relative">
               <img
                 src={mission.immagine}
                 alt={mission.titolo}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
               />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+              <span class="absolute top-4 right-4 text-3xl drop-shadow-lg" aria-hidden="true">
+                {mission.id === 'kenya' ? '🇰🇪' : '🇮🇳'}
+              </span>
             </div>
             <div class="p-8">
               <div class="flex items-center gap-3 mb-3">
