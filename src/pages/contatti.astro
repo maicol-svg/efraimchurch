@@ -42,19 +42,16 @@ const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${
           <p class="text-text-secondary mb-8">Compila il modulo e ti risponderemo il prima possibile.</p>
 
           <form
-            name="contatti"
+            action="https://formsubmit.co/info@missionekenya.com"
             method="POST"
-            data-netlify="true"
-            netlify-honeypot="bot-field"
             class="space-y-6"
           >
-            <!-- Honeypot -->
-            <p class="hidden">
-              <label>
-                Non compilare questo campo: <input name="bot-field" />
-              </label>
-            </p>
-            <input type="hidden" name="form-name" value="contatti" />
+            <!-- Formsubmit config -->
+            <input type="hidden" name="_subject" value="Nuovo messaggio dal sito Efraim Church" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="hidden" name="_next" value="https://efraimchurch.com/contatti/?inviato=true" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="text" name="_honey" style="display:none" />
 
             <!-- Name -->
             <div>
@@ -152,9 +149,14 @@ const scheduleDesc = schedule.map(s => `${s.title} ${s.day.toLowerCase()} ore ${
               </div>
               <div>
                 <h3 class="font-serif text-lg font-semibold text-text">Email</h3>
-                <a href={`mailto:${contatti.email}`} class="mt-1 text-primary-dark hover:text-primary transition-colors">
+                <a href={`mailto:${contatti.email}`} class="mt-1 text-primary-dark hover:text-primary transition-colors block">
                   {contatti.email}
                 </a>
+                {contatti.email_secondaria && (
+                  <a href={`mailto:${contatti.email_secondaria}`} class="mt-1 text-primary-dark hover:text-primary transition-colors block">
+                    {contatti.email_secondaria}
+                  </a>
+                )}
               </div>
             </div>
           </div>
