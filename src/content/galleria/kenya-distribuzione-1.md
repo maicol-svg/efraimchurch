@@ -1,6 +1,6 @@
 ---
 title: "Materiale scolastico"
-image: "/images/missioni/kenya/distribuzione-materiale-1.jpg"
+image: "/images/uploads/distribuzione-materiale-1.jpg"
 caption: "Distribuzione di materiale scolastico ai bambini"
 category: "kenya"
 visible: true

@@ -5,7 +5,7 @@ endDate:
 time: 19:00
 location: Via Bartolomeo Colleoni 43, Messina
 description: L'appuntamento settimanale del venerdì sera per i giovani della Chiesa Efraim. Un momento di incontro, worship e crescita insieme.
-image: /images/chiesa/worship-youth.jpg
+image: /images/uploads/worship-youth.jpg
 link:
 recurring: settimanale
 ---

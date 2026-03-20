@@ -1,6 +1,6 @@
 ---
 title: "Bambini dell'orfanotrofio"
-image: "/images/missioni/india/bambini-orfanotrofio.jpg"
+image: "/images/uploads/bambini-orfanotrofio.jpg"
 caption: "I 24 bambini dell'orfanotrofio a Chennai"
 category: "india"
 visible: true

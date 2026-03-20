@@ -16,70 +16,70 @@
     { "etichetta": "Bambini sostenuti", "valore": "140+" },
     { "etichetta": "Anni di presenza", "valore": "13" }
   ],
-  "immagine": "/images/missioni/kenya/gruppo-bambini-volontari.jpg",
+  "immagine": "/images/uploads/gruppo-bambini-volontari.jpg",
   "galleria": [
     {
-      "immagine": "/images/missioni/kenya/distribuzione-materiale-1.jpg",
+      "immagine": "/images/uploads/distribuzione-materiale-1.jpg",
       "titolo": "Materiale scolastico",
       "didascalia": "Distribuzione di materiale scolastico ai bambini"
     },
     {
-      "immagine": "/images/missioni/kenya/distribuzione-materiale-2.jpg",
+      "immagine": "/images/uploads/distribuzione-materiale-2.jpg",
       "titolo": "Consegna materiale didattico",
       "didascalia": "Consegna di materiale didattico ai bambini del programma"
     },
     {
-      "immagine": "/images/missioni/kenya/distribuzione-materiale-3.jpg",
+      "immagine": "/images/uploads/distribuzione-materiale-3.jpg",
       "titolo": "Supporto scolastico",
       "didascalia": "Supporto scolastico per i bambini di Kasue"
     },
     {
-      "immagine": "/images/missioni/kenya/distribuzione-quaderni.jpg",
+      "immagine": "/images/uploads/distribuzione-quaderni.jpg",
       "titolo": "Distribuzione quaderni",
       "didascalia": "Distribuzione di quaderni e materiale didattico a Kasue"
     },
     {
-      "immagine": "/images/missioni/kenya/gruppo-bambini-volontari.jpg",
+      "immagine": "/images/uploads/gruppo-bambini-volontari.jpg",
       "titolo": "Gruppo bambini e volontari",
       "didascalia": "Bambini e volontari insieme a Kasue, Kenya"
     },
     {
-      "immagine": "/images/missioni/kenya/bambini-nutrizione-1.jpg",
+      "immagine": "/images/uploads/bambini-nutrizione-1.jpg",
       "titolo": "Pasto quotidiano",
       "didascalia": "I bambini durante il pasto quotidiano a Kasue"
     },
     {
-      "immagine": "/images/missioni/kenya/bambini-nutrizione-2.jpg",
+      "immagine": "/images/uploads/bambini-nutrizione-2.jpg",
       "titolo": "Programma alimentare",
       "didascalia": "Il programma di nutrizione quotidiana per i bambini"
     },
     {
-      "immagine": "/images/missioni/kenya/bambini-nutrizione-3.jpg",
+      "immagine": "/images/uploads/bambini-nutrizione-3.jpg",
       "titolo": "Pranzo comunitario",
       "didascalia": "Pranzo comunitario per i bambini del programma"
     },
     {
-      "immagine": "/images/missioni/kenya/bambini-nutrizione-4.jpg",
+      "immagine": "/images/uploads/bambini-nutrizione-4.jpg",
       "titolo": "Bambini a pranzo",
       "didascalia": "Bambini durante il pasto a Kasue"
     },
     {
-      "immagine": "/images/missioni/kenya/bambini-nutrizione-5.jpg",
+      "immagine": "/images/uploads/bambini-nutrizione-5.jpg",
       "titolo": "Momento del pasto",
       "didascalia": "Momento del pasto quotidiano"
     },
     {
-      "immagine": "/images/missioni/kenya/vista-aerea-1.jpg",
+      "immagine": "/images/uploads/vista-aerea-1.jpg",
       "titolo": "Vista aerea del compound",
       "didascalia": "Vista aerea del compound della missione a Kasue"
     },
     {
-      "immagine": "/images/missioni/kenya/vista-aerea-2.jpg",
+      "immagine": "/images/uploads/vista-aerea-2.jpg",
       "titolo": "Il compound dall'alto",
       "didascalia": "Il compound della missione visto dall'alto"
     },
     {
-      "immagine": "/images/missioni/kenya/vista-aerea-3.jpg",
+      "immagine": "/images/uploads/vista-aerea-3.jpg",
       "titolo": "Panoramica della missione",
       "didascalia": "Panoramica aerea dell'area della missione"
     }
@@ -90,8 +90,8 @@
       "data": "2026-02-20",
       "descrizione": "Grazie alla generosità della comunità, un nuovo pozzo d'acqua è stato completato a Kasue, garantendo acqua pulita a centinaia di persone.",
       "immagini": [
-        "/images/missioni/kenya/gruppo-bambini-volontari.jpg",
-        "/images/missioni/kenya/distribuzione-materiale-2.jpg"
+        "/images/uploads/gruppo-bambini-volontari.jpg",
+        "/images/uploads/distribuzione-materiale-2.jpg"
       ],
       "contenuto": "## L'acqua che cambia tutto\n\nA **Kasue**, nella contea di **Kitui** in Kenya, un sogno che custodivamo da tempo è finalmente diventato realtà: il **nuovo pozzo d'acqua** è stato completato e sta già servendo centinaia di persone nella comunità. Quello che per molti di noi è un gesto quotidiano e scontato -- aprire un rubinetto e bere acqua pulita -- per le famiglie di Kasue rappresenta un cambiamento che trasforma radicalmente la qualità della vita.\n\nPrima della costruzione del pozzo, le donne e i bambini del villaggio dovevano percorrere chilometri ogni giorno per raggiungere fonti d'acqua spesso non sicure. Questo significava tempo sottratto alla scuola per i bambini e un rischio costante per la salute di tutti. Oggi, grazie al nuovo pozzo, l'acqua pulita è accessibile a pochi passi dalle abitazioni, e i benefici sono immediati: meno malattie, più tempo per l'istruzione, più dignità per ogni persona.\n\nQuesto progetto è stato possibile grazie alla **generosità straordinaria** della nostra comunità a Messina e di tutti coloro che hanno contribuito con offerte e preghiere. Dal 2012, il nostro impegno a Kasue continua a crescere e a portare frutti tangibili nella vita di **oltre 140 bambini** e delle loro famiglie. Ogni pozzo scavato, ogni scuola costruita, ogni pasto servito è un seme di speranza che continuerà a dare frutto per generazioni."
     }

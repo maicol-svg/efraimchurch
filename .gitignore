@@ -24,3 +24,9 @@ pnpm-debug.log*
 .idea/
 
 .vercel
+
+# Source files (not for repo)
+LOGO/
+fotografie/
+info india.docx
+stripe-registrazione-guida.txt

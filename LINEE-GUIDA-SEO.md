@@ -28,7 +28,7 @@ Il profilo Google "Centro Cristiano Efraim" e' il primo punto di contatto per ch
 - "chiesa cristiana messina"
 - "efraim church"
 - "chiesa efraim messina"
-- "culto evangelico messina"
+- "service evangelico messina"
 
 ### Parole chiave missioni (per le pagine missioni e il blog)
 - "missione kenya"
@@ -53,7 +53,7 @@ Il blog e' lo strumento piu' potente per la SEO. Ogni articolo porta nuove visit
 ### Temi suggeriti per i primi 3 mesi:
 
 **Settimana 1-4 (Marzo-Aprile):**
-- "Cosa aspettarsi al primo culto alla Chiesa Efraim"
+- "Cosa aspettarsi al primo Service alla Chiesa Efraim"
 - "Pasqua Solidale 2026: come donare un uovo e cambiare una vita"
 - "La nostra missione in Kenya: 13 anni a Kasue"
 - "HolyDay: il venerdi' sera dei giovani a Messina"

@@ -1,6 +1,6 @@
 ---
 title: "Pasto quotidiano"
-image: "/images/missioni/kenya/bambini-nutrizione-1.jpg"
+image: "/images/uploads/bambini-nutrizione-1.jpg"
 caption: "I bambini durante il pasto quotidiano a Kasue"
 category: "kenya"
 visible: true

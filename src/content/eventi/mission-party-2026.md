@@ -4,7 +4,7 @@ date: 2026-04-18
 time: "18:00"
 location: "Via Bartolomeo Colleoni 43, Messina"
 description: "Una serata speciale dedicata alle missioni. Testimonianze, aggiornamenti dal campo e un momento di condivisione per celebrare ciò che Dio sta facendo nel mondo."
-image: "/images/missioni/kenya/distribuzione-materiale-1.jpg"
+image: "/images/uploads/distribuzione-materiale-1.jpg"
 recurring: none
 ---
 

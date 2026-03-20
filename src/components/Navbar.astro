@@ -5,6 +5,7 @@ const links = [
   { href: '/', label: 'Home' },
   { href: '/chi-siamo/', label: 'Chi siamo' },
   { href: '/missioni/', label: 'Missioni' },
+  { href: '/galleria/', label: 'Galleria' },
   { href: '/eventi/', label: 'Eventi' },
   { href: '/blog/', label: 'Blog' },
   { href: '/contatti/', label: 'Contatti' },
@@ -79,9 +80,18 @@ const links = [
   <!-- Mobile Menu Overlay -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 top-0 bg-warm/98 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300 lg:hidden"
+    class="fixed inset-0 bg-warm/98 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300 lg:hidden"
     aria-hidden="true"
   >
+    <!-- Close button -->
+    <button
+      id="mobile-menu-close"
+      class="absolute top-6 right-5 z-10 flex items-center justify-center w-11 h-11 text-text hover:text-primary-dark transition-colors"
+      aria-label="Chiudi menu di navigazione"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
     <!-- Decorative gold corner accent top-left -->
     <div class="absolute top-6 left-6 pointer-events-none" aria-hidden="true">
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
@@ -176,6 +186,7 @@ const links = [
     const navbar = document.getElementById('navbar');
     const menuToggle = document.getElementById('menu-toggle');
     const mobileMenu = document.getElementById('mobile-menu');
+    const mobileMenuClose = document.getElementById('mobile-menu-close');
     let isMenuOpen = false;
 
     // Scroll behavior - add background + toggle scrolled class for text colors
@@ -195,33 +206,33 @@ const links = [
 
     // Mobile menu toggle
     function toggleMenu() {
-      isMenuOpen = !isMenuOpen;
+      if (isMenuOpen) {
+        closeMenu();
+        return;
+      }
+      isMenuOpen = true;
       const mobileLinks = mobileMenu?.querySelectorAll('.mobile-link');
 
-      if (isMenuOpen) {
-        mobileMenu?.classList.remove('hidden');
-        requestAnimationFrame(() => {
-          mobileMenu?.classList.remove('opacity-0');
-          mobileMenu?.classList.add('opacity-100');
-          // Stagger link animations
-          mobileLinks?.forEach((link, i) => {
-            setTimeout(() => {
-              link.classList.add('animate-in');
-            }, 80 + i * 60);
-          });
+      mobileMenu?.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        mobileMenu?.classList.remove('opacity-0');
+        mobileMenu?.classList.add('opacity-100');
+        // Stagger link animations
+        mobileLinks?.forEach((link, i) => {
+          setTimeout(() => {
+            link.classList.add('animate-in');
+          }, 80 + i * 60);
         });
-        menuToggle?.setAttribute('aria-expanded', 'true');
-        mobileMenu?.setAttribute('aria-hidden', 'false');
-        document.body.style.overflow = 'hidden';
-        // Animate hamburger to X
-        const lines = menuToggle?.querySelectorAll('.hamburger-line');
-        if (lines) {
-          lines[0]?.classList.add('rotate-45', 'translate-y-[4px]');
-          lines[1]?.classList.add('opacity-0');
-          lines[2]?.classList.add('-rotate-45', '-translate-y-[8px]', 'w-6');
-        }
-      } else {
-        closeMenu();
+      });
+      menuToggle?.setAttribute('aria-expanded', 'true');
+      mobileMenu?.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      // Animate hamburger to X
+      const lines = menuToggle?.querySelectorAll('.hamburger-line');
+      if (lines) {
+        lines[0]?.classList.add('rotate-45', 'translate-y-[4px]');
+        lines[1]?.classList.add('opacity-0');
+        lines[2]?.classList.add('-rotate-45', '-translate-y-[8px]', 'w-6');
       }
     }
 
@@ -248,6 +259,7 @@ const links = [
     }
 
     menuToggle?.addEventListener('click', toggleMenu);
+    mobileMenuClose?.addEventListener('click', closeMenu);
 
     // Close menu on Escape
     document.addEventListener('keydown', (e) => {

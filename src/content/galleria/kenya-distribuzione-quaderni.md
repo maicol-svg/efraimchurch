@@ -1,6 +1,6 @@
 ---
 title: "Distribuzione quaderni"
-image: "/images/missioni/kenya/distribuzione-quaderni.jpg"
+image: "/images/uploads/distribuzione-quaderni.jpg"
 caption: "Distribuzione di quaderni e materiale didattico a Kasue"
 category: "kenya"
 visible: true

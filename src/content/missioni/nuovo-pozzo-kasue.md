@@ -4,8 +4,8 @@ date: 2026-02-20
 mission: "kenya"
 description: "Grazie alla generosità della comunità, un nuovo pozzo d'acqua è stato completato a Kasue, garantendo acqua pulita a centinaia di persone."
 images:
-  - "/images/missioni/kenya/gruppo-bambini-volontari.jpg"
-  - "/images/missioni/kenya/distribuzione-materiale-2.jpg"
+  - "/images/uploads/gruppo-bambini-volontari.jpg"
+  - "/images/uploads/distribuzione-materiale-2.jpg"
 ---
 
 ## L'acqua che cambia tutto

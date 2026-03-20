@@ -3,7 +3,7 @@ title: "Aggiornamento dalla missione in Kenya: un anno di grazia"
 date: 2026-03-01
 author: "Efraim Church"
 description: "Scoprite gli ultimi aggiornamenti dalla nostra missione a Kasue, Kitui, in Kenya. Oltre 140 bambini continuano a crescere con il nostro sostegno."
-image: "/images/missioni/kenya/distribuzione-quaderni.jpg"
+image: "/images/uploads/distribuzione-quaderni.jpg"
 tags:
   - missioni
   - kenya

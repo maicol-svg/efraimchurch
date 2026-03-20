@@ -156,7 +156,7 @@ export function buildCalendarMonth(year: number, month: number, events: Expanded
 export function getEventDotColor(title: string): string {
   const t = title.toLowerCase();
   if (t.includes('holyday')) return 'bg-violet-500';
-  if (t.includes('culto')) return 'bg-emerald-500';
+  if (t.includes('service')) return 'bg-emerald-500';
   return 'bg-accent';
 }
 
