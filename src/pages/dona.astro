@@ -2,13 +2,34 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import pagamenti from '../data/pagamenti.json';
 import faqDona from '../data/faq-dona.json';
+
+const beniConcreti = [
+  { id: "latte", icon: "milk", name: "5 litri di latte", price: "9", desc: "Nutrizione quotidiana per i bambini" },
+  { id: "grano", icon: "wheat", name: "15kg di grano", price: "12,50", desc: "Alimentazione per le famiglie" },
+  { id: "medica", icon: "medical", name: "Visita medica pediatrica", price: "15", desc: "Cure mediche per un bambino" },
+  { id: "materasso", icon: "bed", name: "Un materasso", price: "15", desc: "Un letto dignitoso per dormire" },
+  { id: "scuola", icon: "backpack", name: "Divisa scolastica e scarpe", price: "20", desc: "Tutto il necessario per la scuola" },
+  { id: "capretta", icon: "heart", name: "Una capretta", price: "20", desc: "Sostentamento per una famiglia" },
+];
+
+const progetti = [
+  { name: "50 cuscini per l'orfanotrofio", price: "150", desc: "Cuscini per i bambini dell'orfanotrofio di Kasue" },
+  { name: "50 coperte", price: "250", desc: "Coperte per proteggere dal freddo della notte" },
+  { name: "1000 mattoni", price: "300", desc: "Materiale per la costruzione dell'orfanotrofio" },
+  { name: "50 set lenzuola e federe", price: "450", desc: "Biancheria per l'orfanotrofio" },
+  { name: "50 materassi", price: "500", desc: "Materassi per i letti dell'orfanotrofio" },
+  { name: "Costruzione orfanotrofio", price: "500", desc: "Contribuisci alla costruzione dell'orfanotrofio femminile" },
+  { name: "Materiale da cucina", price: "750", desc: "Pentole, piatti, posate e utensili per la cucina" },
+  { name: "Impianto elettrico", price: "850", desc: "Sistema elettrico per l'orfanotrofio" },
+  { name: "50 letti per l'orfanotrofio", price: "1.500", desc: "Letti per tutti i bambini dell'orfanotrofio" },
+];
 ---
 
 <BaseLayout
   title="Dona"
   description="Sostieni la Chiesa Cristiana Efraim. Dona tramite bonifico, 5x1000 o adozione a distanza. Ogni contributo sostiene la chiesa e le missioni in Kenya e India."
 >
-  <!-- Hero -->
+  <!-- Section 1: Hero -->
   <section class="relative bg-slate-dark overflow-hidden">
     <div class="absolute inset-0 bg-gradient-to-br from-primary-dark/90 to-slate-dark"></div>
     <div class="absolute inset-0 opacity-10">
@@ -28,23 +49,85 @@ import faqDona from '../data/faq-dona.json';
     </div>
   </section>
 
-  <!-- IBAN Section -->
+  <!-- Section 2: Donazione libera -->
   <section class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
-          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Bonifico bancario</span>
-          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Dona tramite bonifico</h2>
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Donazione libera</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Donazione libera</h2>
           <p class="mt-4 text-text-secondary leading-relaxed">
-            Il modo più diretto per sostenere le nostre attività. Puoi effettuare un bonifico bancario utilizzando i seguenti dati.
+            Scegli l'importo e dona con il metodo che preferisci.
           </p>
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 md:p-10">
-          <!-- IBAN -->
+          <!-- Amount buttons -->
+          <div class="grid grid-cols-3 sm:grid-cols-6 gap-3 mb-6">
+            {[5, 10, 20, 50, 100, 200].map((amount) => (
+              <button
+                type="button"
+                data-amount={amount}
+                class="amount-btn rounded-full border-2 border-divider/50 px-4 py-3 text-center font-semibold text-text hover:border-primary hover:text-primary transition-colors cursor-pointer"
+              >
+                {amount}&euro;
+              </button>
+            ))}
+          </div>
+
+          <!-- Custom amount -->
           <div class="mb-8">
+            <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">Personalizzato</label>
+            <div class="flex items-center gap-2 bg-cream rounded-xl p-3 border border-divider/50">
+              <span class="text-text-secondary font-medium pl-2">&euro;</span>
+              <input
+                type="number"
+                id="custom-amount"
+                min="1"
+                placeholder="Inserisci importo"
+                class="flex-1 bg-transparent text-lg font-semibold text-text outline-none placeholder:text-text-secondary/50"
+              />
+            </div>
+          </div>
+
+          <!-- CTA buttons -->
+          <div class="flex flex-col sm:flex-row gap-4 justify-center mb-10">
+            <div class="relative group">
+              <button
+                id="stripe-donate-btn"
+                data-stripe-link=""
+                type="button"
+                class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-base font-semibold text-white shadow-md opacity-50 cursor-not-allowed w-full sm:w-auto"
+                disabled
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                Dona con carta
+              </button>
+              <span class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs text-text-secondary whitespace-nowrap">Disponibile a breve</span>
+            </div>
+            <a
+              href={pagamenti.paypal_link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center gap-2 rounded-full bg-[#0070ba] px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-[#005ea6] transition-all"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
+              </svg>
+              Dona con PayPal
+            </a>
+          </div>
+
+          <!-- Spacer for "Disponibile a breve" label -->
+          <div class="h-4"></div>
+
+          <!-- Divider -->
+          <div class="border-t border-divider/50 my-8"></div>
+
+          <!-- IBAN -->
+          <div>
             <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">IBAN</label>
-            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
+            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50 mb-6">
               <code id="iban-code" class="flex-1 text-lg md:text-xl font-mono font-semibold text-primary-dark tracking-wider break-all">
                 {pagamenti.iban}
               </code>
@@ -58,31 +141,132 @@ import faqDona from '../data/faq-dona.json';
                 <span id="copy-label">Copia</span>
               </button>
             </div>
-          </div>
 
-          <!-- Bank Details -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Intestato a</label>
-              <p class="text-text font-medium">{pagamenti.intestatario}</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Intestato a</label>
+                <p class="text-text font-medium">{pagamenti.intestatario}</p>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Banca</label>
+                <p class="text-text font-medium">{pagamenti.banca}</p>
+              </div>
             </div>
-            <div>
-              <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Banca</label>
-              <p class="text-text font-medium">{pagamenti.banca}</p>
-            </div>
-          </div>
 
-          <div class="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/10">
-            <p class="text-sm text-text-secondary">
-              <strong class="text-text">Causale suggerita:</strong> {pagamenti.causale_suggerita}
-            </p>
+            <div class="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/10">
+              <p class="text-sm text-text-secondary">
+                <strong class="text-text">Causale suggerita:</strong> {pagamenti.causale_suggerita}
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 5x1000 Section -->
+  <!-- Section 3: Dona un bene concreto -->
+  <section class="py-20 md:py-28 bg-cream">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Dona un bene concreto</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Regala qualcosa di concreto</h2>
+          <p class="mt-4 text-text-secondary leading-relaxed max-w-2xl mx-auto">
+            Scegli cosa donare. Il 100% va direttamente ai bambini delle missioni.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {beniConcreti.map((item) => (
+            <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-6 flex flex-col items-start">
+              <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                {item.icon === "milk" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M8 2h8l2 4v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z"/><path d="M6 6h12"/></svg>
+                )}
+                {item.icon === "wheat" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z"/></svg>
+                )}
+                {item.icon === "medical" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M8 2v4"/><path d="M12 2v4"/><path d="M16 2v4"/><rect width="16" height="16" x="4" y="6" rx="2"/><path d="M9 14h6"/><path d="M12 11v6"/></svg>
+                )}
+                {item.icon === "bed" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg>
+                )}
+                {item.icon === "backpack" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M8 21v-5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5"/><path d="M8 10h8"/></svg>
+                )}
+                {item.icon === "heart" && (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+                )}
+              </div>
+              <h3 class="font-serif text-lg font-semibold text-text mb-1">{item.name}</h3>
+              <p class="text-2xl font-bold text-accent mb-2">{item.price}&euro;</p>
+              <p class="text-sm text-text-secondary mb-4">{item.desc}</p>
+              <div class="relative group mt-auto">
+                <button
+                  id={`stripe-item-${item.id}`}
+                  data-stripe-link=""
+                  type="button"
+                  class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-2.5 text-sm font-semibold text-white shadow-sm opacity-50 cursor-not-allowed"
+                  disabled
+                >
+                  Dona questo
+                </button>
+                <span class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-text-secondary whitespace-nowrap">Disponibile a breve</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Sostieni un progetto -->
+  <section class="py-20 md:py-28 bg-warm">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Sostieni un progetto</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Sostieni un progetto</h2>
+          <p class="mt-4 text-text-secondary leading-relaxed max-w-2xl mx-auto">
+            Contribuisci alla costruzione e al mantenimento delle strutture della missione.
+          </p>
+        </div>
+
+        <div class="space-y-4">
+          {progetti.map((progetto, i) => (
+            <div class="bg-white rounded-xl shadow-sm border border-divider/50 p-5 md:p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true">
+                  <path d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <h3 class="font-serif text-base font-bold text-text">{progetto.name}</h3>
+                <p class="text-sm text-text-secondary">{progetto.desc}</p>
+              </div>
+              <div class="flex items-center gap-4 shrink-0 sm:text-right">
+                <p class="text-xl font-bold text-accent whitespace-nowrap">{progetto.price}&euro;</p>
+                <div class="relative group">
+                  <button
+                    data-stripe-link=""
+                    type="button"
+                    class="inline-flex items-center justify-center rounded-full bg-primary px-5 py-2 text-sm font-semibold text-white shadow-sm opacity-50 cursor-not-allowed whitespace-nowrap"
+                    disabled
+                  >
+                    Sostieni
+                  </button>
+                  <span class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-xs text-text-secondary whitespace-nowrap">Disponibile a breve</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: 5x1000 -->
   <section class="py-20 md:py-28 bg-cream">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
@@ -92,7 +276,7 @@ import faqDona from '../data/faq-dona.json';
             <h2 class="font-serif text-3xl md:text-4xl font-bold text-text mb-6">Dona il tuo 5x1000</h2>
             <div class="space-y-4 text-text-secondary leading-relaxed">
               <p>
-                Destinare il 5 per mille alla Chiesa Efraim non ti costa nulla ma per noi vale moltissimo. È un gesto semplice che si trasforma in aiuto concreto per le nostre missioni e le attività sociali.
+                Con la tua dichiarazione dei redditi puoi destinare il 5 per mille alla Chiesa Efraim. Un gesto semplice che si trasforma in aiuto concreto per le nostre missioni e le attività sociali.
               </p>
               <p>
                 Al momento della dichiarazione dei redditi, firma nel riquadro dedicato al "Sostegno del volontariato e delle altre organizzazioni non lucrative di utilità sociale" e inserisci il nostro codice fiscale.
@@ -126,131 +310,7 @@ import faqDona from '../data/faq-dona.json';
     </div>
   </section>
 
-  <!-- Adozioni a distanza -->
-  <section class="py-20 md:py-28 bg-warm">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-12">
-          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Adozione a distanza</span>
-          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Adotta un bambino a distanza</h2>
-          <p class="mt-4 text-text-secondary leading-relaxed">
-            Con il programma di adozione a distanza puoi accompagnare un bambino nel suo percorso di crescita, garantendogli istruzione, nutrizione e cure mediche.
-          </p>
-        </div>
-
-        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary to-primary-dark p-8 md:p-10 text-center">
-            <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-1.5 text-sm text-white mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-              Missioni Kenya e India
-            </div>
-            <p class="text-white/80 text-sm mb-2">A partire da</p>
-            <div class="text-5xl md:text-6xl font-serif font-bold text-white mb-1">{pagamenti.adozione_importo} &euro;</div>
-            <p class="text-white/80 text-lg">al mese</p>
-          </div>
-          <div class="p-8 md:p-10">
-            <h3 class="font-serif text-xl font-semibold text-text mb-4">Cosa include l'adozione a distanza</h3>
-            <ul class="space-y-3">
-              {pagamenti.adozione_incluso.map((item) => (
-                <li class="flex items-start gap-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                  <span class="text-text-secondary">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div class="mt-8 text-center">
-              <a
-                href="/contatti/"
-                class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-primary-dark hover:shadow-lg transition-all"
-              >
-                Contattaci per adottare
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Dona online -->
-  <section class="py-20 md:py-28 bg-cream">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-12">
-          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Dona online</span>
-          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text mb-6">Donazione online</h2>
-          <p class="text-text-secondary leading-relaxed">
-            Puoi sostenere la nostra missione anche online tramite PayPal. Semplice, veloce e sicuro.
-          </p>
-        </div>
-
-        <!-- PayPal -->
-        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 md:p-10 mb-8">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-full bg-[#0070ba]/10 flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0070ba" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
-                <path d="M10 14l1-6h3c2 0 3.5 1 3 3.5s-2.5 3.5-4.5 3.5H10z" opacity="0.5"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-serif text-xl font-semibold text-text">PayPal</h3>
-              <p class="text-sm text-text-secondary">Invia la tua donazione tramite PayPal</p>
-            </div>
-          </div>
-
-          <div class="mb-6">
-            <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">Invia a</label>
-            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
-              <code id="paypal-email" class="flex-1 text-lg font-mono font-semibold text-primary-dark break-all">
-                {pagamenti.paypal_email}
-              </code>
-              <button
-                id="copy-paypal"
-                type="button"
-                class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
-                aria-label="Copia email PayPal negli appunti"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                <span id="copy-paypal-label">Copia</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="text-center">
-            <a
-              href={pagamenti.paypal_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 rounded-full bg-[#0070ba] px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-[#005ea6] transition-all"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
-              </svg>
-              Dona con PayPal
-            </a>
-            <p class="text-sm text-text-secondary mt-3">
-              Oppure invia direttamente a <strong>{pagamenti.paypal_email}</strong> dall'app PayPal
-            </p>
-          </div>
-        </div>
-
-        <!-- Stripe coming soon -->
-        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 text-center">
-          <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true">
-              <rect width="20" height="14" x="2" y="5" rx="2" />
-              <line x1="2" x2="22" y1="10" y2="10" />
-            </svg>
-          </div>
-          <p class="text-text font-medium mb-1">Carte di credito in arrivo</p>
-          <p class="text-sm text-text-secondary/70">Presto sarà disponibile anche la possibilità di donare con carta di credito tramite Stripe.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
+  <!-- Section 6: FAQ -->
   <section class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
@@ -276,7 +336,7 @@ import faqDona from '../data/faq-dona.json';
     </div>
   </section>
 
-  <!-- CTA -->
+  <!-- Section 7: CTA finale -->
   <section class="py-20 bg-primary-dark">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-4">Hai bisogno di aiuto?</h2>
@@ -332,5 +392,29 @@ import faqDona from '../data/faq-dona.json';
 
   setupCopyButton('copy-iban', 'iban-code');
   setupCopyButton('copy-cf', 'cf-code');
-  setupCopyButton('copy-paypal', 'paypal-email');
+
+  // Amount button selection
+  const amountBtns = document.querySelectorAll('.amount-btn');
+  const customInput = document.getElementById('custom-amount') as HTMLInputElement | null;
+
+  amountBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      amountBtns.forEach((b) => {
+        b.classList.remove('border-primary', 'bg-primary', 'text-white');
+        b.classList.add('border-divider/50', 'text-text');
+      });
+      btn.classList.remove('border-divider/50', 'text-text');
+      btn.classList.add('border-primary', 'bg-primary', 'text-white');
+      if (customInput) customInput.value = '';
+    });
+  });
+
+  if (customInput) {
+    customInput.addEventListener('input', () => {
+      amountBtns.forEach((b) => {
+        b.classList.remove('border-primary', 'bg-primary', 'text-white');
+        b.classList.add('border-divider/50', 'text-text');
+      });
+    });
+  }
 </script>
