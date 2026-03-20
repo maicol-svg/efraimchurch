@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const allPhotos = (await getCollection('galleria'))
-  .filter(entry => entry.data.visible !== false)
+  .filter(entry => (entry.data as any).visible !== false)
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 
 const categories = [

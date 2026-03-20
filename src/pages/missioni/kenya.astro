@@ -4,7 +4,7 @@ import { getCollection } from 'astro:content';
 import kenya from '../../data/missione-kenya.json';
 
 const galleria = (await getCollection('galleria'))
-  .filter(entry => entry.data.category === 'kenya' && entry.data.visible !== false)
+  .filter(entry => entry.data.category === 'kenya' && (entry.data as any).visible !== false)
   .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 const updates = kenya.aggiornamenti;
 ---

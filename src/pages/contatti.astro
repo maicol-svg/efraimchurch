@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { getRecurringSchedule, getScheduleText } from '../lib/events';
+import { getRecurringSchedule } from '../lib/events';
 import contatti from '../data/contatti.json';
 
 const schedule = await getRecurringSchedule();
