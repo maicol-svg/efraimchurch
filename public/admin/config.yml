@@ -56,7 +56,7 @@ collections:
       - { label: "Ordine", name: "order", widget: "number", default: 0 }
 
   - name: "missioni"
-    label: "Missioni"
+    label: "Aggiornamenti Missioni"
     folder: "src/content/missioni"
     create: true
     slug: "{{slug}}"
@@ -70,7 +70,7 @@ collections:
       - { label: "Contenuto", name: "body", widget: "markdown" }
 
   - name: "galleria"
-    label: "Galleria"
+    label: "Galleria Foto"
     folder: "src/content/galleria"
     create: true
     slug: "{{slug}}"
@@ -81,20 +81,6 @@ collections:
       - { label: "Didascalia", name: "caption", widget: "string", required: false }
       - { label: "Categoria", name: "category", widget: "select", options: ["kenya", "india", "chiesa", "eventi"] }
       - { label: "Data", name: "date", widget: "datetime", required: false }
-
-  - name: "partner"
-    label: "Partner"
-    folder: "src/content/partner"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    fields:
-      - { label: "Nome", name: "name", widget: "string" }
-      - { label: "Logo", name: "logo", widget: "image", required: false }
-      - { label: "Descrizione", name: "description", widget: "text", required: false }
-      - { label: "Sito web", name: "website", widget: "string", required: false }
-      - { label: "Ordine", name: "order", widget: "number", default: 0 }
-      - { label: "Contenuto", name: "body", widget: "markdown" }
 
   - name: "impostazioni"
     label: "Impostazioni"
@@ -141,7 +127,7 @@ collections:
               - { label: "Domanda", name: "domanda", widget: "string" }
               - { label: "Risposta", name: "risposta", widget: "text" }
       - name: "missioni-info"
-        label: "Info Missioni"
+        label: "Pagine Missioni (Kenya/India)"
         file: "src/data/missioni-info.json"
         fields:
           - label: "Missioni"

@@ -390,35 +390,26 @@
                   ]
                 },
                 {
-                  name: 'missioni', label: 'Missioni', folder: 'src/content/missioni', create: true, slug: '{{slug}}', extension: 'md',
+                  name: 'missioni', label: 'Aggiornamenti Missioni', folder: 'src/content/missioni', create: true, slug: '{{slug}}', extension: 'md',
+                  description: 'Notizie e aggiornamenti dai progetti in Kenya e India. Appaiono nella sezione "Aggiornamenti" delle pagine missione.',
                   fields: [
                     { label: 'Titolo', name: 'title', widget: 'string' },
                     { label: 'Data', name: 'date', widget: 'datetime' },
-                    { label: 'Missione', name: 'mission', widget: 'select', options: ['kenya', 'india'] },
+                    { label: 'Missione', name: 'mission', widget: 'select', options: ['kenya', 'india'], hint: 'A quale missione appartiene questo aggiornamento?' },
                     { label: 'Descrizione', name: 'description', widget: 'text' },
                     { label: 'Immagini', name: 'images', widget: 'list', field: { label: 'Immagine', name: 'image', widget: 'image' }, required: false },
                     { label: 'Contenuto', name: 'body', widget: 'markdown' }
                   ]
                 },
                 {
-                  name: 'galleria', label: 'Galleria', folder: 'src/content/galleria', create: true, slug: '{{slug}}', extension: 'md',
+                  name: 'galleria', label: 'Galleria Foto', folder: 'src/content/galleria', create: true, slug: '{{slug}}', extension: 'md',
+                  description: 'Foto che appaiono nelle gallerie delle pagine Missione Kenya e Missione India. Scegli la categoria per assegnarle alla pagina giusta.',
                   fields: [
-                    { label: 'Titolo', name: 'title', widget: 'string' },
+                    { label: 'Titolo', name: 'title', widget: 'string', hint: 'Descrivi brevemente la foto' },
                     { label: 'Immagine', name: 'image', widget: 'image' },
-                    { label: 'Didascalia', name: 'caption', widget: 'string', required: false },
-                    { label: 'Categoria', name: 'category', widget: 'select', options: ['kenya', 'india', 'chiesa', 'eventi'] },
+                    { label: 'Didascalia', name: 'caption', widget: 'string', required: false, hint: 'Testo che appare sotto la foto nella galleria' },
+                    { label: 'Categoria', name: 'category', widget: 'select', options: ['kenya', 'india', 'chiesa', 'eventi'], hint: 'kenya/india = galleria nelle pagine missione' },
                     { label: 'Data', name: 'date', widget: 'datetime', required: false }
-                  ]
-                },
-                {
-                  name: 'partner', label: 'Partner', folder: 'src/content/partner', create: true, slug: '{{slug}}', extension: 'md',
-                  fields: [
-                    { label: 'Nome', name: 'name', widget: 'string' },
-                    { label: 'Logo', name: 'logo', widget: 'image', required: false },
-                    { label: 'Descrizione', name: 'description', widget: 'text', required: false },
-                    { label: 'Sito web', name: 'website', widget: 'string', required: false },
-                    { label: 'Ordine', name: 'order', widget: 'number', default: 0 },
-                    { label: 'Contenuto', name: 'body', widget: 'markdown' }
                   ]
                 },
                 {
@@ -467,7 +458,7 @@
                       ]
                     },
                     {
-                      name: 'missioni-info', label: 'Info Missioni', file: 'src/data/missioni-info.json',
+                      name: 'missioni-info', label: 'Pagine Missioni (Kenya/India)', file: 'src/data/missioni-info.json',
                       fields: [
                         { label: 'Missioni', name: 'missioni', widget: 'list', fields: [
                           { label: 'ID', name: 'id', widget: 'select', options: ['kenya', 'india'] },
