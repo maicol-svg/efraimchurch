@@ -1,10 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import missioniInfo from '../../data/missioni-info.json';
+import kenya from '../../data/missione-kenya.json';
+import india from '../../data/missione-india.json';
 
-const kenya = missioniInfo.missioni.find(m => m.id === 'kenya');
-const india = missioniInfo.missioni.find(m => m.id === 'india');
-const { statistiche } = missioniInfo;
+const statistiche = [
+  { valore: "13+", etichetta: "Anni di servizio", sottotitolo: "Presenti in Kenya dal 2012" },
+  { valore: "160+", etichetta: "Bambini sostenuti", sottotitolo: "140 in Kenya + 24 in India" },
+  { valore: "2", etichetta: "Nazioni raggiunte", sottotitolo: "Kenya e India" }
+];
 ---
 
 <BaseLayout

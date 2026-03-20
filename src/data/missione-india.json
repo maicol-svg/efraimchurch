@@ -1,0 +1,38 @@
+{
+  "id": "india",
+  "titolo": "Missione India",
+  "localita": "Chennai, India",
+  "anno_inizio": "2024",
+  "stato": "Attiva dal 2024",
+  "hero_descrizione": "Da novembre 2024 un orfanotrofio che accoglie 24 bambini, con 7 aule scolastiche e un programma di cura integrale a Chennai.",
+  "descrizione": [
+    "La missione in India è la più recente frontiera dell'impegno della Chiesa Efraim. Avviata a novembre 2024, il progetto ha preso forma grazie all'affitto di un terreno di oltre 5 acri con strutture preesistenti nella zona di Chennai.",
+    "In pochi mesi il progetto è cresciuto rapidamente: da 3 bambini iniziali, l'orfanotrofio oggi accoglie 24 bambini, offrendo loro una casa sicura, stanze ridipinte, nuovi letti e un ambiente familiare. Ogni bambino riceve 4 pasti al giorno preparati da un cuoco dedicato.",
+    "Sono state allestite 7 aule scolastiche con 3 insegnanti assunti, aperte non solo ai bambini dell'orfanotrofio ma anche ai bambini provenienti da famiglie in difficoltà della zona. Questo permette di ampliare l'impatto del progetto sull'intera comunità.",
+    "I progetti futuri prevedono l'ampliamento degli spazi, l'introduzione di nuovi corsi e l'accoglienza di un numero ancora maggiore di bambini. Ogni contributo aiuta questa missione a crescere e a trasformare vite."
+  ],
+  "card_descrizione": "Da novembre 2024 un orfanotrofio con 24 bambini, 7 aule scolastiche e 3 insegnanti a Chennai. Un progetto in rapida crescita.",
+  "card_stats": [
+    { "etichetta": "Bambini accolti", "valore": "24" },
+    { "etichetta": "Aule scolastiche", "valore": "7" }
+  ],
+  "immagine": "/images/missioni/india/bambini-orfanotrofio.jpg",
+  "galleria": [
+    {
+      "immagine": "/images/missioni/india/bambini-orfanotrofio.jpg",
+      "titolo": "Bambini dell'orfanotrofio",
+      "didascalia": "I 24 bambini dell'orfanotrofio a Chennai"
+    }
+  ],
+  "aggiornamenti": [
+    {
+      "titolo": "Inaugurazione della nuova scuola in India",
+      "data": "2026-01-15",
+      "descrizione": "Una nuova scuola è stata inaugurata in India grazie al sostegno della Chiesa Efraim. Un passo importante per il futuro di tanti bambini.",
+      "immagini": [
+        "/images/missioni/india/bambini-orfanotrofio.jpg"
+      ],
+      "contenuto": "## Un futuro che inizia tra i banchi\n\nIl **15 gennaio 2026** è stata una giornata storica per la nostra missione in **India**: abbiamo inaugurato una **nuova scuola** che offrirà istruzione e opportunità a decine di bambini che fino a ieri non avevano accesso a un'educazione adeguata. La cerimonia è stata un momento di grande emozione, con la partecipazione delle famiglie locali, dei collaboratori sul campo e della nostra comunità collegata in diretta da Messina.\n\nLa scuola non è solo un edificio fatto di mattoni e cemento: è un luogo dove i bambini possono **sognare**, imparare, crescere e costruire un futuro diverso per sé stessi e per le proprie comunità. Le aule sono state dotate di materiale didattico, e un team di insegnanti locali formati e pronti ad accompagnare gli studenti nel loro percorso educativo. Il programma scolastico integra le materie tradizionali con insegnamenti sui valori, la salute e lo sviluppo personale.\n\nQuesto traguardo è il frutto di mesi di lavoro, preghiera e generosità. La Chiesa Efraim crede fermamente che l'istruzione sia uno degli strumenti più potenti per spezzare il ciclo della povertà e aprire porte che sembravano chiuse per sempre. Ringraziamo ogni persona che ha reso possibile questo sogno e vi invitiamo a continuare a sostenere la missione in India con le vostre preghiere e il vostro contributo."
+    }
+  ]
+}

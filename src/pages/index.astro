@@ -8,10 +8,8 @@ import DonationBanner from '../components/DonationBanner.astro';
 import { getCollection } from 'astro:content';
 import { getExpandedEvents, dayAbbrevs } from '../lib/events';
 import contatti from '../data/contatti.json';
-import missioniInfo from '../data/missioni-info.json';
-
-const kenya = missioniInfo.missioni.find(m => m.id === 'kenya');
-const india = missioniInfo.missioni.find(m => m.id === 'india');
+import kenya from '../data/missione-kenya.json';
+import india from '../data/missione-india.json';
 
 const sortedEvents = await getExpandedEvents(4);
 

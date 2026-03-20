@@ -1,16 +1,10 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
-import missioniInfo from '../../data/missioni-info.json';
+import india from '../../data/missione-india.json';
 import pagamenti from '../../data/pagamenti.json';
 
-const india = missioniInfo.missioni.find(m => m.id === 'india');
-const galleria = (await getCollection('galleria'))
-  .filter(entry => entry.data.category === 'india')
-  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
-const updates = (await getCollection('missioni'))
-  .filter((entry) => entry.data.mission === 'india')
-  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const galleria = india.galleria;
+const updates = india.aggiornamenti;
 ---
 
 <BaseLayout
@@ -209,8 +203,8 @@ const updates = (await getCollection('missioni'))
           {galleria.map((foto) => (
             <div class="aspect-square rounded-xl overflow-hidden">
               <img
-                src={foto.data.image}
-                alt={foto.data.alt || 'Foto dalla missione in India'}
+                src={foto.immagine}
+                alt={foto.didascalia || foto.titolo || 'Foto dalla missione in India'}
                 class="w-full h-full object-cover"
                 loading="lazy"
               />
@@ -334,20 +328,20 @@ const updates = (await getCollection('missioni'))
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {updates.map((update) => (
             <article class="bg-white rounded-xl shadow-sm border border-divider/50 overflow-hidden hover:shadow-md transition-shadow">
-              {update.data.images && update.data.images[0] && (
+              {update.immagini && update.immagini[0] && (
                 <div class="aspect-video bg-cream">
-                  <img src={update.data.images[0]} alt={update.data.title} class="w-full h-full object-cover" loading="lazy" />
+                  <img src={update.immagini[0]} alt={update.titolo} class="w-full h-full object-cover" loading="lazy" />
                 </div>
               )}
               <div class="p-6">
                 <time
-                  datetime={update.data.date.toISOString().split('T')[0]}
+                  datetime={update.data}
                   class="text-sm text-accent-dark font-medium"
                 >
-                  {update.data.date.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {new Date(update.data).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </time>
-                <h3 class="font-serif text-lg font-semibold text-text mt-2">{update.data.title}</h3>
-                <p class="mt-2 text-sm text-text-secondary leading-relaxed">{update.data.description}</p>
+                <h3 class="font-serif text-lg font-semibold text-text mt-2">{update.titolo}</h3>
+                <p class="mt-2 text-sm text-text-secondary leading-relaxed">{update.descrizione}</p>
               </div>
             </article>
           ))}

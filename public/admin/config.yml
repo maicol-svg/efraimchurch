@@ -55,33 +55,6 @@ collections:
       - { label: "Biografia", name: "bio", widget: "text", required: false }
       - { label: "Ordine", name: "order", widget: "number", default: 0 }
 
-  - name: "missioni"
-    label: "Aggiornamenti Missioni"
-    folder: "src/content/missioni"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    fields:
-      - { label: "Titolo", name: "title", widget: "string" }
-      - { label: "Data", name: "date", widget: "datetime" }
-      - { label: "Missione", name: "mission", widget: "select", options: ["kenya", "india"] }
-      - { label: "Descrizione", name: "description", widget: "text" }
-      - { label: "Immagini", name: "images", widget: "list", field: { label: "Immagine", name: "image", widget: "image" }, required: false }
-      - { label: "Contenuto", name: "body", widget: "markdown" }
-
-  - name: "galleria"
-    label: "Galleria Foto"
-    folder: "src/content/galleria"
-    create: true
-    slug: "{{slug}}"
-    extension: "md"
-    fields:
-      - { label: "Titolo", name: "title", widget: "string" }
-      - { label: "Immagine", name: "image", widget: "image" }
-      - { label: "Didascalia", name: "caption", widget: "string", required: false }
-      - { label: "Categoria", name: "category", widget: "select", options: ["kenya", "india", "chiesa", "eventi"] }
-      - { label: "Data", name: "date", widget: "datetime", required: false }
-
   - name: "impostazioni"
     label: "Impostazioni"
     files:
@@ -126,36 +99,77 @@ collections:
             fields:
               - { label: "Domanda", name: "domanda", widget: "string" }
               - { label: "Risposta", name: "risposta", widget: "text" }
-      - name: "missioni-info"
-        label: "Pagine Missioni (Kenya/India)"
-        file: "src/data/missioni-info.json"
+      - name: "missione-kenya"
+        label: "Missione Kenya"
+        file: "src/data/missione-kenya.json"
         fields:
-          - label: "Missioni"
-            name: "missioni"
+          - { label: "Titolo", name: "titolo", widget: "string" }
+          - { label: "Località", name: "localita", widget: "string" }
+          - { label: "Anno inizio", name: "anno_inizio", widget: "string", required: false }
+          - { label: "Stato", name: "stato", widget: "string" }
+          - { label: "Descrizione hero", name: "hero_descrizione", widget: "text" }
+          - label: "Descrizione pagina"
+            name: "descrizione"
+            widget: "list"
+            field: { label: "Paragrafo", name: "paragrafo", widget: "text" }
+          - { label: "Descrizione card (homepage)", name: "card_descrizione", widget: "text" }
+          - label: "Statistiche card"
+            name: "card_stats"
             widget: "list"
             fields:
-              - { label: "ID", name: "id", widget: "select", options: ["kenya", "india"] }
-              - { label: "Titolo", name: "titolo", widget: "string" }
-              - { label: "Località", name: "localita", widget: "string" }
-              - { label: "Anno inizio", name: "anno_inizio", widget: "string", required: false }
-              - { label: "Stato", name: "stato", widget: "string" }
-              - { label: "Descrizione hero", name: "hero_descrizione", widget: "text" }
-              - label: "Descrizione pagina"
-                name: "descrizione"
-                widget: "list"
-                field: { label: "Paragrafo", name: "paragrafo", widget: "text" }
-              - { label: "Descrizione card (homepage)", name: "card_descrizione", widget: "text" }
-              - label: "Statistiche card (homepage)"
-                name: "card_stats"
-                widget: "list"
-                fields:
-                  - { label: "Etichetta", name: "etichetta", widget: "string" }
-                  - { label: "Valore", name: "valore", widget: "string" }
-              - { label: "Immagine", name: "immagine", widget: "image", required: false }
-          - label: "Statistiche impatto"
-            name: "statistiche"
-            widget: "list"
-            fields:
-              - { label: "Valore", name: "valore", widget: "string" }
               - { label: "Etichetta", name: "etichetta", widget: "string" }
-              - { label: "Sottotitolo", name: "sottotitolo", widget: "string" }
+              - { label: "Valore", name: "valore", widget: "string" }
+          - { label: "Immagine principale", name: "immagine", widget: "image" }
+          - label: "Galleria foto"
+            name: "galleria"
+            widget: "list"
+            fields:
+              - { label: "Immagine", name: "immagine", widget: "image" }
+              - { label: "Titolo", name: "titolo", widget: "string" }
+              - { label: "Didascalia", name: "didascalia", widget: "string", required: false }
+          - label: "Aggiornamenti"
+            name: "aggiornamenti"
+            widget: "list"
+            fields:
+              - { label: "Titolo", name: "titolo", widget: "string" }
+              - { label: "Data", name: "data", widget: "datetime" }
+              - { label: "Descrizione", name: "descrizione", widget: "text" }
+              - { label: "Immagini", name: "immagini", widget: "list", field: { label: "Immagine", name: "immagine", widget: "image" }, required: false }
+              - { label: "Contenuto", name: "contenuto", widget: "markdown" }
+      - name: "missione-india"
+        label: "Missione India"
+        file: "src/data/missione-india.json"
+        fields:
+          - { label: "Titolo", name: "titolo", widget: "string" }
+          - { label: "Località", name: "localita", widget: "string" }
+          - { label: "Anno inizio", name: "anno_inizio", widget: "string", required: false }
+          - { label: "Stato", name: "stato", widget: "string" }
+          - { label: "Descrizione hero", name: "hero_descrizione", widget: "text" }
+          - label: "Descrizione pagina"
+            name: "descrizione"
+            widget: "list"
+            field: { label: "Paragrafo", name: "paragrafo", widget: "text" }
+          - { label: "Descrizione card (homepage)", name: "card_descrizione", widget: "text" }
+          - label: "Statistiche card"
+            name: "card_stats"
+            widget: "list"
+            fields:
+              - { label: "Etichetta", name: "etichetta", widget: "string" }
+              - { label: "Valore", name: "valore", widget: "string" }
+          - { label: "Immagine principale", name: "immagine", widget: "image" }
+          - label: "Galleria foto"
+            name: "galleria"
+            widget: "list"
+            fields:
+              - { label: "Immagine", name: "immagine", widget: "image" }
+              - { label: "Titolo", name: "titolo", widget: "string" }
+              - { label: "Didascalia", name: "didascalia", widget: "string", required: false }
+          - label: "Aggiornamenti"
+            name: "aggiornamenti"
+            widget: "list"
+            fields:
+              - { label: "Titolo", name: "titolo", widget: "string" }
+              - { label: "Data", name: "data", widget: "datetime" }
+              - { label: "Descrizione", name: "descrizione", widget: "text" }
+              - { label: "Immagini", name: "immagini", widget: "list", field: { label: "Immagine", name: "immagine", widget: "image" }, required: false }
+              - { label: "Contenuto", name: "contenuto", widget: "markdown" }
