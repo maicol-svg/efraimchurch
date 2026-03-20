@@ -123,13 +123,20 @@ const links = [
           {label}
         </a>
       ))}
-      <a
-        href="/dona/"
-        class="mobile-link mt-4 inline-flex items-center gap-2 bg-accent px-8 py-3 text-[15px] font-semibold tracking-wide uppercase text-white hover:bg-accent-dark transition-all opacity-0 translate-y-4"
-        style={`transition-delay: ${links.length * 60}ms;`}
-      >
-        Dona ora
-      </a>
+      <div class="mobile-link mt-4 flex flex-col sm:flex-row items-center gap-3 opacity-0 translate-y-4" style={`transition-delay: ${links.length * 60}ms;`}>
+        <a
+          href="/adozioni/#form-adozione"
+          class="inline-flex items-center gap-2 bg-primary px-8 py-3 text-[15px] font-semibold tracking-wide uppercase text-white hover:bg-primary-dark transition-all"
+        >
+          Adotta
+        </a>
+        <a
+          href="/dona/"
+          class="inline-flex items-center gap-2 bg-accent px-8 py-3 text-[15px] font-semibold tracking-wide uppercase text-white hover:bg-accent-dark transition-all"
+        >
+          Dona ora
+        </a>
+      </div>
     </div>
   </div>
 
