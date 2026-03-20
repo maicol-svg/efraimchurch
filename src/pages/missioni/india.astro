@@ -1,9 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 import india from '../../data/missione-india.json';
 import pagamenti from '../../data/pagamenti.json';
 
-const galleria = india.galleria;
+const galleria = (await getCollection('galleria'))
+  .filter(entry => entry.data.category === 'india' && entry.data.visible !== false)
+  .sort((a, b) => (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0));
 const updates = india.aggiornamenti;
 ---
 
@@ -203,8 +206,8 @@ const updates = india.aggiornamenti;
           {galleria.map((foto) => (
             <div class="aspect-square rounded-xl overflow-hidden">
               <img
-                src={foto.immagine}
-                alt={foto.didascalia || foto.titolo || 'Foto dalla missione in India'}
+                src={foto.data.image}
+                alt={foto.data.caption || foto.data.title || 'Foto dalla missione in India'}
                 class="w-full h-full object-cover"
                 loading="lazy"
               />

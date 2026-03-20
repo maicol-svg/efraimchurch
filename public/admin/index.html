@@ -390,6 +390,18 @@
                   ]
                 },
                 {
+                  name: 'galleria', label: 'Galleria', folder: 'src/content/galleria', create: true, slug: '{{slug}}', extension: 'md',
+                  description: 'Foto del sito. Appaiono nella pagina Galleria e nelle pagine missione in base alla categoria.',
+                  fields: [
+                    { label: 'Titolo', name: 'title', widget: 'string', hint: 'Descrivi brevemente la foto' },
+                    { label: 'Immagine', name: 'image', widget: 'image' },
+                    { label: 'Didascalia', name: 'caption', widget: 'string', required: false },
+                    { label: 'Categoria', name: 'category', widget: 'select', options: ['kenya', 'india', 'chiesa', 'eventi'], hint: 'Determina dove appare la foto sul sito' },
+                    { label: 'Visibile nella galleria', name: 'visible', widget: 'boolean', default: true, hint: 'Se disattivato, la foto è solo nella Media Library per riuso' },
+                    { label: 'Data', name: 'date', widget: 'datetime', required: false }
+                  ]
+                },
+                {
                   name: 'impostazioni', label: 'Impostazioni',
                   files: [
                     {

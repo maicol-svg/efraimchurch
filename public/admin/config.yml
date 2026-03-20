@@ -55,6 +55,20 @@ collections:
       - { label: "Biografia", name: "bio", widget: "text", required: false }
       - { label: "Ordine", name: "order", widget: "number", default: 0 }
 
+  - name: "galleria"
+    label: "Galleria"
+    folder: "src/content/galleria"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Immagine", name: "image", widget: "image" }
+      - { label: "Didascalia", name: "caption", widget: "string", required: false }
+      - { label: "Categoria", name: "category", widget: "select", options: ["kenya", "india", "chiesa", "eventi"] }
+      - { label: "Visibile nella galleria", name: "visible", widget: "boolean", default: true }
+      - { label: "Data", name: "date", widget: "datetime", required: false }
+
   - name: "impostazioni"
     label: "Impostazioni"
     files:
