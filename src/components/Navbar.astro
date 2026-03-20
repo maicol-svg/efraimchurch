@@ -83,13 +83,15 @@ const links = [
       </div>
     </div>
   </nav>
+</header>
 
-  <!-- Mobile Menu Overlay -->
-  <div
-    id="mobile-menu"
-    class="fixed inset-0 bg-warm/98 backdrop-blur-sm z-[60] hidden opacity-0 transition-opacity duration-300 lg:hidden"
-    aria-hidden="true"
-  >
+<!-- Mobile Menu Overlay (outside header to avoid stacking context issues on scroll) -->
+<div
+  id="mobile-menu"
+  class="fixed inset-0 bg-warm/98 backdrop-blur-sm z-[9999] hidden opacity-0 transition-opacity duration-300 lg:hidden"
+  style="top: 0; left: 0; width: 100vw; height: 100vh;"
+  aria-hidden="true"
+>
     <!-- Close button -->
     <button
       id="mobile-menu-close"
@@ -130,7 +132,6 @@ const links = [
       </a>
     </div>
   </div>
-</header>
 
 <style>
   .mobile-link {
