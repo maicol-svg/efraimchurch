@@ -2,7 +2,6 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import india from '../../data/missione-india.json';
-import pagamenti from '../../data/pagamenti.json';
 
 const galleria = (await getCollection('galleria'))
   .filter(entry => entry.data.category === 'india' && entry.data.visible !== false)
@@ -64,7 +63,7 @@ const updates = india.aggiornamenti;
             Adotta un bambino
           </a>
           <a
-            href="#donazione"
+            href="#adozione"
             class="inline-flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-8 py-3 text-base font-semibold text-white hover:bg-white/10 transition-all"
           >
             Dona ora
@@ -142,52 +141,43 @@ const updates = india.aggiornamenti;
     </div>
   </section>
 
-  <!-- Section 4: Adotta a distanza -->
+  <!-- Section 4: Sostieni questa missione -->
   <section id="adozione" class="py-20 md:py-28 bg-cream">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-12">
-          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Adozione a distanza</span>
-          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Adotta un bambino a distanza</h2>
-          <p class="mt-4 text-text-secondary leading-relaxed">
-            Con il programma di adozione a distanza puoi accompagnare un bambino nel suo percorso di crescita, garantendogli istruzione, nutrizione e cure mediche.
-          </p>
+      <div class="max-w-4xl mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Adozione card -->
+          <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 flex flex-col">
+            <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-text mb-3">Adotta un bambino</h3>
+            <p class="text-text-secondary leading-relaxed mb-6 flex-1">
+              Accompagna un bambino di Chennai nel suo percorso di crescita. Con il tuo sostegno mensile garantisci scuola, cibo e cure mediche.
+            </p>
+            <a href="/adozioni/" class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-primary-dark hover:shadow-lg transition-all">
+              Scopri come adottare
+            </a>
+          </div>
+          <!-- Donazione card -->
+          <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 flex flex-col">
+            <div class="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mb-6">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-accent-dark" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+            <h3 class="font-serif text-2xl font-bold text-text mb-3">Fai una donazione</h3>
+            <p class="text-text-secondary leading-relaxed mb-6 flex-1">
+              Dona beni concreti, sostieni un progetto o fai una donazione libera. Ogni contributo cambia la vita di un bambino a Chennai.
+            </p>
+            <a href="/dona/" class="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-semibold text-slate-dark shadow-md hover:bg-accent-dark hover:text-white transition-all">
+              Vai alla pagina donazioni
+            </a>
+          </div>
         </div>
-
-        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 overflow-hidden">
-          <div class="bg-gradient-to-r from-primary to-primary-dark p-8 md:p-10 text-center">
-            <div class="inline-flex items-center gap-2 bg-white/20 rounded-full px-4 py-1.5 text-sm text-white mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-              Missione India
-            </div>
-            <p class="text-white/80 text-sm mb-2">A partire da</p>
-            <div class="text-5xl md:text-6xl font-serif font-bold text-white mb-1">{pagamenti.adozione_importo} &euro;</div>
-            <p class="text-white/80 text-lg">al mese</p>
-          </div>
-          <div class="p-8 md:p-10">
-            <h3 class="font-serif text-xl font-semibold text-text mb-4">Cosa include l'adozione a distanza</h3>
-            <ul class="space-y-3">
-              {pagamenti.adozione_incluso.map((item) => (
-                <li class="flex items-start gap-3">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 mt-0.5 text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
-                  <span class="text-text-secondary">{item}</span>
-                </li>
-              ))}
-            </ul>
-            <div class="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/10">
-              <p class="text-sm text-text-secondary">
-                <strong class="text-text">Causale:</strong> Adozione a distanza - India
-              </p>
-            </div>
-            <div class="mt-8 text-center">
-              <a
-                href="/contatti/"
-                class="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-primary-dark hover:shadow-lg transition-all"
-              >
-                Contattaci per adottare
-              </a>
-            </div>
-          </div>
+        <!-- Causale note -->
+        <div class="mt-8 p-4 rounded-lg bg-primary/5 border border-primary/10 text-center">
+          <p class="text-sm text-text-secondary">
+            <strong class="text-text">Causale bonifico:</strong> Donazione - Missione India
+          </p>
         </div>
       </div>
     </div>
@@ -217,107 +207,6 @@ const updates = india.aggiornamenti;
       </div>
     </section>
   )}
-
-  <!-- Section 6: Dona per questa missione -->
-  <section id="donazione" class="py-20 md:py-28 bg-cream">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl mx-auto">
-        <div class="text-center mb-12">
-          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Sostieni</span>
-          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Dona per la missione in India</h2>
-        </div>
-
-        <!-- IBAN Card -->
-        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 md:p-10 mb-8">
-          <div class="mb-8">
-            <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">IBAN</label>
-            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
-              <code id="iban-code-india" class="flex-1 text-lg md:text-xl font-mono font-semibold text-primary-dark tracking-wider break-all">
-                {pagamenti.iban}
-              </code>
-              <button
-                id="copy-iban-india"
-                type="button"
-                class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
-                aria-label="Copia IBAN negli appunti"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                <span>Copia</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Intestato a</label>
-              <p class="text-text font-medium">{pagamenti.intestatario}</p>
-            </div>
-            <div>
-              <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-1">Banca</label>
-              <p class="text-text font-medium">{pagamenti.banca}</p>
-            </div>
-          </div>
-
-          <div class="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/10">
-            <p class="text-sm text-text-secondary">
-              <strong class="text-text">Causale:</strong> Donazione - Missione India
-            </p>
-          </div>
-        </div>
-
-        <!-- PayPal -->
-        <div class="bg-white rounded-2xl shadow-sm border border-divider/50 p-8 md:p-10">
-          <div class="flex items-center gap-4 mb-6">
-            <div class="w-14 h-14 rounded-full bg-[#0070ba]/10 flex items-center justify-center shrink-0">
-              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0070ba" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
-                <path d="M10 14l1-6h3c2 0 3.5 1 3 3.5s-2.5 3.5-4.5 3.5H10z" opacity="0.5"/>
-              </svg>
-            </div>
-            <div>
-              <h3 class="font-serif text-xl font-semibold text-text">PayPal</h3>
-              <p class="text-sm text-text-secondary">Invia la tua donazione tramite PayPal</p>
-            </div>
-          </div>
-
-          <div class="mb-6">
-            <label class="block text-sm font-medium text-text-secondary uppercase tracking-wider mb-2">Invia a</label>
-            <div class="flex items-center gap-3 bg-cream rounded-xl p-4 border border-divider/50">
-              <code id="paypal-email-india" class="flex-1 text-lg font-mono font-semibold text-primary-dark break-all">
-                {pagamenti.paypal_email}
-              </code>
-              <button
-                id="copy-paypal-india"
-                type="button"
-                class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-white hover:bg-primary-dark transition-colors"
-                aria-label="Copia email PayPal negli appunti"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
-                <span>Copia</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="text-center">
-            <a
-              href={pagamenti.paypal_link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex items-center justify-center gap-2 rounded-full bg-[#0070ba] px-8 py-3 text-base font-semibold text-white shadow-md hover:bg-[#005ea6] transition-all"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M7 11l1-9h6.5c2.5 0 4.5 1.5 4 4.5-.5 3-3 4.5-5.5 4.5H10l-1 6H5l2-6z"/>
-              </svg>
-              Dona con PayPal
-            </a>
-            <p class="text-sm text-text-secondary mt-3">
-              Oppure invia direttamente a <strong>{pagamenti.paypal_email}</strong> dall'app PayPal
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Section 7: Aggiornamenti -->
   <section class="py-20 md:py-28 bg-warm">
@@ -381,38 +270,3 @@ const updates = india.aggiornamenti;
     </div>
   </section>
 </BaseLayout>
-
-<script>
-  function setupCopyButton(buttonId: string, codeId: string) {
-    const button = document.getElementById(buttonId);
-    const code = document.getElementById(codeId);
-    if (!button || !code) return;
-
-    button.addEventListener('click', async () => {
-      const text = code.textContent?.trim() || '';
-      try {
-        await navigator.clipboard.writeText(text);
-        const label = button.querySelector('span');
-        const originalText = label?.textContent;
-        if (label) {
-          label.textContent = 'Copiato!';
-          setTimeout(() => {
-            label.textContent = originalText || 'Copia';
-          }, 2000);
-        }
-      } catch {
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-      }
-    });
-  }
-
-  setupCopyButton('copy-iban-india', 'iban-code-india');
-  setupCopyButton('copy-paypal-india', 'paypal-email-india');
-</script>
