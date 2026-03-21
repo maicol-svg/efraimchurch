@@ -1,11 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MissionNav from '../components/MissionNav.astro';
 ---
 
 <BaseLayout
   title="Sostieni un bambino"
   description="Sostieni un bambino degli orfanotrofi della missione in Kenya o India. Garantisci istruzione, nutrizione e cure mediche con la Chiesa Cristiana Efraim."
 >
+  <MissionNav sections={[
+    { id: 'sostegno', label: 'Il sostegno' },
+    { id: 'come-funziona', label: 'Come funziona' },
+    { id: 'cosa-include', label: 'Cosa include' },
+    { id: 'scrivi', label: 'Scrivi' },
+    { id: 'faq', label: 'FAQ' },
+  ]} />
+
   <!-- Section 1: Hero -->
   <section class="relative bg-slate-dark overflow-hidden">
     <div class="absolute inset-0">
@@ -26,7 +35,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 2: Il tuo sostegno -->
-  <section class="py-20 md:py-28 bg-warm">
+  <section id="sostegno" class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <!-- Left: narrative text -->
@@ -55,7 +64,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 3: Come funziona -->
-  <section class="py-20 md:py-28 bg-cream">
+  <section id="come-funziona" class="py-20 md:py-28 bg-cream">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Tre semplici passi</span>
@@ -97,7 +106,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 4: Cosa include il tuo sostegno -->
-  <section class="py-20 md:py-28 bg-warm">
+  <section id="cosa-include" class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Il tuo contributo</span>
@@ -221,7 +230,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 5: Scrivi al tuo bambino -->
-  <section class="py-20 md:py-28 bg-cream">
+  <section id="scrivi" class="py-20 md:py-28 bg-cream">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Lettere e messaggi</span>
@@ -265,7 +274,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </section>
 
   <!-- Section 6: FAQ adozioni -->
-  <section class="py-20 md:py-28 bg-warm">
+  <section id="faq" class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="max-w-3xl mx-auto">
         <div class="text-center mb-12">
