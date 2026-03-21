@@ -87,17 +87,12 @@ const { sections } = Astro.props;
     const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
 
     let isVisible = false;
-    let heroEl: HTMLElement | null = null;
 
-    // Find the hero section (first section on the page)
-    const firstSection = document.querySelector('section');
-    if (firstSection) heroEl = firstSection;
-
-    // Show/hide nav based on whether we've scrolled past the hero
+    // Show/hide nav: desktop after 300px scroll (reliable), mobile uses first section
     function updateVisibility() {
-      if (!heroEl || sectionEls.length === 0) return;
-      const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
-      const shouldShow = window.scrollY > heroBottom - 100;
+      if (sectionEls.length === 0) return;
+      // Simple threshold: show after scrolling 300px (always past any hero)
+      const shouldShow = window.scrollY > 300;
 
       if (shouldShow === isVisible) return;
       isVisible = shouldShow;
