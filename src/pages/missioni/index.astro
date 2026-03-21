@@ -47,15 +47,20 @@ const statistiche = [
         <line x1="780" y1="0" x2="680" y2="500" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
       </svg>
     </div>
-    <!-- Dark overlay for readability -->
-    <div class="absolute inset-0 bg-slate-dark/80"></div>
+    <!-- Warm overlay for contrast with green logo -->
+    <div class="absolute inset-0 bg-gradient-to-b from-warm/90 via-cream/85 to-warm/90"></div>
     <div class="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-28 md:py-36">
-      <div class="max-w-3xl">
-        <span class="inline-block text-accent font-medium text-sm tracking-widest uppercase mb-4">Raggiungere le nazioni</span>
-        <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+      <div class="flex flex-col items-center text-center">
+        <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-6">Raggiungere le nazioni</span>
+        <img
+          src="/images/uploads/logo-missioni.png"
+          alt="Efraim Church - Missioni Umanitarie"
+          class="w-[clamp(14rem,40vw,22rem)] h-auto mb-8"
+        />
+        <h1 class="font-serif text-3xl md:text-4xl lg:text-5xl font-bold text-text leading-tight">
           Le nostre missioni
         </h1>
-        <p class="mt-6 text-lg text-white/70 leading-relaxed max-w-2xl">
+        <p class="mt-6 text-lg text-text-secondary leading-relaxed max-w-2xl">
           Dal cuore di Messina al cuore del mondo. Crediamo che ogni vita abbia un valore inestimabile e lavoriamo per portare speranza concreta dove ce n'è più bisogno.
         </p>
       </div>

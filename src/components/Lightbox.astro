@@ -48,16 +48,18 @@
     let images: { src: string; alt: string; title: string; caption: string }[] = [];
     let currentIndex = 0;
 
-    function open(group: string, index: number) {
-      // Collect all images in this group
-      const els = document.querySelectorAll(`[data-lightbox-group="${group}"]`);
-      images = Array.from(els).map(el => ({
+    function open(group: string, clickedEl: Element) {
+      // Collect only VISIBLE images in this group
+      const els = Array.from(document.querySelectorAll(`[data-lightbox-group="${group}"]`))
+        .filter(el => (el as HTMLElement).offsetParent !== null && (el as HTMLElement).style.display !== 'none');
+      images = els.map(el => ({
         src: (el as HTMLImageElement).src || el.getAttribute('data-lightbox-src') || '',
         alt: (el as HTMLImageElement).alt || '',
         title: el.getAttribute('data-lightbox-title') || '',
         caption: el.getAttribute('data-lightbox-caption') || '',
       }));
-      currentIndex = index;
+      currentIndex = els.indexOf(clickedEl);
+      if (currentIndex < 0) currentIndex = 0;
       show();
       overlay.classList.remove('hidden');
       overlay.classList.add('flex');
@@ -112,14 +114,13 @@
       if (e.key === 'ArrowRight') next();
     });
 
-    // Attach to all lightbox images on the page
+    // Attach to all lightbox elements on the page
     document.querySelectorAll('[data-lightbox-group]').forEach((el) => {
       const group = el.getAttribute('data-lightbox-group')!;
-      // Calculate index within this group
-      const groupEls = document.querySelectorAll(`[data-lightbox-group="${group}"]`);
-      const indexInGroup = Array.from(groupEls).indexOf(el);
-
-      el.addEventListener('click', () => open(group, indexInGroup));
+      el.addEventListener('click', (e) => {
+        e.stopPropagation();
+        open(group, el);
+      });
       (el as HTMLElement).style.cursor = 'pointer';
     });
   }
