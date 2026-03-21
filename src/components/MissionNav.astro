@@ -79,25 +79,35 @@ const { sections } = Astro.props;
     const mobileLinks = mobileNav?.querySelectorAll('.mission-nav-link-mobile') ?? [];
     const allLinks = [...desktopLinks, ...mobileLinks];
 
+    // Offset for sticky elements: navbar (80px) + mobile tab bar (~48px)
+    const SCROLL_OFFSET = 140;
+
     // Get section elements
-    const sectionIds = Array.from(desktopLinks).map(l => l.getAttribute('data-section')!);
+    const sectionIds = Array.from(desktopLinks.length ? desktopLinks : mobileLinks).map(l => l.getAttribute('data-section')!);
     const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
 
-    // Show/hide nav based on scroll position
-    function updateVisibility() {
-      if (sectionEls.length === 0) return;
-      const firstTop = sectionEls[0].offsetTop - 200;
-      const lastBottom = sectionEls[sectionEls.length - 1].offsetTop + sectionEls[sectionEls.length - 1].offsetHeight + 100;
-      const scrollY = window.scrollY;
+    let isVisible = false;
+    let heroEl: HTMLElement | null = null;
 
-      const visible = scrollY > firstTop && scrollY < lastBottom;
+    // Find the hero section (first section on the page)
+    const firstSection = document.querySelector('section');
+    if (firstSection) heroEl = firstSection;
+
+    // Show/hide nav based on whether we've scrolled past the hero
+    function updateVisibility() {
+      if (!heroEl || sectionEls.length === 0) return;
+      const heroBottom = heroEl.offsetTop + heroEl.offsetHeight;
+      const shouldShow = window.scrollY > heroBottom - 100;
+
+      if (shouldShow === isVisible) return;
+      isVisible = shouldShow;
 
       if (desktopNav) {
-        desktopNav.style.opacity = visible ? '1' : '0';
-        desktopNav.style.pointerEvents = visible ? 'auto' : 'none';
+        desktopNav.style.opacity = isVisible ? '1' : '0';
+        desktopNav.style.pointerEvents = isVisible ? 'auto' : 'none';
       }
       if (mobileNav) {
-        if (visible) {
+        if (isVisible) {
           mobileNav.classList.remove('-translate-y-full', 'opacity-0');
         } else {
           mobileNav.classList.add('-translate-y-full', 'opacity-0');
@@ -106,15 +116,19 @@ const { sections } = Astro.props;
     }
 
     // Scroll spy: highlight active section
+    let lastActiveId = '';
     function updateActive() {
       let activeId = sectionIds[0];
-      const scrollY = window.scrollY + 150;
+      const scrollY = window.scrollY + SCROLL_OFFSET;
 
       for (const el of sectionEls) {
         if (el.offsetTop <= scrollY) {
           activeId = el.id;
         }
       }
+
+      if (activeId === lastActiveId) return;
+      lastActiveId = activeId;
 
       allLinks.forEach(link => {
         const linkSection = link.getAttribute('data-section');
@@ -132,7 +146,7 @@ const { sections } = Astro.props;
       }
     }
 
-    // Smooth scroll on click
+    // Smooth scroll on click with offset for sticky bars
     allLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -140,7 +154,8 @@ const { sections } = Astro.props;
         if (!id) return;
         const target = document.getElementById(id);
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const top = target.offsetTop - SCROLL_OFFSET;
+          window.scrollTo({ top, behavior: 'smooth' });
         }
       });
     });
