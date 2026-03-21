@@ -55,6 +55,25 @@ collections:
       - { label: "Biografia", name: "bio", widget: "text", required: false }
       - { label: "Ordine", name: "order", widget: "number", default: 0 }
 
+  - name: "missioni-aggiornamenti"
+    label: "Aggiornamenti Missioni"
+    folder: "src/content/missioni"
+    create: true
+    slug: "{{slug}}"
+    extension: "md"
+    description: "Notizie e aggiornamenti dai campi missione."
+    fields:
+      - { label: "Titolo", name: "title", widget: "string" }
+      - { label: "Data", name: "date", widget: "datetime" }
+      - { label: "Missione", name: "mission", widget: "select", options: ["kenya", "india"] }
+      - { label: "Descrizione", name: "description", widget: "text" }
+      - label: "Immagini"
+        name: "images"
+        widget: "list"
+        required: false
+        field: { label: "Immagine", name: "image", widget: "image" }
+      - { label: "Contenuto", name: "body", widget: "markdown" }
+
   - name: "galleria"
     label: "Galleria"
     folder: "src/content/galleria"

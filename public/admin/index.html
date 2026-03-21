@@ -390,6 +390,18 @@
                   ]
                 },
                 {
+                  name: 'missioni-aggiornamenti', label: 'Aggiornamenti Missioni', folder: 'src/content/missioni', create: true, slug: '{{slug}}', extension: 'md',
+                  description: 'Notizie e aggiornamenti dai campi missione.',
+                  fields: [
+                    { label: 'Titolo', name: 'title', widget: 'string' },
+                    { label: 'Data', name: 'date', widget: 'datetime' },
+                    { label: 'Missione', name: 'mission', widget: 'select', options: ['kenya', 'india'] },
+                    { label: 'Descrizione', name: 'description', widget: 'text' },
+                    { label: 'Immagini', name: 'images', widget: 'list', field: { label: 'Immagine', name: 'image', widget: 'image' }, required: false },
+                    { label: 'Contenuto', name: 'body', widget: 'markdown' }
+                  ]
+                },
+                {
                   name: 'galleria', label: 'Galleria', folder: 'src/content/galleria', create: true, slug: '{{slug}}', extension: 'md',
                   description: 'Foto del sito. Appaiono nella pagina Galleria e nelle pagine missione in base alla categoria.',
                   fields: [

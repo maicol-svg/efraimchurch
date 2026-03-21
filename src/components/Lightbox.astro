@@ -61,14 +61,14 @@
       currentIndex = els.indexOf(clickedEl);
       if (currentIndex < 0) currentIndex = 0;
       show();
-      overlay.classList.remove('hidden');
-      overlay.classList.add('flex');
+      overlay!.classList.remove('hidden');
+      overlay!.classList.add('flex');
       document.body.style.overflow = 'hidden';
     }
 
     function close() {
-      overlay.classList.add('hidden');
-      overlay.classList.remove('flex');
+      overlay!.classList.add('hidden');
+      overlay!.classList.remove('flex');
       document.body.style.overflow = '';
     }
 
@@ -102,13 +102,13 @@
     nextBtn?.addEventListener('click', next);
 
     // Close on overlay click (not on image)
-    overlay.addEventListener('click', (e) => {
+    overlay!.addEventListener('click', (e) => {
       if (e.target === overlay) close();
     });
 
     // Keyboard
     document.addEventListener('keydown', (e) => {
-      if (overlay.classList.contains('hidden')) return;
+      if (overlay!.classList.contains('hidden')) return;
       if (e.key === 'Escape') close();
       if (e.key === 'ArrowLeft') prev();
       if (e.key === 'ArrowRight') next();

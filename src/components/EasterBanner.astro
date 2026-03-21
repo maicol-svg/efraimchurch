@@ -215,24 +215,24 @@
     let cardOpen = false;
 
     function openCard() {
-      fabCard.classList.remove('hidden');
+      fabCard!.classList.remove('hidden');
       // Trigger reflow for transition
-      void fabCard.offsetWidth;
-      fabCard.classList.add('card-visible');
+      void fabCard!.offsetWidth;
+      fabCard!.classList.add('card-visible');
       cardOpen = true;
       // Pause bounce + ping when card is open
-      fabBtn.classList.add('animation-paused');
+      fabBtn!.classList.add('animation-paused');
       if (fabPing) fabPing.classList.add('animation-paused');
     }
 
     function closeCard() {
-      fabCard.classList.remove('card-visible');
+      fabCard!.classList.remove('card-visible');
       cardOpen = false;
       // Resume bounce + ping
-      fabBtn.classList.remove('animation-paused');
+      fabBtn!.classList.remove('animation-paused');
       if (fabPing) fabPing.classList.remove('animation-paused');
       setTimeout(() => {
-        if (!cardOpen) fabCard.classList.add('hidden');
+        if (!cardOpen) fabCard!.classList.add('hidden');
       }, 250);
     }
 
@@ -268,18 +268,18 @@
     if (!isHomepage) return;
 
     function showModal() {
-      backdrop.classList.remove('hidden');
+      backdrop!.classList.remove('hidden');
       // Trigger reflow for transition
-      void backdrop.offsetWidth;
-      backdrop.style.opacity = '1';
-      backdrop.classList.add('modal-visible');
+      void backdrop!.offsetWidth;
+      backdrop!.style.opacity = '1';
+      backdrop!.classList.add('modal-visible');
     }
 
     function closeModal() {
-      backdrop.classList.remove('modal-visible');
-      backdrop.style.opacity = '0';
+      backdrop!.classList.remove('modal-visible');
+      backdrop!.style.opacity = '0';
       setTimeout(() => {
-        backdrop.classList.add('hidden');
+        backdrop!.classList.add('hidden');
       }, 300);
     }
 
@@ -289,7 +289,7 @@
     closeBtn.addEventListener('click', closeModal);
 
     // Close on backdrop click (not on modal itself)
-    backdrop.addEventListener('click', (e) => {
+    backdrop!.addEventListener('click', (e) => {
       if (e.target === backdrop) {
         closeModal();
       }
@@ -297,7 +297,7 @@
 
     // Close on Escape key
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && !backdrop.classList.contains('hidden')) {
+      if (e.key === 'Escape' && !backdrop!.classList.contains('hidden')) {
         closeModal();
       }
     });

@@ -18,7 +18,10 @@ const eventi = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    endDate: z.union([z.coerce.date(), z.literal(''), z.null()]).optional().transform(v => (!v || v === '') ? undefined : v),
+    endDate: z.preprocess(
+      (v) => (v === '' || v === null || v === undefined ? undefined : v),
+      z.coerce.date().optional()
+    ),
     time: z.string().optional(),
     location: z.string().optional(),
     description: z.string(),
@@ -58,18 +61,8 @@ const galleria = defineCollection({
     caption: z.string().optional(),
     category: z.enum(['kenya', 'india', 'chiesa', 'eventi']),
     date: z.coerce.date().optional(),
+    visible: z.boolean().default(true),
   }),
 });
 
-const partner = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/partner' }),
-  schema: z.object({
-    name: z.string(),
-    logo: z.string().optional(),
-    description: z.string().optional(),
-    website: z.string().nullish().transform(v => (!v || v === '') ? undefined : v),
-    order: z.number().default(0),
-  }),
-});
-
-export const collections = { blog, eventi, team, missioni, galleria, partner };
+export const collections = { blog, eventi, team, missioni, galleria };
