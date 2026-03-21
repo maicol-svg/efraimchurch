@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MissionNav from '../../components/MissionNav.astro';
+import Lightbox from '../../components/Lightbox.astro';
 import { getCollection } from 'astro:content';
 import kenya from '../../data/missione-kenya.json';
 
@@ -260,6 +261,9 @@ const updates = kenya.aggiornamenti;
                 alt={foto.data.caption || foto.data.title || 'Foto dalla missione in Kenya'}
                 class="w-full h-full object-cover"
                 loading="lazy"
+                data-lightbox-group="kenya"
+                data-lightbox-title={foto.data.title}
+                data-lightbox-caption={foto.data.caption || ''}
               />
             </div>
           ))}
@@ -329,4 +333,5 @@ const updates = kenya.aggiornamenti;
       </div>
     </div>
   </section>
+  <Lightbox />
 </BaseLayout>
