@@ -134,6 +134,16 @@ collections:
               - { label: "Etichetta", name: "etichetta", widget: "string" }
               - { label: "Valore", name: "valore", widget: "string" }
           - { label: "Immagine principale", name: "immagine", widget: "image" }
+          - label: "Obiettivi raggiunti"
+            name: "obiettivi_raggiunti"
+            widget: "list"
+            required: false
+            field: { label: "Obiettivo", name: "obiettivo", widget: "string" }
+          - label: "Obiettivi da raggiungere"
+            name: "obiettivi_da_raggiungere"
+            widget: "list"
+            required: false
+            field: { label: "Obiettivo", name: "obiettivo", widget: "string" }
           - label: "Galleria foto"
             name: "galleria"
             widget: "list"
@@ -171,6 +181,16 @@ collections:
               - { label: "Etichetta", name: "etichetta", widget: "string" }
               - { label: "Valore", name: "valore", widget: "string" }
           - { label: "Immagine principale", name: "immagine", widget: "image" }
+          - label: "Obiettivi raggiunti"
+            name: "obiettivi_raggiunti"
+            widget: "list"
+            required: false
+            field: { label: "Obiettivo", name: "obiettivo", widget: "string" }
+          - label: "Obiettivi da raggiungere"
+            name: "obiettivi_da_raggiungere"
+            widget: "list"
+            required: false
+            field: { label: "Obiettivo", name: "obiettivo", widget: "string" }
           - label: "Galleria foto"
             name: "galleria"
             widget: "list"

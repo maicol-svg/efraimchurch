@@ -17,6 +17,20 @@
     { "etichetta": "Aule scolastiche", "valore": "7" }
   ],
   "immagine": "/images/uploads/bambini-orfanotrofio.jpg",
+  "obiettivi_raggiunti": [
+    "Affitto terreno di 5+ acri con strutture",
+    "Orfanotrofio con 24 bambini accolti",
+    "7 aule scolastiche allestite",
+    "3 insegnanti assunti",
+    "Cuoco dedicato per 4 pasti al giorno",
+    "Stanze ridipinte e nuovi letti"
+  ],
+  "obiettivi_da_raggiungere": [
+    "Ampliamento degli spazi per i bambini",
+    "Introduzione di nuovi corsi formativi",
+    "Accoglienza di più bambini",
+    "Miglioramento delle strutture esistenti"
+  ],
   "galleria": [
     {
       "immagine": "/images/uploads/bambini-orfanotrofio.jpg",

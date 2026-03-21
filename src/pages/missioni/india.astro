@@ -16,6 +16,7 @@ const updates = india.aggiornamenti;
 >
   <MissionNav sections={[
     { id: 'progetto', label: 'Il progetto' },
+    { id: 'obiettivi', label: 'Obiettivi' },
     { id: 'adozione', label: 'Sostieni' },
     { id: 'galleria', label: 'Galleria' },
     { id: 'aggiornamenti', label: 'Aggiornamenti' },
@@ -148,6 +149,65 @@ const updates = india.aggiornamenti;
       </div>
     </div>
   </section>
+
+  <!-- Section 3: Obiettivi -->
+  {(india.obiettivi_raggiunti?.length > 0 || india.obiettivi_da_raggiungere?.length > 0) && (
+    <section id="obiettivi" class="py-20 md:py-28 bg-cream">
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Il nostro percorso</span>
+          <h2 class="font-serif text-3xl md:text-4xl font-bold text-text">Obiettivi della missione</h2>
+          <p class="mt-4 text-text-secondary leading-relaxed max-w-2xl mx-auto">
+            Ogni traguardo raggiunto è un passo verso un futuro migliore.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+          {india.obiettivi_raggiunti?.length > 0 && (
+            <div>
+              <h3 class="font-serif text-xl font-bold text-primary-dark mb-6 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                Obiettivi raggiunti
+              </h3>
+              <ul class="space-y-4">
+                {india.obiettivi_raggiunti.map((obj: string) => (
+                  <li class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center shrink-0 mt-0.5">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="text-primary" aria-hidden="true"><path d="m5 12 5 5L20 7"/></svg>
+                    </div>
+                    <span class="text-text-secondary">{obj}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {india.obiettivi_da_raggiungere?.length > 0 && (
+            <div>
+              <h3 class="font-serif text-xl font-bold text-accent-dark mb-6 flex items-center gap-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-accent" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                Obiettivi da raggiungere
+              </h3>
+              <ul class="space-y-4">
+                {india.obiettivi_da_raggiungere.map((obj: string) => (
+                  <li class="flex items-start gap-3">
+                    <div class="w-6 h-6 rounded-full border-2 border-accent/40 shrink-0 mt-0.5"></div>
+                    <span class="text-text-secondary">{obj}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="/dona/" class="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-8 py-3 text-base font-semibold text-slate-dark shadow-md hover:bg-accent-dark hover:text-white transition-all">
+            Sostieni un obiettivo
+          </a>
+        </div>
+      </div>
+    </section>
+  )}
 
   <!-- Section 4: Sostieni questa missione -->
   <section id="adozione" class="py-20 md:py-28 bg-cream">

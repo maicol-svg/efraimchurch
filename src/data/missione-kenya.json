@@ -17,6 +17,24 @@
     { "etichetta": "Anni di presenza", "valore": "13" }
   ],
   "immagine": "/images/uploads/gruppo-bambini-volontari.jpg",
+  "obiettivi_raggiunti": [
+    "Costruzione del pozzo con acqua potabile",
+    "Orfanotrofio maschile (Gianluca Chiliberti)",
+    "Orfanotrofio femminile (Myriam La Spada) con pannelli solari e bagni",
+    "Mucche e capre per il sostentamento",
+    "Coltivazione di verdure locali e alberi da frutto",
+    "Ambulatorio clinico per primo soccorso"
+  ],
+  "obiettivi_da_raggiungere": [
+    "2 sale da pranzo e stanze polifunzionali",
+    "Pollaio",
+    "Scuola dei mestieri",
+    "Costruzione di una chiesa",
+    "Nuovi bagni maschili",
+    "Ampliamento orfanotrofio maschile",
+    "Casa del custode",
+    "Acquisto di un van"
+  ],
   "galleria": [
     {
       "immagine": "/images/uploads/distribuzione-materiale-1.jpg",
