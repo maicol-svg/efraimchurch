@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MissionNav from '../../components/MissionNav.astro';
 import { getCollection } from 'astro:content';
 import india from '../../data/missione-india.json';
 
@@ -13,6 +14,13 @@ const updates = india.aggiornamenti;
   title="Missione India"
   description="La nostra missione a Chennai, India. Dal 2024 un orfanotrofio con 24 bambini, 7 aule scolastiche e un programma di cura integrale."
 >
+  <MissionNav sections={[
+    { id: 'progetto', label: 'Il progetto' },
+    { id: 'adozione', label: 'Sostieni' },
+    { id: 'galleria', label: 'Galleria' },
+    { id: 'aggiornamenti', label: 'Aggiornamenti' },
+  ]} />
+
   <!-- Section 1: Hero -->
   <section class="relative bg-slate-dark overflow-hidden">
     <div class="absolute inset-0">
@@ -74,7 +82,7 @@ const updates = india.aggiornamenti;
   </section>
 
   <!-- Section 2: Il progetto -->
-  <section class="py-20 md:py-28 bg-warm">
+  <section id="progetto" class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
         <div>
@@ -185,7 +193,7 @@ const updates = india.aggiornamenti;
 
   <!-- Section 5: Galleria -->
   {galleria.length > 0 && (
-    <section class="py-20 md:py-28 bg-warm">
+    <section id="galleria" class="py-20 md:py-28 bg-warm">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Galleria</span>
@@ -209,7 +217,7 @@ const updates = india.aggiornamenti;
   )}
 
   <!-- Section 7: Aggiornamenti -->
-  <section class="py-20 md:py-28 bg-warm">
+  <section id="aggiornamenti" class="py-20 md:py-28 bg-warm">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-12">
         <span class="inline-block text-accent-dark font-medium text-sm tracking-widest uppercase mb-3">Aggiornamenti</span>

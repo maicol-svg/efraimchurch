@@ -1,0 +1,158 @@
+---
+interface Props {
+  sections: Array<{ id: string; label: string }>;
+}
+const { sections } = Astro.props;
+---
+
+<!-- Desktop: fixed sidebar left (hidden below lg) -->
+<nav
+  id="mission-nav-desktop"
+  class="hidden lg:block fixed left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 opacity-0 transition-opacity duration-300"
+  aria-label="Navigazione sezioni"
+>
+  <ul class="space-y-4">
+    {sections.map((s) => (
+      <li>
+        <a
+          href={`#${s.id}`}
+          data-section={s.id}
+          class="mission-nav-link flex items-center gap-3 group transition-all duration-200"
+        >
+          <span class="w-2 h-2 rounded-full bg-text/20 group-hover:bg-primary transition-colors shrink-0 mission-nav-dot"></span>
+          <span class="text-[11px] font-sans font-semibold uppercase tracking-[0.15em] text-text/40 group-hover:text-primary-dark transition-colors mission-nav-label">{s.label}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<!-- Mobile: sticky tab bar (hidden on lg+) -->
+<div
+  id="mission-nav-mobile"
+  class="lg:hidden sticky top-[80px] z-40 bg-warm/95 backdrop-blur-md border-b border-divider/30 opacity-0 -translate-y-full transition-all duration-300"
+>
+  <div class="mx-auto max-w-7xl px-4">
+    <nav class="flex gap-1 overflow-x-auto scrollbar-hide py-2" aria-label="Navigazione sezioni">
+      {sections.map((s) => (
+        <a
+          href={`#${s.id}`}
+          data-section={s.id}
+          class="mission-nav-link-mobile shrink-0 px-3 py-2 text-[11px] font-sans font-semibold uppercase tracking-[0.1em] text-text/50 border-b-2 border-transparent transition-all whitespace-nowrap hover:text-primary-dark"
+        >
+          {s.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+</div>
+
+<style>
+  .mission-nav-link.active .mission-nav-dot {
+    background-color: var(--color-primary);
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+  .mission-nav-link.active .mission-nav-label {
+    color: var(--color-primary-dark);
+  }
+  .mission-nav-link-mobile.active {
+    color: var(--color-primary-dark);
+    border-bottom-color: var(--color-primary);
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+
+<script>
+  function initMissionNav() {
+    const desktopNav = document.getElementById('mission-nav-desktop');
+    const mobileNav = document.getElementById('mission-nav-mobile');
+    if (!desktopNav && !mobileNav) return;
+
+    const desktopLinks = desktopNav?.querySelectorAll('.mission-nav-link') ?? [];
+    const mobileLinks = mobileNav?.querySelectorAll('.mission-nav-link-mobile') ?? [];
+    const allLinks = [...desktopLinks, ...mobileLinks];
+
+    // Get section elements
+    const sectionIds = Array.from(desktopLinks).map(l => l.getAttribute('data-section')!);
+    const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
+
+    // Show/hide nav based on scroll position
+    function updateVisibility() {
+      if (sectionEls.length === 0) return;
+      const firstTop = sectionEls[0].offsetTop - 200;
+      const lastBottom = sectionEls[sectionEls.length - 1].offsetTop + sectionEls[sectionEls.length - 1].offsetHeight + 100;
+      const scrollY = window.scrollY;
+
+      const visible = scrollY > firstTop && scrollY < lastBottom;
+
+      if (desktopNav) {
+        desktopNav.style.opacity = visible ? '1' : '0';
+        desktopNav.style.pointerEvents = visible ? 'auto' : 'none';
+      }
+      if (mobileNav) {
+        if (visible) {
+          mobileNav.classList.remove('-translate-y-full', 'opacity-0');
+        } else {
+          mobileNav.classList.add('-translate-y-full', 'opacity-0');
+        }
+      }
+    }
+
+    // Scroll spy: highlight active section
+    function updateActive() {
+      let activeId = sectionIds[0];
+      const scrollY = window.scrollY + 150;
+
+      for (const el of sectionEls) {
+        if (el.offsetTop <= scrollY) {
+          activeId = el.id;
+        }
+      }
+
+      allLinks.forEach(link => {
+        const linkSection = link.getAttribute('data-section');
+        if (linkSection === activeId) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Scroll mobile active link into view
+      const activeMobileLink = mobileNav?.querySelector('.active') as HTMLElement;
+      if (activeMobileLink) {
+        activeMobileLink.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+    }
+
+    // Smooth scroll on click
+    allLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = link.getAttribute('data-section') || link.getAttribute('href')?.slice(1);
+        if (!id) return;
+        const target = document.getElementById(id);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', () => {
+      updateVisibility();
+      updateActive();
+    }, { passive: true });
+
+    updateVisibility();
+    updateActive();
+  }
+
+  initMissionNav();
+</script>
