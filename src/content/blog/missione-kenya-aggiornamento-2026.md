@@ -9,6 +9,7 @@ tags:
   - kenya
   - bambini
   - aggiornamento
+category: "Missioni"
 ---
 
 ## La storia continua a Kasue

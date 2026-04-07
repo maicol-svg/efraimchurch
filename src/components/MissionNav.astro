@@ -5,10 +5,10 @@ interface Props {
 const { sections } = Astro.props;
 ---
 
-<!-- Desktop: fixed sidebar left (hidden below lg) -->
+<!-- Desktop sidebar: only on 2xl+ (1536px) where there's margin space -->
 <nav
   id="mission-nav-desktop"
-  class="hidden lg:block fixed left-6 xl:left-10 top-1/2 -translate-y-1/2 z-40 opacity-0 transition-opacity duration-300"
+  class="hidden 2xl:block fixed left-8 top-1/2 -translate-y-1/2 z-40 opacity-0 transition-opacity duration-300"
   aria-label="Navigazione sezioni"
 >
   <ul class="space-y-4">
@@ -27,7 +27,47 @@ const { sections } = Astro.props;
   </ul>
 </nav>
 
-<!-- Mobile: sticky tab bar (hidden on lg+) -->
+<!-- Desktop toggle: visible on lg to 2xl where sidebar would overlap -->
+<button
+  id="mission-nav-toggle"
+  class="hidden lg:flex 2xl:hidden fixed left-4 top-1/2 -translate-y-1/2 z-40 w-10 h-10 items-center justify-center rounded-full bg-white shadow-md border border-divider/50 text-text-secondary hover:text-primary-dark hover:shadow-lg transition-all opacity-0"
+  aria-label="Apri navigazione sezioni"
+  type="button"
+>
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+</button>
+
+<!-- Desktop slide-out panel: for lg to 2xl screens -->
+<div
+  id="mission-nav-panel"
+  class="hidden fixed inset-0 z-50"
+>
+  <!-- Backdrop -->
+  <div id="mission-nav-backdrop" class="absolute inset-0 bg-black/20 opacity-0 transition-opacity duration-300"></div>
+  <!-- Panel -->
+  <nav
+    id="mission-nav-panel-inner"
+    class="absolute left-0 top-0 h-full w-52 bg-warm/98 backdrop-blur-md shadow-xl border-r border-divider/30 -translate-x-full transition-transform duration-300 flex items-center"
+    aria-label="Navigazione sezioni"
+  >
+    <ul class="space-y-5 px-6">
+      {sections.map((s) => (
+        <li>
+          <a
+            href={`#${s.id}`}
+            data-section={s.id}
+            class="mission-nav-link mission-nav-panel-link flex items-center gap-3 group transition-all duration-200"
+          >
+            <span class="w-2 h-2 rounded-full bg-text/20 group-hover:bg-primary transition-colors shrink-0 mission-nav-dot"></span>
+            <span class="text-sm font-sans font-semibold text-text/50 group-hover:text-primary-dark transition-colors mission-nav-label">{s.label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<!-- Mobile: fixed tab bar (hidden on lg+) -->
 <div
   id="mission-nav-mobile"
   class="lg:hidden fixed top-[80px] left-0 right-0 z-40 bg-warm/95 backdrop-blur-md border-b border-divider/30 opacity-0 -translate-y-full transition-all duration-300 pointer-events-none"
@@ -72,26 +112,63 @@ const { sections } = Astro.props;
 <script>
   function initMissionNav() {
     const desktopNav = document.getElementById('mission-nav-desktop');
+    const toggleBtn = document.getElementById('mission-nav-toggle');
+    const panel = document.getElementById('mission-nav-panel');
+    const panelInner = document.getElementById('mission-nav-panel-inner');
+    const backdrop = document.getElementById('mission-nav-backdrop');
     const mobileNav = document.getElementById('mission-nav-mobile');
-    if (!desktopNav && !mobileNav) return;
+
+    if (!desktopNav && !toggleBtn && !mobileNav) return;
 
     const desktopLinks = desktopNav?.querySelectorAll('.mission-nav-link') ?? [];
+    const panelLinks = panel?.querySelectorAll('.mission-nav-panel-link') ?? [];
     const mobileLinks = mobileNav?.querySelectorAll('.mission-nav-link-mobile') ?? [];
-    const allLinks = [...desktopLinks, ...mobileLinks];
+    const allLinks = [...desktopLinks, ...panelLinks, ...mobileLinks];
 
-    // Offset for sticky elements: navbar (80px) + mobile tab bar (~48px)
     const SCROLL_OFFSET = 140;
 
-    // Get section elements
-    const sectionIds = Array.from(desktopLinks.length ? desktopLinks : mobileLinks).map(l => l.getAttribute('data-section')!);
+    const sectionIds = Array.from(desktopLinks.length ? desktopLinks : mobileLinks.length ? mobileLinks : panelLinks).map(l => l.getAttribute('data-section')!);
     const sectionEls = sectionIds.map(id => document.getElementById(id)).filter(Boolean) as HTMLElement[];
 
     let isVisible = false;
+    let isPanelOpen = false;
 
-    // Show/hide nav: desktop after 300px scroll (reliable), mobile uses first section
+    // Panel open/close
+    function openPanel() {
+      if (!panel || !panelInner || !backdrop) return;
+      isPanelOpen = true;
+      panel.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        backdrop!.classList.remove('opacity-0');
+        panelInner!.classList.remove('-translate-x-full');
+      });
+    }
+
+    function closePanel() {
+      if (!panel || !panelInner || !backdrop) return;
+      isPanelOpen = false;
+      backdrop!.classList.add('opacity-0');
+      panelInner!.classList.add('-translate-x-full');
+      setTimeout(() => panel!.classList.add('hidden'), 300);
+    }
+
+    toggleBtn?.addEventListener('click', () => {
+      if (isPanelOpen) closePanel();
+      else openPanel();
+    });
+
+    backdrop?.addEventListener('click', closePanel);
+
+    // Close panel on link click
+    panelLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        setTimeout(closePanel, 100);
+      });
+    });
+
+    // Show/hide
     function updateVisibility() {
       if (sectionEls.length === 0) return;
-      // Simple threshold: show after scrolling 300px (always past any hero)
       const shouldShow = window.scrollY > 300;
 
       if (shouldShow === isVisible) return;
@@ -101,6 +178,10 @@ const { sections } = Astro.props;
         desktopNav.style.opacity = isVisible ? '1' : '0';
         desktopNav.style.pointerEvents = isVisible ? 'auto' : 'none';
       }
+      if (toggleBtn) {
+        toggleBtn.style.opacity = isVisible ? '1' : '0';
+        toggleBtn.style.pointerEvents = isVisible ? 'auto' : 'none';
+      }
       if (mobileNav) {
         if (isVisible) {
           mobileNav.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
@@ -108,9 +189,11 @@ const { sections } = Astro.props;
           mobileNav.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
         }
       }
+      // Close panel if hiding
+      if (!isVisible && isPanelOpen) closePanel();
     }
 
-    // Scroll spy: highlight active section
+    // Scroll spy
     let lastActiveId = '';
     function updateActive() {
       let activeId = sectionIds[0];
@@ -134,14 +217,13 @@ const { sections } = Astro.props;
         }
       });
 
-      // Scroll mobile active link into view
       const activeMobileLink = mobileNav?.querySelector('.active') as HTMLElement;
       if (activeMobileLink) {
         activeMobileLink.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
     }
 
-    // Smooth scroll on click with offset for sticky bars
+    // Smooth scroll
     allLinks.forEach(link => {
       link.addEventListener('click', (e) => {
         e.preventDefault();
@@ -153,6 +235,11 @@ const { sections } = Astro.props;
           window.scrollTo({ top, behavior: 'smooth' });
         }
       });
+    });
+
+    // Escape closes panel
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isPanelOpen) closePanel();
     });
 
     window.addEventListener('scroll', () => {

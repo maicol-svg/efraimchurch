@@ -21,6 +21,7 @@ collections:
       - { label: "Autore", name: "author", widget: "string", default: "Efraim Church" }
       - { label: "Descrizione", name: "description", widget: "text" }
       - { label: "Immagine", name: "image", widget: "image", required: false }
+      - { label: "Categoria", name: "category", widget: "select", options: ["Missioni", "Iniziative", "Comunità", "Testimonianze", "Novità"], default: "Novità", required: false }
       - { label: "Tag", name: "tags", widget: "list", required: false }
       - { label: "Contenuto", name: "body", widget: "markdown" }
 

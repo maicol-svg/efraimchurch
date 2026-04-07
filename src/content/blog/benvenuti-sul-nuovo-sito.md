@@ -8,6 +8,7 @@ tags:
   - comunità
   - novità
   - benvenuto
+category: "Novità"
 ---
 
 ## Un nuovo spazio per la nostra famiglia

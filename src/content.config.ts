@@ -9,6 +9,7 @@ const blog = defineCollection({
     author: z.string().default('Efraim Church'),
     description: z.string(),
     image: z.string().optional(),
+    category: z.enum(['Missioni', 'Iniziative', 'Comunità', 'Testimonianze', 'Novità']).default('Novità').optional(),
     tags: z.array(z.string()).optional(),
   }),
 });

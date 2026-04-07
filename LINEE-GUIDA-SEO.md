@@ -107,7 +107,6 @@ I link da altri siti verso il nostro migliorano l'autorita' del dominio.
 **Azioni:**
 - Registrare il sito su directory di chiese evangeliche italiane
 - Collegare missionekenya.com al nuovo sito con link prominenti
-- Collegare pasqua.missionekenya.com al sito principale
 - Registrarsi su Google Maps e Bing Places
 
 ---

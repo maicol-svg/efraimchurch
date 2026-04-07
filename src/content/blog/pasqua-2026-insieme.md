@@ -9,6 +9,7 @@ tags:
   - missioni
   - kenya
   - solidarietà
+category: "Iniziative"
 ---
 
 ## Un uovo di Pasqua che cambia le cose
